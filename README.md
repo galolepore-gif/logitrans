@@ -1,60 +1,51 @@
-# LOGITRANS // NETWORK OS
+# LogiTrans · memoria interactiva
 
-Web de presentación del proyecto LogiTrans (ASIX2C 0379 · Institut F. Vidal i Barraquer).
-Una sola página que se recorre con el scroll o se presenta paso a paso delante del tribunal.
+Web del proyecto LogiTrans (ASIX2C 0379 · Institut F. Vidal i Barraquer): toda la memoria final, el Packet Tracer simulado dentro de la web y un modo presentación para la defensa.
+HTML, CSS y JavaScript sin frameworks. Funciona con doble clic sobre `index.html`, sin servidor y sin Internet.
 
-## Cómo abrirla
+## Tres formas de usarla
 
-- **Con doble clic:** abrí `index.html`. Funciona sin servidor y sin Internet (sirve para llevarla en un USB).
-- **Online:** GitHub Pages publica la raíz del repositorio.
-- `index.html?pres` arranca directamente en modo presentación.
+- **Navegación libre (por defecto).** Índice lateral con los mismos puntos que el documento final, del 0 al 6. Cada apartado tiene su texto, sus comprobaciones con la captura real y widgets interactivos.
+- **LogiTrans Tracer** (`#/tracer`). La topología del Packet Tracer con consola en cada equipo, modo simulación paquete a paquete y 17 escenarios que repiten las pruebas de la memoria. Las ACL usan las líneas y los contadores reales de las capturas.
+- **Modo presentación** (`P`). Diapositivas a pantalla completa generadas desde la misma memoria, con los widgets vivos. `S` abre la vista del presentador en otra ventana. `Esc` vuelve al apartado donde estabas.
 
 ## Atajos
 
 | Tecla | Qué hace |
 | --- | --- |
-| `P` | Modo presentación (pantalla completa, paso a paso) |
-| Flechas · Espacio · clic | Siguiente / anterior paso |
-| `S` | Vista de ponente en otra ventana (notas, siguiente capítulo, cronómetro) |
-| `B` | Pantalla en negro |
-| `F` | Pantalla completa |
-| `Ctrl` + `K` | Consola de comandos (ping, ssh, show, traceroute… con las reglas reales) |
-| `R` | Rúbrica del Sprint 2 |
-| `T` | Modo NOC (oscuro) / modo plano (claro, para proyectores flojos) |
-| `M` | Sonido |
-| `1` … `9`, `0` | Ir a un capítulo |
+| `Ctrl` + `K` o `/` | Buscar en toda la memoria |
+| `[` `]` | Apartado anterior y siguiente |
+| `T` | Abrir el Tracer |
+| `N` | Siguiente paso del escenario abierto |
+| `P` | Modo presentación |
+| Flechas · Espacio | Siguiente y anterior (en presentación) |
+| `G` · `B` · `S` | Todas las diapositivas · pantalla en negro · presentador |
+| `Esc` | Cerrar o salir |
 | `?` | Ayuda |
+
+En cualquier comprobación de red, el botón «Ejecutar en el Tracer» abre la consola del equipo con el comando ya escrito.
 
 ## Estructura
 
 ```
-index.html          la presentación completa (20 capítulos)
-presenter.html      vista de ponente (se abre con S)
+index.html            la web
+presenter.html        vista del presentador (se sincroniza sola con BroadcastChannel)
 css/
-  fonts.css         fuentes locales (Unbounded, IBM Plex Sans, JetBrains Mono)
-  base.css          colores, tipografía, paneles, botones, terminal
-  hud.css           barra superior, traceroute lateral, arranque, consola, visor, modo presentación
-  chapters.css      estilos de cada capítulo, en el orden del recorrido
+  fonts.css           fuentes locales (Archivo, IBM Plex Sans, IBM Plex Mono)
+  app.css             paleta, tipografía, layout, portada, presupuesto
+  widgets.css         widgets de cada capítulo
+  tracer.css          simulador
+  present.css         modo presentación
 js/
-  data/data.js      todos los datos del proyecto sacados de la memoria (VLAN, subredes, racks, ACL, presupuesto…)
-  data/evidence.js  las 164 capturas de la memoria con su pie
-  data/notes.js     notas de ponente por capítulo
-  core/             motor: utilidades, sonido, visor de evidencias, escenas, modo presentación, consola
-  scenes/           un archivo por capítulo o grupo de capítulos
-  main.js           arranque, atajos y reloj
-assets/
-  capturas/         capturas de la memoria (WebP)
-  planos/           planos de cada planta (WebP)
-  fonts/            fuentes
-  img/              favicon y QR
-downloads/          memoria (PDF y Word), Packet Tracer y planos draw.io
+  data/               datos de la memoria, capturas, notas y diapositivas
+  core/               utilidades, render de la memoria, portada, buscador, visor, presentación
+  doc/                el texto de la memoria por capítulos (0 a 6)
+  widgets/            widgets interactivos por capítulo
+  tracer/             modelo de red, CLI de IOS y ASA, consolas de PC y PowerShell, escenarios, interfaz
+assets/               imágenes, planos, capturas y fuentes
+downloads/            memoria, Packet Tracer y planos para descargar
 ```
 
-Sin frameworks ni dependencias: HTML, CSS y JavaScript clásico. Los datos están en `js/data/data.js`:
-si cambia algo en la memoria, se cambia ahí y se actualiza en toda la web.
+## Nota sobre el Tracer
 
-## Notas
-
-- El PDF de la memoria se generó desde el Word con LibreOffice. Si hace falta el PDF oficial exportado desde Word, reemplazá `downloads/LogiTrans_Memoria.pdf`.
-- El QR apunta a `https://galolepore-gif.github.io/logitrans/`. Si el repositorio tiene otro nombre, hay que regenerar `assets/img/qr.svg` y cambiar `LT.SITE_URL` en `js/scenes/cierre.js`.
-- En el área de clientes de la demo, el usuario es `cliente1` y la contraseña `demo`. Los envíos que se ven son datos de ejemplo.
+Es una réplica del Packet Tracer v5: 46 de los 105 equipos, con la misma topología, el mismo direccionamiento y las mismas listas de acceso. Las salidas de consola se reconstruyen a partir de las capturas de la memoria.

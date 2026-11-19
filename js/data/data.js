@@ -104,7 +104,7 @@ LT.ATTACKS = [
   { id: 'mitm', layer: 3, name: 'Man-in-the-middle entre sedes', how: 'Interceptar el tráfico entre Barcelona y Zaragoza mientras cruza Internet.', def: 'VPN IPsec AES-256', defHow: 'GRE sobre IPsec entre BCN-RT1 y ZGZ-RT1: ESP con AES-256 y SHA-HMAC. Lo que viaja por Internet es ilegible.', ref: '3.C1',
     cmd: 'tcpdump -i eth0 host 85.100.2.2', logs: ['85.100.1.2 > 85.100.2.2: ESP(spi=0x8f3a1c22,seq=0x5b), length 132', 'Carga útil cifrada: 4f 9a e1 07 c2 3d 88 ...', '#pkts encrypt: 91 · #pkts decrypt: 89'] },
   { id: 'lateral', layer: 3, name: 'Movimiento lateral', how: 'Desde un equipo comprometido de una VLAN, atacar a los de otra.', def: 'ACL Convidats, Gestió y Operaris', defHow: 'Cada VLAN sensible tiene su lista de acceso: la de invitados no llega a nada interno, la de operarios solo a tres servicios concretos y a Gestió solo entra el NOC.', ref: '4.B1 – 4.B3',
-    cmd: 'nmap -sn 10.1.0.0/16   (desde P0-INV-01)', logs: ['ACL-INVITADOS-IN: deny ip any 10.0.0.0 0.255.255.255 (matches subiendo)', 'Reply from 10.1.40.1: Destination host unreachable', 'Ningún host interno responde'] }
+    cmd: 'nmap -sn 10.1.0.0/16   (desde P0-INV-01)', logs: ['ACL-INVITADOS-IN: 50 deny ip any any (matches subiendo)', 'Reply from 10.1.40.1: Destination host unreachable', 'Ningún host interno responde'] }
 ];
 
 LT.OWASP = [
