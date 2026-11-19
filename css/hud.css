@@ -1,0 +1,111 @@
+/* =========================================================
+   HUD: barra superior, traceroute, boot, consola, visor,
+   modo presentación y paneles flotantes
+   ========================================================= */
+.hud { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 14px 24px; font: 500 11.5px/1 var(--f-mono); letter-spacing: .06em; color: var(--muted);
+  background: linear-gradient(var(--bg) 30%, transparent); pointer-events: none; }
+.hud > * { pointer-events: auto; }
+.hud b { color: var(--text); font-weight: 600; letter-spacing: .14em; }
+.hud .live { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
+.hud .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 calc(12px * var(--glow)) var(--ok); animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+.hud .tools { display: flex; align-items: center; gap: 6px; }
+.hud .tools button { display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border-radius: 7px; color: var(--muted); transition: .2s; }
+.hud .tools button:hover, .hud .tools button.on { color: var(--text); background: var(--surface); }
+.hud .tools svg { width: 15px; height: 15px; }
+.hud .sep { width: 1px; height: 18px; background: var(--line-2); margin: 0 6px; }
+.hud #clock { min-width: 64px; text-align: right; }
+.progress { position: fixed; top: 0; left: 0; height: 2px; z-index: 41; background: linear-gradient(90deg, var(--brand), var(--signal)); width: 0; transition: width .2s; }
+
+/* traceroute lateral */
+.trace { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 39; display: flex; flex-direction: column; gap: 9px; }
+.trace a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; text-decoration: none; color: var(--dim); font: 500 10px var(--f-mono); letter-spacing: .1em; height: 14px; }
+.trace a span { opacity: 0; transform: translateX(6px); transition: .25s; white-space: nowrap; background: var(--bg); padding: 2px 6px; border-radius: 4px; }
+.trace a:hover span { opacity: 1; transform: none; color: var(--text); }
+.trace a i { width: 9px; height: 9px; border: 1.5px solid currentColor; border-radius: 50%; transition: .25s; flex: none; }
+.trace a.seen { color: var(--muted); }
+.trace a.seen i { background: var(--muted); }
+.trace a.on { color: var(--signal); }
+.trace a.on i { background: var(--signal); border-color: var(--signal); box-shadow: 0 0 calc(14px * var(--glow)) var(--signal); transform: scale(1.25); }
+.trace:hover a.on span { opacity: 1; transform: none; }
+.trace::before { content: ""; position: absolute; right: 4px; top: 6px; bottom: 6px; width: 1px; background: var(--line-2); z-index: -1; }
+
+/* ---------- BOOT ---------- */
+#boot { position: fixed; inset: 0; z-index: 100; background: #000; color: #9AA6C2; font: 400 13px/1.7 var(--f-mono); padding: 6vh 7vw; display: flex; flex-direction: column; justify-content: space-between; transition: opacity .8s, visibility .8s; cursor: pointer; }
+#boot.out { opacity: 0; visibility: hidden; }
+#boot .log { white-space: pre-wrap; max-width: 900px; }
+#boot .ok { color: #2BE38B; } #boot .w { color: #E8ECF4; } #boot .s { color: #3DF5FF; } #boot .o { color: #FF6B1A; }
+#boot .bar { height: 2px; background: #111827; margin-top: 18px; max-width: 520px; overflow: hidden; }
+#boot .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #FF6B1A, #3DF5FF); transition: width .25s linear; }
+#boot .skip { font: 500 11px var(--f-mono); letter-spacing: .2em; color: #4F5B7A; display: flex; justify-content: space-between; }
+#boot .logo { font: 900 clamp(42px, 9vw, 140px)/.9 var(--f-display); color: #fff; letter-spacing: -.02em; opacity: 0; transition: opacity .6s, filter .6s; filter: blur(12px); }
+#boot .logo em { font-style: normal; color: #FF6B1A; }
+#boot .logo.on { opacity: 1; filter: none; }
+
+/* ---------- CONSOLA (Ctrl K) ---------- */
+#console { position: fixed; z-index: 80; left: 50%; bottom: 24px; transform: translate(-50%, 30px); width: min(980px, calc(100vw - 32px)); height: min(460px, 60vh);
+  opacity: 0; visibility: hidden; transition: .35s var(--ease); box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+#console.open { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+#console .term { height: 100%; border-color: var(--line-2); }
+#console pre { font-size: 13px; }
+#console .in { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-top: 1px solid #1B2540; }
+#console .in label { color: #3DF5FF; white-space: nowrap; }
+#console input { flex: 1; background: transparent; border: 0; outline: 0; color: #E8ECF4; font: 400 13px var(--f-mono); caret-color: #3DF5FF; }
+#console .hint { color: #4F5B7A; font-size: 11px; }
+
+/* ---------- VISOR DE EVIDENCIAS ---------- */
+#lightbox { position: fixed; inset: 0; z-index: 90; background: rgba(2, 3, 8, .92); backdrop-filter: blur(8px); display: grid; grid-template-rows: auto 1fr auto; opacity: 0; visibility: hidden; transition: .3s; }
+#lightbox.open { opacity: 1; visibility: visible; }
+#lightbox header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; font: 500 12px var(--f-mono); color: #7D89A8; letter-spacing: .1em; }
+#lightbox header b { color: #E8ECF4; }
+#lightbox .stage { display: grid; place-items: center; padding: 0 70px; min-height: 0; position: relative; }
+#lightbox .stage img { max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0, 0, 0, .6); background: #fff; }
+#lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid #2A3556; color: #E8ECF4; display: grid; place-items: center; font-size: 18px; }
+#lightbox .nav:hover { border-color: #3DF5FF; color: #3DF5FF; }
+#lightbox .prev { left: 14px; } #lightbox .next { right: 14px; }
+#lightbox footer { padding: 14px 24px 18px; display: flex; gap: 22px; align-items: flex-start; justify-content: space-between; }
+#lightbox .cap { font-size: 15px; color: #E8ECF4; max-width: 900px; }
+#lightbox .cap small { display: block; font: 500 11px var(--f-mono); color: #3DF5FF; letter-spacing: .12em; margin-bottom: 4px; }
+#lightbox .strip { display: flex; gap: 6px; overflow-x: auto; max-width: 45vw; padding-bottom: 4px; }
+#lightbox .strip img { width: 64px; height: 42px; object-fit: cover; border-radius: 4px; opacity: .45; cursor: pointer; border: 1px solid transparent; flex: none; background: #fff; }
+#lightbox .strip img.on { opacity: 1; border-color: #3DF5FF; }
+#lightbox .x { color: #E8ECF4; font-size: 13px; padding: 6px 10px; border: 1px solid #2A3556; border-radius: 6px; }
+
+/* ---------- OVERLAYS (ayuda, rúbrica) ---------- */
+.overlay { position: fixed; inset: 0; z-index: 85; background: rgba(2, 3, 8, .86); backdrop-filter: blur(10px); display: grid; place-items: center; padding: 24px; opacity: 0; visibility: hidden; transition: .3s; }
+[data-theme="plano"] .overlay { background: rgba(230, 235, 243, .9); }
+.overlay.open { opacity: 1; visibility: visible; }
+.overlay .box { width: min(1080px, 100%); max-height: 88vh; overflow: auto; background: var(--surface); border: 1px solid var(--line-2); border-radius: 16px; padding: 28px; }
+.overlay h3 { font: 800 28px var(--f-display); margin-bottom: 6px; }
+.keys { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 32px; margin-top: 20px; }
+.keys div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+
+/* ---------- TOAST ---------- */
+#toast { position: fixed; left: 50%; top: 70px; transform: translate(-50%, -12px); z-index: 95; font: 500 12px var(--f-mono); letter-spacing: .08em; background: var(--surface); border: 1px solid var(--line-2); color: var(--text); padding: 10px 16px; border-radius: 8px; opacity: 0; transition: .3s; pointer-events: none; }
+#toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- MODO PRESENTACIÓN ---------- */
+body.pres { overflow: hidden; }
+body.pres .trace { right: 14px; }
+body.pres .slide { height: 100vh; min-height: 0; overflow: hidden; padding-top: 74px; padding-bottom: 64px; }
+body.pres main { transition: transform .9s var(--ease); }
+body.pres [data-step] { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); pointer-events: none; }
+body.pres [data-step].shown { opacity: 1; transform: none; pointer-events: auto; }
+body.pres .rv { opacity: 1; transform: none; }
+.presbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; display: none; align-items: center; gap: 18px; padding: 10px 22px; font: 500 11px var(--f-mono); color: var(--muted); background: linear-gradient(transparent, var(--bg) 40%); letter-spacing: .06em; }
+body.pres .presbar { display: flex; }
+.presbar .prog { flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.presbar .prog i { display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--signal)); width: 0; transition: width .5s var(--ease); }
+.presbar .who { display: inline-flex; align-items: center; gap: 8px; color: var(--text); }
+.presbar .who i { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font: 700 10px var(--f-body); font-style: normal; color: #05070D; }
+.presbar button { color: var(--muted); padding: 4px 8px; border-radius: 6px; }
+.presbar button:hover { color: var(--text); background: var(--surface); }
+#blackout { position: fixed; inset: 0; background: #000; z-index: 99; opacity: 0; visibility: hidden; transition: .4s; }
+#blackout.on { opacity: 1; visibility: visible; }
+
+@media (max-width: 900px) {
+  .trace { display: none; }
+  .hud .tools .lbl { display: none; }
+  .hud .hide-m { display: none; }
+}

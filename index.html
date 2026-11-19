@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOGITRANS // NETWORK OS · Proyecto ASIX2C</title>
+<meta name="description" content="LogiTrans: la infraestructura de red completa de una empresa de logística con sede en Barcelona y almacén en Zaragoza. Proyecto final ASIX2C, Institut F. Vidal i Barraquer.">
+<meta name="theme-color" content="#05070D">
+<meta property="og:title" content="LOGITRANS // NETWORK OS">
+<meta property="og:description" content="500 equipos, 2 sedes, 1 red. El proyecto LogiTrans, funcionando en el navegador.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/hud.css">
+<link rel="stylesheet" href="css/chapters.css">
+</head>
+<body>
+
+<!-- ============ BOOT ============ -->
+<div id="boot" role="dialog" aria-label="Arranque">
+  <div>
+    <div class="log" id="boot-log"></div>
+    <div class="bar"><i id="boot-bar"></i></div>
+  </div>
+  <div class="logo" id="boot-logo">LOGI<em>TRANS</em></div>
+  <div class="skip"><span>CLIC O CUALQUIER TECLA PARA ENTRAR</span><span>ASIX2C 0379 · INSTITUT F. VIDAL I BARRAQUER</span></div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<!-- ============ HUD ============ -->
+<header class="hud">
+  <a class="live" href="#inicio"><i></i><b>LOGITRANS</b><span class="hide-m">// NETWORK OS · logitrans.local</span></a>
+  <div class="tools">
+    <button id="btn-console" title="Consola (Ctrl+K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 17 6-6-6-6M12 19h8"/></svg><span class="lbl">Consola</span></button>
+    <button id="btn-pres" title="Modo presentación (P)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="lbl">Presentar</span></button>
+    <button id="btn-rubric" title="Rúbrica (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span class="lbl">Rúbrica</span></button>
+    <span class="sep"></span>
+    <button id="btn-theme" title="Modo NOC / modo plano (T)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <button id="btn-sound" title="Sonido (M)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path id="snd-x" d="m23 9-6 6M17 9l6 6"/></svg></button>
+    <button id="btn-help" title="Atajos (?)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></button>
+    <span class="sep"></span>
+    <span id="clock">--:--:--</span>
+  </div>
+</header>
+
+<nav class="trace" id="trace" aria-label="Recorrido"></nav>
+
+<main id="main">
+
+<!-- 01 ============ INICIO ============ -->
+<section class="slide" id="inicio" data-title="Inicio" data-speaker="galo">
+  <canvas id="hero-net" aria-hidden="true"></canvas>
+  <div class="slide-inner hero-c">
+    <div class="eyebrow rv">PROJECTE · ASIX2C 0379 · INSTITUT F. VIDAL I BARRAQUER</div>
+    <h1 class="hero-title rv d1">LOGI<em>TRANS</em></h1>
+    <p class="hero-sub rv d2">Una red. <b>Dos sedes.</b> Quinientos equipos. Todo lo que construimos, <b>funcionando delante tuyo</b>.</p>
+    <div class="stats hero-stats rv d3">
+      <div class="stat"><div class="n" data-count="500">0</div><div class="l">equipos</div></div>
+      <div class="stat"><div class="n" data-count="2">0</div><div class="l">sedes</div></div>
+      <div class="stat"><div class="n" data-count="6">0</div><div class="l">VLAN</div></div>
+      <div class="stat"><div class="n" data-count="105">0</div><div class="l">equipos en PT</div></div>
+      <div class="stat"><div class="n" data-count="71">0</div><div class="l">AP Wi-Fi 6</div></div>
+      <div class="stat"><div class="n" data-count="1034758" data-suffix=" €">0</div><div class="l">presupuesto</div></div>
+    </div>
+    <div class="hero-actions rv d4">
+      <a class="btn" href="#encargo">Iniciar recorrido</a>
+      <button class="btn ghost" data-act="pres">Modo presentación <kbd>P</kbd></button>
+      <button class="btn sig" data-act="console">Abrir consola <kbd>Ctrl K</kbd></button>
+    </div>
+  </div>
+  <div class="hero-foot mono">GALO LEPORE ROSSI · JOAN INFANTES LOPEZ · ROBERT PURCHAREA · OLIVER MOLINA MONTERO</div>
+</section>
+
+<!-- 02 ============ EL ENCARGO ============ -->
+<section class="slide" id="encargo" data-title="El encargo" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 02 · <b>El encargo</b></div>
+    <h2 class="ch-t rv">Un cliente.<br><span class="o">Treinta requisitos.</span></h2>
+    <div class="grid split mt">
+      <div class="ticket rv" data-step="1">
+        <div class="ticket-h"><span class="tag sig">TICKET #LT-0001</span><span class="mono muted">De: Joan Cervós · cliente</span></div>
+        <h3>Infraestructura de red nueva para LogiTrans</h3>
+        <p>Somos una empresa de logística y transporte. Tenemos una <b>oficina central en Barcelona</b> (4 plantas, 350 equipos) y un <b>almacén en Zaragoza</b> (150 equipos). Queremos que funcionen como una sola red.</p>
+        <ul class="req" id="req-list">
+          <li>Cableado estructurado, racks, SAI y hardware real</li>
+          <li>Seis VLAN, IPv4 con VLSM e IPv6</li>
+          <li>VPN IPsec entre sedes, OSPF autenticado y NAT</li>
+          <li>Seguridad de capa 2 y ACL por departamento</li>
+          <li>Active Directory, GPO y RADIUS</li>
+          <li>Web corporativa con WAF y área de clientes</li>
+          <li>RAID 5, cifrado, firewall y antivirus</li>
+          <li>Repositorio con streaming y despliegue de imágenes</li>
+          <li>Auditoría propia y plan de mitigación</li>
+        </ul>
+      </div>
+      <div class="panel rv d2" data-step="2">
+        <h4>Rúbrica del Sprint 2 <em id="rub-sum"></em></h4>
+        <div class="rubric-grid" id="rubric-grid"></div>
+        <div class="rubric-legend mono"><span><i class="s0"></i>0 en el Sprint 1</span><span><i class="s1"></i>1</span><span><i class="s2"></i>2</span><span><i class="s3"></i>3</span><span class="sig">Clic en cada punto para ir a la parte de la web donde lo resolvemos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ============ LAS SEDES ============ -->
+<section class="slide" id="sedes" data-title="Las sedes" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 03 · <b>Diseño físico</b></div>
+        <h2 class="ch-t rv">Dos edificios.<br><span class="o">Una estrella.</span></h2>
+        <p class="ch-d rv">Las dos sedes se cablean en estrella: un armario principal del que sale <b>fibra OM4</b> a los armarios de planta, y de ahí <b>Cat 6A</b> a cada roseta, sin pasar nunca de 90 m de cobre.</p>
+      </div>
+    </div>
+    <div class="grid split-r mt sites">
+      <div class="panel site-bcn rv" data-step="1">
+        <h4>Oficina central · Barcelona <em>One Parc Central · 22@</em></h4>
+        <div class="iso-wrap" id="iso-bcn"></div>
+        <div class="stats mini-stats"><div class="stat"><div class="n">4 × 1.000</div><div class="l">m² por planta</div></div><div class="stat"><div class="n">302</div><div class="l">puestos en planos</div></div><div class="stat"><div class="n">54</div><div class="l">AP</div></div><div class="stat"><div class="n">12</div><div class="l">switches de acceso</div></div></div>
+      </div>
+      <div class="panel site-zgz rv d2" data-step="2">
+        <h4>Almacén · Zaragoza <em>PLAZA · Nave P3</em></h4>
+        <div class="nave" id="nave-zgz"></div>
+        <div class="stats mini-stats"><div class="stat"><div class="n">9.000</div><div class="l">m² · 150 × 60 m</div></div><div class="stat"><div class="n">9</div><div class="l">muelles</div></div><div class="stat"><div class="n">17</div><div class="l">AP</div></div><div class="stat"><div class="n">135 m</div><div class="l">fibra al IDF-02</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ============ LOS PLANOS ============ -->
+<section class="slide" id="planos" data-title="Los planos" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 04 · <b>Plànols</b></div>
+        <h2 class="ch-t rv">Cada sala,<br><span class="o">su VLAN.</span></h2>
+      </div>
+      <div class="chips rv" id="floor-tabs"></div>
+    </div>
+    <div class="grid split-r mt">
+      <div class="plan-view rv" id="plan-view">
+        <img id="plan-img" src="assets/planos/p1.webp" alt="Plano de la planta">
+        <div class="plan-scan"></div>
+      </div>
+      <div class="panel rv d2" id="plan-info"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ============ EL CABLE ============ -->
+<section class="slide" id="cable" data-title="El cable" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 05 · <b>Medios y etiquetado</b></div>
+    <h2 class="ch-t rv">El cable dura<br><span class="o">veinte años.</span></h2>
+    <p class="ch-d rv">Es lo que menos se ve y lo que más cuesta arreglar. Por eso lo elegimos pensando en <b>durabilidad</b>, <b>normativa</b> (LSZH, TIA-568) y <b>margen</b> para subir a 10 Gb sin tocarlo.</p>
+    <div class="cable-run rv mt" id="cable-run" data-step="1"></div>
+    <div class="grid g3 mt">
+      <div class="panel rv" data-step="2" id="cmp-copper"></div>
+      <div class="panel rv d1" data-step="2" id="cmp-fiber"></div>
+      <div class="panel rv d2" data-step="3">
+        <h4>Decodificador de etiquetas <em>2.A2</em></h4>
+        <input class="lbl-in mono" id="lbl-in" value="FO-CPD-IDFP2-01" spellcheck="false" aria-label="Etiqueta">
+        <div class="lbl-out" id="lbl-out"></div>
+        <div class="chips mt-s" id="lbl-ex"></div>
+      </div>
+    </div>
+    <div class="cable-totals rv mt" data-step="3">
+      <div class="stat"><div class="n">36.500 m</div><div class="l">Cat 6A con margen · 37 bobinas</div></div>
+      <div class="stat"><div class="n">690</div><div class="l">tomas</div></div>
+      <div class="stat"><div class="n">520 m</div><div class="l">fibra OM4</div></div>
+      <div class="stat"><div class="n">≈ 900 m</div><div class="l">bandeja metálica</div></div>
+      <div class="patch" id="patch-colors"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ============ EL RACK ============ -->
+<section class="slide" id="rack" data-title="El rack" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 06 · <b>Racks, SAI y hardware</b></div>
+        <h2 class="ch-t rv">42 unidades.<br><span class="o">Ni una al azar.</span></h2>
+      </div>
+      <div class="chips rv" id="rack-tabs"></div>
+    </div>
+    <div class="grid rack-layout mt">
+      <div class="rack-col rv" id="rack-view"></div>
+      <div class="rack-side">
+        <div class="panel rv" id="rack-detail"></div>
+        <div class="panel rv d1 ups" id="ups-panel" data-step="1">
+          <h4>Corte de luz <em id="ups-model"></em></h4>
+          <div class="ups-row"><div class="ups-time mono" id="ups-time">15:00</div><div class="ups-bat"><i id="ups-fill"></i></div></div>
+          <p class="muted small" id="ups-txt">SAI online de doble conversión: la corriente pasa siempre por rectificador e inversor. No hay tiempo de transferencia.</p>
+          <button class="btn small" id="ups-go">Cortar la luz</button>
+        </div>
+        <div class="rv d2"><button class="ev-btn" data-ev="rack">Ver alzados de la memoria</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 ============ LA RED ============ -->
+<section class="slide" id="red" data-title="La red" data-speaker="galo">
+  <div class="slide-inner wide">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 07 · <b>Diseño lógico</b></div>
+        <h2 class="ch-t rv">La red, <span class="o">viva.</span></h2>
+      </div>
+      <p class="ch-d rv small-d">Doble troncal en cada switch de acceso, cores unidos por <b>EtherChannel LACP</b>, ASA con cuatro patas y dos routers por sede contra cuatro ISP. Ningún cable ni equipo es imprescindible. Elegí origen, destino y servicio, y mandá el paquete.</p>
+    </div>
+    <div class="topo-wrap rv mt-s">
+      <svg id="topo" viewBox="0 0 1600 760" role="img" aria-label="Topología de LogiTrans"></svg>
+      <div class="topo-info panel tight" id="topo-info"></div>
+    </div>
+    <div class="sim rv" data-step="1">
+      <div class="sim-f"><label>Origen</label><select id="sim-src"></select></div>
+      <div class="sim-f"><label>Destino</label><select id="sim-dst"></select></div>
+      <div class="sim-f"><label>Servicio</label><select id="sim-svc"></select></div>
+      <button class="btn" id="sim-go">Enviar paquete</button>
+      <div class="sim-out mono" id="sim-out">Elegí una prueba o probá una de estas:</div>
+      <div class="chips" id="sim-presets"></div>
+      <div class="sim-extra">
+        <div class="chips" id="vlan-chips"></div>
+        <button class="btn small ghost" id="stp-cut">Cortar troncal P1 → CORE1</button>
+        <button class="ev-btn" data-ev="acl">ACL</button><button class="ev-btn" data-ev="vlan">VLAN</button><button class="ev-btn" data-ev="pt">PT</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 ============ LAS DIRECCIONES ============ -->
+<section class="slide" id="ip" data-title="Las direcciones" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 08 · <b>IPv4 VLSM + IPv6</b></div>
+        <h2 class="ch-t rv">Cada IP<br><span class="o">se explica sola.</span></h2>
+      </div>
+      <div class="ipdecode rv" id="ipdecode"></div>
+    </div>
+    <div class="grid split-r mt">
+      <div class="panel rv" data-step="1">
+        <h4>Bloques VLSM a escala <em id="vlsm-mode">IPv4</em></h4>
+        <div class="vlsm" id="vlsm"></div>
+        <div class="chips mt-s"><button class="chip on" id="v4btn">IPv4</button><button class="chip" id="v6btn">IPv6 dual stack</button></div>
+      </div>
+      <div class="panel rv d1" id="vlsm-detail" data-step="1"></div>
+    </div>
+    <div class="ip-foot rv mt" data-step="2">
+      <div class="stat"><div class="n">≈ 1.240</div><div class="l">direcciones asignadas</div></div>
+      <div class="stat"><div class="n">&lt; 0,01 %</div><div class="l">del 10.0.0.0/8</div></div>
+      <div class="stat"><div class="n">253</div><div class="l">delegaciones futuras sin tocar nada</div></div>
+      <div class="stat"><div class="n">/52</div><div class="l">un prefijo IPv6 por sede</div></div>
+      <div><button class="ev-btn" data-ev="ipv4">IPv4 en PT</button> <button class="ev-btn" data-ev="ipv6">IPv6 en PT</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 ============ EL TÚNEL ============ -->
+<section class="slide" id="tunel" data-title="El túnel" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 09 · <b>VPN IPsec + OSPF</b></div>
+    <h2 class="ch-t rv">Por Internet,<br><span class="o">pero ilegible.</span></h2>
+    <div class="tunnel rv mt" id="tunnel" data-step="1">
+      <div class="tn-end"><b>BCN-RT1</b><span class="mono">85.100.1.2 · Tunnel0 10.0.0.1</span></div>
+      <div class="tn-pipe"><div class="tn-label mono">GRE sobre IPsec · ESP AES-256 + SHA-HMAC · DH grupo 5</div><div class="tn-packets" id="tn-packets"></div></div>
+      <div class="tn-end r"><b>ZGZ-RT1</b><span class="mono">85.100.2.2 · Tunnel0 10.0.0.2</span></div>
+    </div>
+    <div class="grid g3 mt">
+      <div class="panel rv" data-step="2">
+        <h4>Lo que ve un espía <em>tcpdump</em></h4>
+        <div class="cipher mono" id="cipher"></div>
+        <input class="lbl-in mono mt-s" id="cipher-in" value="ping 10.2.50.10 desde P1-ADM-03" aria-label="Texto a cifrar">
+      </div>
+      <div class="panel rv d1" data-step="3">
+        <h4>Vecindad OSPF <em>proceso 10 · MD5</em></h4>
+        <div class="ospf" id="ospf"></div>
+        <button class="btn small mt-s" id="ospf-go">Levantar adyacencia</button>
+      </div>
+      <div class="panel rv d2 honest" data-step="4">
+        <h4>Limitaciones de Packet Tracer <em>honestidad</em></h4>
+        <p><b>OSPFv3 + IPsec:</b> <span class="mono">ipv6 ospf authentication ipsec spi 256 sha1</span> devuelve <span class="bad mono">% Invalid input</span>. Dejamos MD5 en OSPFv2 y lo documentamos.</p>
+        <p><b>OSPFv3 por GRE:</b> no forma vecindad en PT. Entre sedes usamos rutas estáticas IPv6 a los /52 de cada sede, que es equivalente.</p>
+        <p class="muted">En IOS real las dos cosas funcionan.</p>
+        <button class="ev-btn" data-ev="ospf">OSPF</button> <button class="ev-btn" data-ev="vpn">VPN</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ============ NAT Y FIREWALL ============ -->
+<section class="slide" id="nat" data-title="NAT y firewall" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 10 · <b>Internet, NAT y ASA</b></div>
+    <h2 class="ch-t rv">Para Internet,<br><span class="o">somos una IP.</span></h2>
+    <div class="nat-stage rv mt" id="nat-stage" data-step="1"></div>
+    <div class="grid g2 mt">
+      <div class="panel rv" data-step="2">
+        <h4>Traducciones en BCN-RT1 <em>show ip nat translations</em></h4>
+        <table class="t mono" id="nat-table"><thead><tr><th>Pro</th><th>Inside global</th><th>Inside local</th><th>Outside global</th></tr></thead><tbody></tbody></table>
+        <div class="chips mt-s"><button class="chip" data-nat="pat">PAT: un PC navega</button><button class="chip" data-nat="static">NAT estático: alguien entra a la web</button></div>
+      </div>
+      <div class="panel rv d1" data-step="3">
+        <h4>BCN-FW · ASA 5506-X <em>4 interfaces</em></h4>
+        <div class="asa" id="asa"></div>
+        <p class="muted small mt-s">El ASA de Packet Tracer no guarda estado de TCP: por eso hay reglas explícitas para las respuestas (web, SSH a routers y RADIUS). En un ASA real no hacen falta.</p>
+        <button class="ev-btn" data-ev="nat">NAT y firewall</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ============ EL ATAQUE ============ -->
+<section class="slide" id="ataque" data-title="El ataque" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 11 · <b>Seguridad capa 2 y capa 3</b></div>
+        <h2 class="ch-t rv">Atacanos.<br><span class="o">Dale.</span></h2>
+      </div>
+      <p class="ch-d rv small-d">Diez ataques de la tabla de mitigación, lanzables en vivo contra un switch de acceso. Cada defensa es configuración real del Packet Tracer.</p>
+    </div>
+    <div class="grid atk-layout mt">
+      <div class="atk-list rv" id="atk-list" data-step="1"></div>
+      <div class="panel rv d1 atk-arena" data-step="1">
+        <h4><span id="atk-title">BCN-P1-ACC1 · Fa0/1–24</span> <em id="atk-state">EN ESPERA</em></h4>
+        <div class="switch" id="switch"></div>
+        <div class="atk-desc" id="atk-desc"></div>
+        <div class="atk-actions"><button class="btn" id="atk-go">Lanzar ataque</button><button class="btn ghost" id="atk-reset">Restablecer</button><button class="ev-btn" data-ev="l2">Pruebas reales</button></div>
+        <div class="term atk-term"><div class="term-bar"><i></i><i></i><i></i><span id="atk-term-t">BCN-P1-ACC1 · consola</span></div><pre id="atk-log"></pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ============ SERVICIOS ============ -->
+<section class="slide" id="servicios" data-title="Servicios Windows" data-speaker="robert">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 12 · <b>Active Directory, GPO, RADIUS</b></div>
+        <h2 class="ch-t rv">logitrans<span class="b">.local</span></h2>
+      </div>
+      <p class="ch-d rv small-d">Windows Server 2022 en SRV-AD: dominio, DHCP, DNS con horizonte dividido y NPS. Abrí las herramientas como si estuvieras sentado en el servidor.</p>
+    </div>
+    <div class="desktop rv mt-s" id="desktop" data-step="1">
+      <div class="dt-area" id="dt-area"></div>
+      <div class="dt-icons" id="dt-icons"></div>
+      <div class="dt-task"><span class="dt-start">&#8862;</span><span id="dt-tasks"></span><span class="dt-clock mono" id="dt-clock"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ============ DATOS ============ -->
+<section class="slide" id="datos" data-title="RAID y cifrado" data-speaker="robert">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 13 · <b>RAID 5, BitLocker, firewall y antivirus</b></div>
+    <h2 class="ch-t rv">Sacá un disco.<br><span class="o">Robalo. Da igual.</span></h2>
+    <div class="grid g3 mt">
+      <div class="panel rv" data-step="1">
+        <h4>Pool-RAID · Disco-Datos <em id="raid-lbl">HEALTHY</em></h4>
+        <div class="disks" id="disks"></div>
+        <div class="raid-st mono" id="raid-st"></div>
+        <p class="muted small">Storage Spaces en Parity: datos y paridad repartidos en 3 discos de 5 GB. Hacé clic en un disco para quitarlo, igual que en la prueba.</p>
+      </div>
+      <div class="panel rv d1" data-step="2">
+        <h4>Robo del disco <em>BitLocker XTS-AES 128</em></h4>
+        <div class="term"><div class="term-bar"><i></i><i></i><i></i><span>ubuntu@ladron</span></div><pre id="bl-term"></pre></div>
+        <button class="btn small mt-s" id="bl-go">Montar el disco robado</button>
+      </div>
+      <div class="panel rv d2" data-step="3">
+        <h4>Defensa del host <em>5.C2</em></h4>
+        <ul class="checks">
+          <li><b>Firewall de Windows Defender</b> en Dominio, Privado y Público, bloqueo por defecto, vía GPO.</li>
+          <li><b>Solo las reglas necesarias:</b> DNS, SMB, Core Networking y NPS.</li>
+          <li><b>Microsoft Defender</b>: análisis diario 5:27 y semanal los viernes 20:30.</li>
+          <li><b>Logs en \\SRV-AD\Logs</b> sobre R: cifrado. Solo <b>Grupo-Gestio</b> lee, desde la VLAN 99.</li>
+          <li><b>Documentos en el servidor</b>, no en el PC: Redireccion-Docs y unidad S:.</li>
+        </ul>
+        <button class="ev-btn" data-ev="storage">RAID y cifrado</button> <button class="ev-btn" data-ev="fwav">Firewall y AV</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 ============ WEB Y APPS ============ -->
+<section class="slide" id="web" data-title="Web y aplicaciones" data-speaker="oliver">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 14 · <b>WordPress, clientes, medios y FOG</b></div>
+    <h2 class="ch-t rv">Cinco contenedores.<br><span class="o">Una sola puerta.</span></h2>
+    <div class="grid g2 mt">
+      <div class="panel rv" data-step="1">
+        <h4>docker compose · SRV-HV03 <em>10.1.50.12 ↔ 85.100.1.18</em></h4>
+        <div class="stack" id="stack"></div>
+        <button class="btn small mt-s" id="stack-up">docker compose up -d --wait</button>
+      </div>
+      <div class="panel rv d1" data-step="2">
+        <h4>Área de clientes · probala <em>logitrans.com/clients</em></h4>
+        <div class="portal" id="portal"></div>
+      </div>
+    </div>
+    <div class="grid g3 mt">
+      <div class="panel rv tight" data-step="3"><h4>WAF Wordfence <em>Free</em></h4><div class="waf" id="waf"></div></div>
+      <div class="panel rv d1 tight" data-step="3"><h4>Repositorio + Jellyfin <em>sin descargas</em></h4><div id="repo"></div></div>
+      <div class="panel rv d2 tight" data-step="3"><h4>FOG · despliegue PXE <em>win10-base</em></h4><div id="fog"></div></div>
+    </div>
+    <div class="mt-s rv"><button class="ev-btn" data-ev="web">Web y clientes</button> <button class="ev-btn" data-ev="repo">Repositorio</button> <button class="ev-btn" data-ev="fog">FOG</button></div>
+  </div>
+</section>
+
+<!-- 15 ============ AUDITORÍA ============ -->
+<section class="slide" id="auditoria" data-title="Auditoría" data-speaker="oliver">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 15 · <b>Nmap y WPScan</b></div>
+    <h2 class="ch-t rv">Nos atacamos<br><span class="o">primero.</span></h2>
+    <div class="grid g2 mt">
+      <div class="term rv audit-term" data-step="1"><div class="term-bar"><i></i><i></i><i></i><span>auditor@logitrans · nmap</span></div><pre id="nmap-term"></pre></div>
+      <div class="panel rv d1" data-step="2">
+        <h4>Puertos abiertos y decisión <em>6.1</em></h4>
+        <div class="ports" id="ports"></div>
+        <div class="chips mt-s"><button class="btn small" id="nmap-go">Repetir escaneo</button><button class="btn small ghost" id="fw-go">Aplicar firewall</button></div>
+      </div>
+    </div>
+    <div class="grid g2 mt">
+      <div class="term rv audit-term s" data-step="3"><div class="term-bar"><i></i><i></i><i></i><span>auditor@logitrans · wpscan</span></div><pre id="wp-term"></pre></div>
+      <div class="panel rv d1" data-step="3">
+        <h4>Resultado de WPScan <em>con token de API</em></h4>
+        <div class="wpres" id="wpres"></div>
+        <button class="ev-btn mt-s" data-ev="audit">Capturas de la auditoría</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ============ MITIGACIÓN ============ -->
+<section class="slide" id="mitigacion" data-title="Mitigación" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="head-row">
+      <div>
+        <div class="ch-n rv">Hop 16 · <b>OWASP Top 10 · capa 2 · capa 3</b></div>
+        <h2 class="ch-t rv">Diez riesgos.<br><span class="o">Diez respuestas.</span></h2>
+      </div>
+      <p class="ch-d rv small-d">OWASP Top 10 (2021) aplicado a WordPress y al área de clientes. Pasá el mouse por cada riesgo para ver cómo lo frenamos y en qué punto de la memoria está.</p>
+    </div>
+    <div class="owasp mt" id="owasp" data-step="1"></div>
+    <div class="findings rv mt" id="findings" data-step="3"></div>
+  </div>
+</section>
+
+<!-- 17 ============ CORRECCIONES ============ -->
+<section class="slide" id="correcciones" data-title="Correcciones" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 17 · <b>Revisión del Sprint 1</b></div>
+    <h2 class="ch-t rv">Lo que nos<br><span class="o">corrigió el profe.</span></h2>
+    <p class="ch-d rv">Y cómo lo resolvimos. Arrastrá cada tarjeta para ver el antes y el después.</p>
+    <div class="fixes mt" id="fixes" data-step="1"></div>
+  </div>
+</section>
+
+<!-- 18 ============ PRESUPUESTO ============ -->
+<section class="slide" id="presupuesto" data-title="Presupuesto" data-speaker="joan">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 18 · <b>Presupuesto</b></div>
+    <h2 class="ch-t rv"><span id="budget-total">0</span> €</h2>
+    <p class="ch-d rv">IVA incluido. <b>855.172 €</b> sin IVA. Modelos reales, con precio de distribuidor.</p>
+    <div class="budget mt" id="budget" data-step="1"></div>
+  </div>
+</section>
+
+<!-- 19 ============ EQUIPO ============ -->
+<section class="slide" id="equipo" data-title="Equipo y Scrum" data-speaker="galo">
+  <div class="slide-inner">
+    <div class="ch-n rv">Hop 19 · <b>Equipo y metodología</b></div>
+    <h2 class="ch-t rv">Cuatro personas.<br><span class="o">Tres sprints.</span></h2>
+    <div class="team mt" id="team" data-step="1"></div>
+    <div class="sprints mt" id="sprints" data-step="2"></div>
+  </div>
+</section>
+
+<!-- 20 ============ CRÉDITOS ============ -->
+<section class="slide" id="creditos" data-title="Créditos" data-speaker="all">
+  <div class="slide-inner credits">
+    <div class="credits-roll" id="credits-roll"></div>
+    <div class="dl rv" data-step="1">
+      <div class="ch-n">Descargas</div>
+      <div class="dl-grid">
+        <a class="dl-i" href="downloads/LogiTrans_Memoria.pdf" download><b>Memoria final</b><span>PDF · 10 MB</span></a>
+        <a class="dl-i" href="downloads/LogiTrans_Memoria.docx" download><b>Memoria final</b><span>Word · 13 MB</span></a>
+        <a class="dl-i" href="downloads/LogiTrans_PacketTracer_PT9.0.1.pkt" download><b>Packet Tracer v5</b><span>PT 9.0.1 · 105 equipos</span></a>
+        <a class="dl-i" href="downloads/LogiTrans_PacketTracer_PT9.0.0.pkt" download><b>Packet Tracer v5</b><span>PT 9.0.0 (instituto)</span></a>
+        <a class="dl-i" href="downloads/LogiTrans_Planos_drawio.zip" download><b>Planos draw.io</b><span>ZIP · P0 · P1 · P2 · P3 · ZGZ</span></a>
+      </div>
+      <div class="qr-row"><div id="qr" class="qr"></div><div class="mono muted small" id="qr-url"></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PANELES FLOTANTES ============ -->
+<div class="presbar" id="presbar">
+  <span id="pb-n">01 / 20</span>
+  <span class="who" id="pb-who"></span>
+  <div class="prog"><i id="pb-prog"></i></div>
+  <span id="pb-timer">00:00</span>
+  <button id="pb-presenter" title="Vista de ponente (S)">Ponente</button>
+  <button id="pb-exit" title="Salir (Esc)">Salir</button>
+</div>
+<div id="blackout"></div>
+<div id="toast"></div>
+
+<div id="console" aria-label="Consola">
+  <div class="term">
+    <div class="term-bar"><i></i><i></i><i></i><span>NOC · P3-GES-01 · consola simulada con los datos reales del proyecto</span></div>
+    <pre id="con-out"></pre>
+    <div class="in"><label id="con-prompt">BCN-CORE1#</label><input id="con-in" autocomplete="off" spellcheck="false" aria-label="Comando"><span class="hint">Tab completa · Esc cierra</span></div>
+  </div>
+</div>
+
+<div id="lightbox" aria-label="Evidencias">
+  <header><span><b id="lb-title">Evidencias</b> · <span id="lb-n"></span></span><button class="x" id="lb-x">Cerrar · Esc</button></header>
+  <div class="stage"><button class="nav prev" id="lb-prev" aria-label="Anterior">&larr;</button><img id="lb-img" alt=""><button class="nav next" id="lb-next" aria-label="Siguiente">&rarr;</button></div>
+  <footer><div class="cap" id="lb-cap"></div><div class="strip" id="lb-strip"></div></footer>
+</div>
+
+<div class="overlay" id="help"><div class="box">
+  <h3>Atajos</h3>
+  <p class="muted">La web se puede recorrer con el scroll o presentar paso a paso.</p>
+  <div class="keys">
+    <div><span>Modo presentación</span><kbd>P</kbd></div>
+    <div><span>Siguiente / anterior paso</span><span><kbd>&rarr;</kbd> <kbd>&larr;</kbd> <kbd>Espacio</kbd></span></div>
+    <div><span>Vista de ponente</span><kbd>S</kbd></div>
+    <div><span>Pantalla completa</span><kbd>F</kbd></div>
+    <div><span>Pantalla en negro</span><kbd>B</kbd></div>
+    <div><span>Consola de comandos</span><span><kbd>Ctrl</kbd> <kbd>K</kbd></span></div>
+    <div><span>Rúbrica</span><kbd>R</kbd></div>
+    <div><span>Modo NOC / plano</span><kbd>T</kbd></div>
+    <div><span>Sonido</span><kbd>M</kbd></div>
+    <div><span>Ir a un capítulo</span><span><kbd>1</kbd> … <kbd>9</kbd></span></div>
+    <div><span>Esta ayuda</span><kbd>?</kbd></div>
+    <div><span>Cerrar</span><kbd>Esc</kbd></div>
+  </div>
+</div></div>
+
+<div class="overlay" id="rubric"><div class="box">
+  <h3>Rúbrica del Sprint 2</h3>
+  <p class="muted">Los 30 puntos, la nota que sacamos en el Sprint 1 y dónde lo resolvemos ahora. Clic para ir.</p>
+  <table class="t mt-s" id="rubric-table"><thead><tr><th>Punto</th><th>Criterio</th><th>Sprint 1</th><th>Comentario del profe</th><th></th></tr></thead><tbody></tbody></table>
+</div></div>
+
+<script src="js/data/data.js"></script>
+<script src="js/data/evidence.js"></script>
+<script src="js/data/notes.js"></script>
+<script src="js/core/util.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/core/lightbox.js"></script>
+<script src="js/core/engine.js"></script>
+<script src="js/core/presenter.js"></script>
+<script src="js/core/console.js"></script>
+<script src="js/scenes/boot.js"></script>
+<script src="js/scenes/hero.js"></script>
+<script src="js/scenes/encargo.js"></script>
+<script src="js/scenes/fisico.js"></script>
+<script src="js/scenes/rack.js"></script>
+<script src="js/scenes/topology.js"></script>
+<script src="js/scenes/ip.js"></script>
+<script src="js/scenes/tunel.js"></script>
+<script src="js/scenes/ataque.js"></script>
+<script src="js/scenes/desktop.js"></script>
+<script src="js/scenes/datos.js"></script>
+<script src="js/scenes/web.js"></script>
+<script src="js/scenes/auditoria.js"></script>
+<script src="js/scenes/cierre.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
