@@ -16,11 +16,11 @@
     S.push({ kind: 'cover', id: 'cover', t: 'LogiTrans', notes: 'Presentación del equipo y del encargo: una empresa de logística con oficina central en Barcelona (350 puestos) y almacén en Zaragoza (150).' });
     S.push({ kind: 'agenda', id: 'agenda', t: 'Índice', notes: 'El orden es el mismo que el de la memoria. Cada punto tiene su prueba en el Packet Tracer o en los servicios.' });
     LT.CHAPTERS.forEach(function (c) {
-      S.push({ kind: 'chapter', id: 'ch' + c.n, ch: c, t: c.n + ' · ' + c.t, notes: 'Capítulo ' + c.n + ': ' + c.s.map(function (id) { return id + ' ' + (LT.SECTIONS[id] ? LT.SECTIONS[id].t : ''); }).join(' · ') });
+      S.push({ kind: 'chapter', id: 'ch' + c.n, ch: c, t: c.n + ' · ' + c.t, notes: (LT.lang === 'ca' ? 'Capítol ' : 'Capítulo ') + c.n + ': ' + c.s.map(function (id) { return id + ' ' + (LT.SECTIONS[id] ? LT.SECTIONS[id].t : ''); }).join(' · ') });
       c.s.forEach(function (id) {
         var sec = LT.SECTIONS[id]; if (!sec) return;
         S.push({ kind: 'sec', id: id, sec: sec, t: (id === '0' ? '0' : id) + ' · ' + sec.t, vis: VIS[id], steps: Math.min((sec.subs || []).length, 7),
-          notes: (sec.lead || '').replace(/<[^>]+>/g, '') + (sec.sc ? ' Escenario en el Tracer: ' + sec.sc[1] : '') + ' Puntos: ' + (sec.subs || []).map(function (s) { return s[0] + ' ' + s[1]; }).join(' · ') });
+          notes: (sec.lead || '').replace(/<[^>]+>/g, '') + (sec.sc ? (LT.lang === 'ca' ? ' Escenari al Tracer: ' : ' Escenario en el Tracer: ') + sec.sc[1] : '') + (LT.lang === 'ca' ? ' Punts: ' : ' Puntos: ') + (sec.subs || []).map(function (s) { return s[0] + ' ' + s[1]; }).join(' · ') });
       });
     });
     S.push({ kind: 'budget', id: 'budget', t: 'Presupuesto', notes: '855.172 € de base y 1.034.758,12 € con IVA. Más de la mitad son los equipos de usuario.' });

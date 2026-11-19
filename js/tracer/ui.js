@@ -531,7 +531,7 @@
   function openScenario(el, m, id) {
     var sc = LT.SC[id], i = 0, busy = false;
     LT.ACTS.reset();
-    el.innerHTML = '<div class="player"><button class="link back">Todos los escenarios</button><p class="lbl">Escenario · <a href="#/s/' + sc.ref + '">punto ' + sc.ref + ' de la memoria</a></p><h3>' + sc.t + '</h3><p>' + sc.d + '</p><ol class="steps">' +
+    el.innerHTML = '<div class="player"><button class="link back">Todos los escenarios</button><p class="lbl">' + (LT.lang === 'ca' ? 'Escenari · <a href="#/s/' + sc.ref + '">punt ' + sc.ref + ' de la memòria</a>' : 'Escenario · <a href="#/s/' + sc.ref + '">punto ' + sc.ref + ' de la memoria</a>') + '</p><h3>' + sc.t + '</h3><p>' + sc.d + '</p><ol class="steps">' +
       sc.steps.map(function (s, k) { return '<li data-k="' + k + '"><p>' + s.say + '</p>' + (s.dev ? '<code>' + esc(s.dev) + ' · ' + esc(s.cmd.replace(/^browser /, 'Navegador → ').replace(/ @\w+/, '').replace('conf-ospfv3-auth', 'ipv6 ospf authentication ipsec …').replace(/^(aaa|dhcp)$/, function (x) { return 'Servicios → ' + x.toUpperCase(); }).replace(/^wireless$/, 'Config → Wireless0')) + '</code>' : s.act ? '<code class="act">Acción en la red</code>' : '') + '</li>'; }).join('') +
       '</ol><div class="pl-ctl"><button class="btn sun next">Empezar</button><button class="btn ghost sm all">Reproducir todo</button><button class="btn ghost sm rst">Reiniciar</button></div></div>';
     LT.$('.back', el).onclick = function () { history.replaceState(null, '', '#/tracer'); scPanel(el, m); };

@@ -61,7 +61,7 @@
       var first = evs.length && LT.EVIDENCE[evs[0]];
       var data = ' data-dev="' + esc(dev) + '" data-cmd="' + esc(cmd) + '"' + (run ? ' data-run="' + esc(run) + '"' : '') + ' data-ev="' + evs.join(',') + '"';
       return '<div class="chk"' + data + '><div class="c-body"><div class="c-top"><span class="c-dev">' + esc(dev) + '</span><span class="c-cmd">' + esc(cmd) + '</span></div><p>' + txt + '</p><div class="c-act"></div></div>' +
-        (first ? '<div class="c-img" style="background-image:url(' + first.src + ')"><span>IMAGEN ' + evs.join(' · ') + '</span></div>' : '') + '</div>';
+        (first ? '<div class="c-img" style="background-image:url(' + first.src + ')"><span>' + (LT.lang === 'ca' ? 'IMATGE ' : 'IMAGEN ') + evs.join(' · ') + '</span></div>' : '') + '</div>';
     },
     fig: function (n, cap) {
       var e = LT.EVIDENCE[n]; if (!e) return '';

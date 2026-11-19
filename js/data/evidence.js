@@ -171,7 +171,7 @@ LT.EVIDENCE = {};
 LT.EVIDENCE_RAW.trim().split('\n').forEach(function (l) {
   var p = l.split('|');
   var n = +p[0];
-  LT.EVIDENCE[n] = { n: n, dev: p[1], txt: p[2], src: 'assets/capturas/ev-' + String(n).padStart(3, '0') + '.webp' };
+  LT.EVIDENCE[n] = { n: n, dev: p[1], txt: p.slice(2).join('|'), src: 'assets/capturas/ev-' + String(n).padStart(3, '0') + '.webp' };
 });
 /* Grupos de evidencias por capítulo */
 LT.EVIDENCE_GROUPS = {

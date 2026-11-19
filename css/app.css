@@ -123,6 +123,10 @@ code { font: 500 .88em/1.4 var(--mono); background: rgba(20, 33, 46, .07); paddi
 }
 .search-btn:hover { border-color: var(--line-2); }
 .search-btn kbd { margin-left: auto; }
+.lang-btn { display: flex; padding: 3px; gap: 2px; background: var(--white); border: 1px solid var(--line); border-radius: 2px; cursor: pointer; }
+.lang-btn span { font: 600 11px/1 var(--mono); letter-spacing: .08em; padding: 6px 7px; border-radius: 1px; color: var(--muted); }
+.lang-btn span.on { background: var(--ink); color: var(--white); }
+.lang-btn:hover { border-color: var(--line-2); }
 .menu-btn { display: none; background: none; border: 0; padding: 8px; }
 .menu-btn svg { width: 22px; height: 22px; }
 

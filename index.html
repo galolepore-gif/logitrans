@@ -29,6 +29,7 @@
     </nav>
     <span class="sp"></span>
     <button class="search-btn" data-act="search" aria-label="Buscar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>Buscar en la memoria</span><kbd>Ctrl K</kbd></button>
+    <button class="lang-btn" data-act="lang" data-noi18n title="Canviar a català" aria-label="Canviar a català"><span class="on">ES</span><span>CA</span></button>
     <button class="btn present" data-act="present"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg><span>Presentar</span></button>
   </header>
 
@@ -91,6 +92,7 @@
 
 <div id="toast" role="status"></div>
 
+<script src="js/core/i18n.js"></script>
 <script src="js/data/data.js"></script>
 <script src="js/data/evidence.js"></script>
 <script src="js/core/util.js"></script>
@@ -109,6 +111,7 @@
 <script src="js/doc/d4.js"></script>
 <script src="js/doc/d5.js"></script>
 <script src="js/doc/d6.js"></script>
+<script>if (LT.lang === 'ca') ['evidence', 'd0-2', 'd3', 'd4', 'd5', 'd6'].forEach(function (f) { document.write('<script src="js/doc-ca/' + f + '.js"><\/script>'); });</script>
 <script src="js/tracer/scenarios.js"></script>
 <script src="js/tracer/ui.js"></script>
 <script src="js/core/home.js"></script>

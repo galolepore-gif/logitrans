@@ -21,7 +21,7 @@
 
     /* Cómo se usa */
     h += '<section class="home-sec how"><div class="how-grid">' +
-      card('01', 'Memoria completa', nSecs + ' apartados y ' + nSubs + ' puntos, en el mismo orden que el documento final. Navegá libre desde el índice o buscá con <kbd>Ctrl</kbd> <kbd>K</kbd>.', '#/s/0', 'Ir al índice') +
+      card('01', 'Memoria completa', nSecs + (LT.lang === 'ca' ? ' apartats i ' : ' apartados y ') + nSubs + ' puntos, en el mismo orden que el documento final. Navegá libre desde el índice o buscá con <kbd>Ctrl</kbd> <kbd>K</kbd>.', '#/s/0', 'Ir al índice') +
       card('02', 'LogiTrans Tracer', 'El Packet Tracer dentro de la web: consola de cada equipo, simulación paquete a paquete y ' + LT.SCENARIOS.length + ' escenarios que repiten las pruebas de la memoria.', '#/tracer', 'Abrir el simulador') +
       card('03', nChk + ' comprobaciones', 'Cada prueba lleva su comando, lo que demuestra, la captura real y, si es de red, el botón para ejecutarla en vivo.', '#/s/3.C1', 'Ver un ejemplo') +
       card('04', 'Modo presentación', 'Para la defensa: diapositivas a pantalla completa generadas desde la misma memoria, con vista del presentador. <kbd>Esc</kbd> vuelve al mismo punto.', null, 'Presentar', 'present') +

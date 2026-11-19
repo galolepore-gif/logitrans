@@ -3,6 +3,8 @@
 (function () {
   var LT = window.LT;
   var app = LT.$('#app');
+  var lb = LT.$('.lang-btn');
+  if (lb && LT.lang === 'ca') { lb.children[0].classList.remove('on'); lb.children[1].classList.add('on'); lb.title = 'Cambiar a castellano'; lb.setAttribute('aria-label', 'Cambiar a castellano'); }
 
   /* ---------- Rutas ---------- */
   function route() {
@@ -41,6 +43,7 @@
     else if (act === 'search') { LT.palette.open(); }
     else if (act === 'present') { LT.Present.open(); }
     else if (act === 'present-here') { LT.Present.open(LT.current); }
+    else if (act === 'lang') { LT.setLang(LT.lang === 'ca' ? 'es' : 'ca'); }
     else if (act === 'help') { e.preventDefault(); LT.$('#help').classList.add('open'); }
     else if (act === 'help-close') { LT.$('#help').classList.remove('open'); }
     else return;
