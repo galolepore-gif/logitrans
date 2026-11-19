@@ -10,7 +10,11 @@
     app.classList.remove('menu');
     if (LT.Tracer && LT.Tracer.isPop()) LT.Tracer.closePop();
     var key = 'home';
-    if (p[0] === 's' && p[1]) { LT.renderSection(p[1], p[2]); key = p[1]; }
+    if (p[0] === 's' && p[1]) {
+      var r = LT.resolveSec(p[1], p[2]);
+      if (r && (r[0] !== p[1] || (r[1] || '') !== (p[2] || ''))) { history.replaceState(null, '', '#/s/' + r[0] + (r[1] ? '/' + r[1] : '')); p = ['s', r[0], r[1]]; }
+      LT.renderSection(p[1], p[2]); key = p[1];
+    }
     else if (p[0] === 'tracer') { LT.Tracer.render(p[1]); key = 'tracer'; }
     else if (p[0] === 'presupuesto') { LT.renderBudget(); key = 'presupuesto'; }
     else { LT.renderHome(); key = 'home'; }

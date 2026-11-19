@@ -14,6 +14,18 @@
   LT.ORDER = [];
   LT.CHAPTERS.forEach(function (c) { c.s.forEach(function (id) { LT.ORDER.push(id); }); });
   LT.sec = function (def) { LT.SECTIONS[def.id] = def; };
+  /* Acepta cualquier forma razonable de enlace: «3» (capítulo), «3.c1» (minúsculas), «3.C1.2» (punto dentro de un apartado).
+     Devuelve [apartado, punto] o null. */
+  LT.resolveSec = function (raw, sub) {
+    if (!raw) return null;
+    var id = decodeURIComponent(raw).trim().toUpperCase().replace(/\.$/, '');
+    if (LT.SECTIONS[id]) return [id, sub];
+    for (var i = 0; i < LT.CHAPTERS.length; i++) if (LT.CHAPTERS[i].n === id) return [LT.CHAPTERS[i].s[0], null];
+    var best = null;
+    LT.ORDER.forEach(function (k) { if (id.indexOf(k + '.') === 0 && (!best || k.length > best.length)) best = k; });
+    if (best) return [best, sub || id];
+    return null;
+  };
   LT.chapterOf = function (id) { for (var i = 0; i < LT.CHAPTERS.length; i++) if (LT.CHAPTERS[i].s.indexOf(id) >= 0) return LT.CHAPTERS[i]; };
 
   /* ---------- Ayudantes para escribir contenido ---------- */
@@ -66,7 +78,10 @@
   LT.renderSection = function (id, subId) {
     var S = LT.SECTIONS[id];
     var view = LT.$('#view');
-    if (!S) { view.innerHTML = '<div class="doc"><div class="doc-main"><h1>No encontrado</h1></div></div>'; return; }
+    if (!S) {
+      view.innerHTML = '<div class="doc"><div class="doc-main"><header class="doc-head"><span class="num">?</span><h1>Este punto no existe</h1><p class="lead">El enlace apunta a «' + LT.esc(id) + '». Elegí un apartado del índice o volvé a la portada.</p></header><p><a class="btn sun" href="#/">Ir a la portada</a></p></div></div>';
+      return;
+    }
     var ch = LT.chapterOf(id), i = LT.ORDER.indexOf(id);
     var prev = LT.SECTIONS[LT.ORDER[i - 1]], next = LT.SECTIONS[LT.ORDER[i + 1]];
     var h = '<div class="doc"><article class="doc-main">';
@@ -148,7 +163,7 @@
     var ul = LT.$('#toc'); ul.innerHTML = '';
     ul.appendChild(LT.h('li', null, LT.h('a', { href: '#/', 'data-id': 'home', html: '<i>·</i>Portada' })));
     LT.CHAPTERS.forEach(function (c) {
-      ul.appendChild(LT.h('li.ch', { text: c.n + ' · ' + c.t }));
+      ul.appendChild(LT.h('li.ch', null, LT.h('a', { href: '#/s/' + c.s[0], text: c.n + ' · ' + c.t })));
       c.s.forEach(function (id) {
         var S = LT.SECTIONS[id]; if (!S) return;
         var li = LT.h('li');
