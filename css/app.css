@@ -629,3 +629,9 @@ span.dot { width: auto; }
 @media (max-width: 1200px) {
   .guide-btn span, .btn.present span { display: none; }
 }
+
+/* Franja de la guía: botón y enlaces como en pantalla grande también a 1280 px */
+.guide-strip { grid-template-columns: minmax(0, 1fr) auto; }
+.gs-links { max-width: 520px; }
+.gs-links a { white-space: nowrap; }
+@media (max-width: 1100px) { .guide-strip { grid-template-columns: 1fr; } }
