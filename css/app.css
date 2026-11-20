@@ -574,3 +574,21 @@ td.dot, span.dot { text-align: center; width: 92px; }
 span.dot { width: auto; }
 @media (max-width: 1100px) { .team2 { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .member2 header { grid-template-columns: auto 1fr; } .member2 dl { grid-column: 1 / -1; } td.dot { width: 44px; } .matrix thead th { font-size: 11px; } }
+.gantt { background: var(--white); border: 1px solid var(--line); padding: 22px 24px; }
+.gantt .legend { gap: 6px; }
+.legend .sw { display: inline-block; width: 22px; height: 10px; background: var(--c); margin-left: 12px; }
+.gt { min-width: 760px; }
+.gt-row { display: grid; grid-template-columns: 330px minmax(0, 1fr); align-items: center; border-bottom: 1px solid var(--line); }
+.gt-l { padding: 6px 12px 6px 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gt-l a { color: var(--ink); text-decoration: none; }
+.gt-l a:hover { text-decoration: underline; }
+.gt-l i { font: normal 600 12px/1 var(--mono); display: inline-block; min-width: 44px; color: var(--muted); }
+.gt-t { position: relative; height: 100%; min-height: 30px; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(14% - 1px), var(--line) calc(14% - 1px), var(--line) 14%); }
+.gt-bar { position: absolute; top: 8px; bottom: 8px; min-width: 6px; }
+.gt-axis { border-bottom: 2px solid var(--ink); }
+.gt-axis .gt-t { background: none; height: 26px; }
+.gt-axis .gt-t span { position: absolute; bottom: 6px; font: 500 10.5px/1 var(--mono); color: var(--muted); white-space: nowrap; transform: translateX(-2px); }
+.gt-ch { padding: 14px 0 6px; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.matrix thead th small { display: block; margin-top: 3px; font: 500 9.5px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 700px) { .gt-row { grid-template-columns: 200px minmax(0, 1fr); } }
+.gt-axis .gt-t span:last-child { transform: translateX(-100%); }

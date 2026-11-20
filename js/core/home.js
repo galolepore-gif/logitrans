@@ -39,8 +39,8 @@
       LT.SCENARIOS.slice(0, 9).map(function (s) { return '<a href="#/tracer/' + s.id + '"><i>' + s.ref + '</i>' + s.t + '</a>'; }).join('') + '<a href="#/tracer" class="more">y ' + (LT.SCENARIOS.length - 9) + ' más</a></div></div></div></section>';
 
     /* Equipo y sprints */
-    h += '<section class="home-sec" id="equipo"><div class="sec-head"><span class="kick">Equipo ASIX2C 0379</span><h2>Quién hizo qué</h2><p>Las tarjetas del Trello de cada uno y su parte del diagrama de Gantt, del 1 de octubre al 19 de noviembre de 2026. Cada número lleva a su punto de la memoria.</p></div>' +
-      '<div class="team2">' + LT.TEAM.map(teamCard).join('') + '</div>' + teamMatrix() +
+    h += '<section class="home-sec" id="equipo"><div class="sec-head"><span class="kick">Equipo ASIX2C 0379</span><h2>Quién hizo qué</h2><p>Del 1 de octubre al 19 de noviembre de 2026, punto por punto de la rúbrica. Cada número lleva a su apartado de la memoria.</p></div>' +
+      teamGantt() + teamMatrix() +
       '<div class="sprints">' + LT.SPRINTS.map(function (s) { return '<article class="sprint rv"><span class="lbl">Sprint ' + s.n + ' · ' + s.state + '</span><h4>' + s.name + '</h4><ul>' + s.items.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul></article>'; }).join('') + '</div></section>';
 
     /* Descargas */
@@ -56,43 +56,47 @@
     var m = LT.Tracer.map(LT.$('.hero-map', view), { onDevice: function (id) { LT.go('#/tracer'); setTimeout(function () { LT.Tracer.win(id); }, 60); } });
     demo(m);
   };
-  /* ---------- Equipo: tarjetas del Trello + matriz del Gantt ---------- */
-  function first(id) { var t = LT.TEAM.filter(function (m) { return m.id === id; })[0]; return t ? t.name.split(' ')[0] : id; }
-  function withWho(ids) {
-    var n = ids.split(' ').map(first), ca = LT.lang === 'ca';
-    return (ca ? 'amb ' : 'con ') + (n.length > 1 ? n.slice(0, -1).join(', ') + (ca ? ' i ' : ' y ') + n[n.length - 1] : n[0]);
-  }
-  function chips(pts) { return pts ? pts.split(' ').map(function (p) { return '<a class="pt" href="#/s/' + p + '" title="' + (LT.SECTIONS[p] ? LT.SECTIONS[p].t : p) + '">' + p + '</a>'; }).join('') : ''; }
-  function teamCard(t) {
-    var pts = {};
-    t.tasks.forEach(function (k) { if (k[1]) k[1].split(' ').forEach(function (p) { pts[p] = 1; }); });
-    Object.keys(LT.GANTT).forEach(function (p) { if (LT.GANTT[p].split(' ').indexOf(t.id) >= 0) pts[p] = 1; });
-    var nOwn = t.tasks.filter(function (k) { return !k[2]; }).length;
-    return '<article class="member2 rv" style="--c:var(' + t.color + ')"><header><span class="av">' + t.initial + '</span><div><b>' + t.name + '</b><small>' + t.role + '</small></div>' +
-      '<dl><div><dt>' + t.tasks.length + '</dt><dd>' + (LT.lang === 'ca' ? 'targetes' : 'tarjetas') + '</dd></div><div><dt>' + nOwn + '</dt><dd>' + (LT.lang === 'ca' ? 'pròpies' : 'propias') + '</dd></div><div><dt>' + Object.keys(pts).length + '</dt><dd>' + (LT.lang === 'ca' ? 'punts' : 'puntos') + '</dd></div></dl></header>' +
-      '<p class="does">' + t.does + '</p>' +
-      '<span class="lbl">Sprint 2 · Trello</span><ul class="tasks">' + t.tasks.map(function (k) {
-        return '<li><span class="tn">' + k[0] + '</span>' + (k[2] ? '<em class="with">' + withWho(k[2]) + '</em>' : '') + '<span class="pts">' + chips(k[1]) + '</span></li>';
-      }).join('') + '</ul>' +
-      '<p class="s1"><span class="lbl">Sprint 1</span> ' + t.s1.join(' · ') + '</p></article>';
-  }
-  function teamMatrix() {
-    var ca = LT.lang === 'ca', trello = {};
-    LT.TEAM.forEach(function (t) { t.tasks.forEach(function (k) { if (k[1]) k[1].split(' ').forEach(function (p) { (trello[p] = trello[p] || {})[t.id] = 1; }); }); });
-    var rows = '';
+  /* ---------- Equipo: diagrama de Gantt + responsables por punto ---------- */
+  function member(id) { return LT.TEAM.filter(function (m) { return m.id === id; })[0]; }
+  function rowsByChapter(fn) {
+    var h = '';
     LT.CHAPTERS.forEach(function (c) {
       if (c.n === '0') return;
-      rows += '<tr class="ch"><th colspan="' + (LT.TEAM.length + 1) + '">' + c.n + ' · ' + c.t + '</th></tr>';
-      c.s.forEach(function (id) {
-        var g = (LT.GANTT[id] || '').split(' ');
-        rows += '<tr><td><a href="#/s/' + id + '"><i>' + id + '</i>' + (LT.SECTIONS[id] ? LT.SECTIONS[id].t : '') + '</a></td>' + LT.TEAM.map(function (t) {
-          var on = g.indexOf(t.id) >= 0, tr = trello[id] && trello[id][t.id];
-          return '<td class="dot' + (on ? ' on' : tr ? ' tr' : '') + '" style="--c:var(' + t.color + ')">' + (on || tr ? '<span title="' + t.name + '"></span>' : '') + '</td>';
-        }).join('') + '</tr>';
-      });
+      h += fn(null, c);
+      c.s.forEach(function (id) { if (LT.REPARTO[id]) h += fn(id, c); });
     });
-    return '<div class="matrix rv"><div class="mx-head"><h3>' + (ca ? 'Els 30 punts de la rúbrica' : 'Los 30 puntos de la rúbrica') + '</h3><p class="legend"><span class="dot on"><span></span></span>' + (ca ? 'Responsable segons el Gantt' : 'Responsable según el Gantt') + '<span class="dot tr"><span></span></span>' + (ca ? 'Hi va col·laborar segons el Trello' : 'Colaboró según el Trello') + '</p></div>' +
-      '<div class="mx-scroll"><table><thead><tr><th>' + (ca ? 'Punt' : 'Punto') + '</th>' + LT.TEAM.map(function (t) { return '<th style="--c:var(' + t.color + ')"><span class="av">' + t.initial + '</span>' + t.name.split(' ')[0] + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+    return h;
+  }
+  function secLink(id) { return '<a href="#/s/' + id + '"><i>' + id + '</i>' + (LT.SECTIONS[id] ? LT.SECTIONS[id].t : '') + '</a>'; }
+  function teamGantt() {
+    var ca = LT.lang === 'ca', D = 864e5, t0 = Date.parse('2026-10-01'), t1 = Date.parse('2026-11-20'), span = t1 - t0;
+    var mes = ca ? ['oct.', 'nov.'] : ['oct', 'nov'];
+    function fmt(d) { var x = new Date(d); return x.getUTCDate() + ' ' + mes[x.getUTCMonth() - 9]; }
+    function pct(d) { return ((Date.parse(d) - t0) / span * 100).toFixed(2) + '%'; }
+    var ticks = '';
+    for (var t = t0; t < t1; t += 7 * D) ticks += '<span style="left:' + ((t - t0) / span * 100).toFixed(2) + '%">' + fmt(t) + '</span>';
+    var rows = rowsByChapter(function (id, c) {
+      if (!id) return '<div class="gt-ch">' + c.n + ' · ' + c.t + '</div>';
+      var r = LT.REPARTO[id], who = r[2].split(' ').map(member), n = who.length;
+      var bg = n === 1 ? 'var(' + who[0].color + ')' : 'linear-gradient(180deg,' + who.map(function (m, i) { return 'var(' + m.color + ') ' + (i * 100 / n) + '% ' + ((i + 1) * 100 / n) + '%'; }).join(',') + ')';
+      var end = new Date(Date.parse(r[1]) + D).toISOString().slice(0, 10);
+      return '<div class="gt-row"><div class="gt-l">' + secLink(id) + '</div><div class="gt-t"><span class="gt-bar" style="left:' + pct(r[0]) + ';width:calc(' + pct(end) + ' - ' + pct(r[0]) + ');background:' + bg + '" title="' + fmt(Date.parse(r[0])) + ' – ' + fmt(Date.parse(r[1])) + ' · ' + who.map(function (m) { return m.name.split(' ')[0]; }).join(', ') + '"></span></div></div>';
+    });
+    return '<div class="gantt rv"><div class="mx-head"><h3>' + (ca ? 'Diagrama de Gantt' : 'Diagrama de Gantt') + '</h3><p class="legend">' + LT.TEAM.map(function (m) { return '<span class="sw" style="--c:var(' + m.color + ')"></span>' + m.name.split(' ')[0]; }).join('') + '</p></div>' +
+      '<div class="mx-scroll"><div class="gt"><div class="gt-row gt-axis"><div class="gt-l"></div><div class="gt-t">' + ticks + '</div></div>' + rows + '</div></div></div>';
+  }
+  function teamMatrix() {
+    var ca = LT.lang === 'ca';
+    var rows = rowsByChapter(function (id, c) {
+      if (!id) return '<tr class="ch"><th colspan="' + (LT.TEAM.length + 1) + '">' + c.n + ' · ' + c.t + '</th></tr>';
+      var r = LT.REPARTO[id], resp = r[2].split(' '), col = r[3] ? r[3].split(' ') : [];
+      return '<tr><td>' + secLink(id) + '</td>' + LT.TEAM.map(function (t) {
+        var on = resp.indexOf(t.id) >= 0, tr = col.indexOf(t.id) >= 0;
+        return '<td class="dot' + (on ? ' on' : tr ? ' tr' : '') + '" style="--c:var(' + t.color + ')">' + (on || tr ? '<span title="' + t.name + '"></span>' : '') + '</td>';
+      }).join('') + '</tr>';
+    });
+    return '<div class="matrix rv"><div class="mx-head"><h3>' + (ca ? 'Els 30 punts de la rúbrica' : 'Los 30 puntos de la rúbrica') + '</h3><p class="legend"><span class="dot on"><span></span></span>' + (ca ? 'Responsable' : 'Responsable') + '<span class="dot tr"><span></span></span>' + (ca ? 'Hi va col·laborar' : 'Colaboró') + '</p></div>' +
+      '<div class="mx-scroll"><table><thead><tr><th>' + (ca ? 'Punt' : 'Punto') + '</th>' + LT.TEAM.map(function (t) { return '<th style="--c:var(' + t.color + ')"><span class="av">' + t.initial + '</span>' + t.name.split(' ')[0] + '<small>' + t.role + '</small></th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table></div></div>';
   }
 
   function card(n, t, p, href, cta, act) { return '<article class="how-c rv"><span class="n">' + n + '</span><h3>' + t + '</h3><p>' + p + '</p>' + (href ? '<a class="link" href="' + href + '">' + cta + '</a>' : '<button class="link" data-act="' + act + '">' + cta + '</button>') + '</article>'; }

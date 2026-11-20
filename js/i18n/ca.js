@@ -1113,4 +1113,5 @@ LT.I18N_CA = {"ASIX2C · Proyecto final · Sprint 3":"ASIX2C · Projecte final �
 "Arranque del proyecto y Scrum · Elección de ubicaciones · Planos y diseño físico · Packet Tracer del Sprint 1":"Arrencada del projecte i Scrum · Elecció d’ubicacions · Plànols i disseny físic · Packet Tracer del Sprint 1",
 "Arranque del proyecto y Scrum · Planos y diseño físico · Topología y VLAN · Direccionamiento IPv4/IPv6 · Hardware, materiales y presupuesto · Informe del Sprint 1":"Arrencada del projecte i Scrum · Plànols i disseny físic · Topologia i VLAN · Adreçament IPv4/IPv6 · Maquinari, materials i pressupost · Informe del Sprint 1",
 "Hardware, materiales y presupuesto":"Maquinari, materials i pressupost",
-"Topología y VLAN · Hardware, materiales y presupuesto · Packet Tracer del Sprint 1":"Topologia i VLAN · Maquinari, materials i pressupost · Packet Tracer del Sprint 1"};
+"Topología y VLAN · Hardware, materiales y presupuesto · Packet Tracer del Sprint 1":"Topologia i VLAN · Maquinari, materials i pressupost · Packet Tracer del Sprint 1",
+"Del 1 de octubre al 19 de noviembre de 2026, punto por punto de la rúbrica. Cada número lleva a su apartado de la memoria.":"De l’1 d’octubre al 19 de novembre de 2026, punt per punt de la rúbrica. Cada número porta al seu apartat de la memòria."};
