@@ -475,6 +475,7 @@
       '<div class="seg" role="group" aria-label="Modo"><button data-m="rt" class="on">Tiempo real</button><button data-m="sim">Simulación</button></div>' +
       '<button class="btn sm ghost" data-a="pdu" title="Elegí origen y destino en el mapa">Añadir PDU</button>' +
       '<button class="btn sm ghost" data-a="reset">Reiniciar la red</button>' +
+      '<a class="btn sm ghost tr-guide" href="GUIA.html#tracer" target="_blank">¿Cómo se usa?</a>' +
       '<span class="tr-hint">Clic en un equipo para abrirlo · los escenarios repiten las pruebas de la memoria</span></div>' +
       '<div class="tr-main"><div class="tr-stage"><div class="tr-mapw"></div><div class="tr-pdus"><table class="t mini"><thead><tr><th>Fuego</th><th>Último estado</th><th>Origen</th><th>Destino</th><th>Tipo</th><th>TTL</th></tr></thead><tbody><tr class="empty"><td colspan="6">Sin PDU. Usá «Añadir PDU» y elegí dos equipos.</td></tr></tbody></table></div></div>' +
       '<aside class="tr-side"><nav class="tr-tabs"><button data-p="sc" class="on">Escenarios</button><button data-p="sim">Simulación</button><button data-p="dev">Equipos</button></nav><div class="tr-panel"></div></aside></div>' +

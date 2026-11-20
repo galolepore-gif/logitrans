@@ -23,6 +23,7 @@
     app.classList.toggle('full', key === 'home' || key === 'tracer' || key === 'presupuesto');
     app.classList.toggle('is-tracer', key === 'tracer');
     LT.markToc(key);
+    var gb = LT.$('.guide-btn'); if (gb) gb.setAttribute('href', 'GUIA.html' + (key === 'tracer' ? '#tracer' : key === 'presupuesto' ? '#barra' : key === 'home' ? '' : '#memoria'));
     LT.$$('.top nav a').forEach(function (a) {
       var n = a.dataset.nav;
       a.classList.toggle('on', n === key || (n === 'memoria' && /^\d/.test(key)));

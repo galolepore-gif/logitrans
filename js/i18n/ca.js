@@ -1116,4 +1116,15 @@ LT.I18N_CA = {"ASIX2C · Proyecto final · Sprint 3":"ASIX2C · Projecte final �
 "Topología y VLAN · Hardware, materiales y presupuesto · Packet Tracer del Sprint 1":"Topologia i VLAN · Maquinari, materials i pressupost · Packet Tracer del Sprint 1",
 "Del 1 de octubre al 19 de noviembre de 2026, punto por punto de la rúbrica. Cada número lleva a su apartado de la memoria.":"De l’1 d’octubre al 19 de novembre de 2026, punt per punt de la rúbrica. Cada número porta al seu apartat de la memòria.",
 "Guía de uso completa":"Guia d’ús completa",
-"Guía de uso":"Guia d’ús"};
+"Guía de uso":"Guia d’ús",
+"Guía":"Guia",
+"Cómo usar la web":"Com fer servir la web",
+"¿Primera vez en la web?":"Primera vegada a la web?",
+"Guía de uso con capturas: cómo leer la memoria, usar el Tracer y presentar.":"Guia d’ús amb captures: com llegir la memòria, fer servir el Tracer i presentar.",
+"Abrir la guía":"Obrir la guia",
+"Todo lo que se puede hacer, paso a paso":"Tot el que s’hi pot fer, pas a pas",
+"La memoria y sus comprobaciones, las piezas interactivas, la consola de cada equipo, los escenarios, el modo simulación y la presentación. Con capturas de cada pantalla.":"La memòria i les seves comprovacions, les peces interactives, la consola de cada equip, els escenaris, el mode simulació i la presentació. Amb captures de cada pantalla.",
+"Cómo usar el Tracer":"Com fer servir el Tracer",
+"Cómo leer la memoria":"Com llegir la memòria",
+"Cómo presentar":"Com presentar",
+"¿Cómo se usa?":"Com es fa servir?"};

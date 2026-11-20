@@ -14,7 +14,8 @@
       '<div class="hero-txt"><span class="kick">ASIX2C · Proyecto final</span>' +
       '<h1>Infraestructura de red de <em>LogiTrans</em></h1>' +
       '<p class="lead">Oficina central de cuatro plantas, almacén de 9.000 m², VPN entre sedes, seguridad por capas y servicios. Toda la memoria, el Packet Tracer y las pruebas, en una sola web.</p>' +
-      '<div class="hero-cta"><a class="btn sun" href="#/s/0">Empezar por los planos</a><a class="btn ghost" href="#/tracer">Abrir el Tracer</a><button class="btn ghost" data-act="present">Modo presentación <kbd>P</kbd></button></div></div>' +
+      '<div class="hero-cta"><a class="btn sun" href="#/s/0">Empezar por los planos</a><a class="btn ghost" href="#/tracer">Abrir el Tracer</a><button class="btn ghost" data-act="present">Modo presentación <kbd>P</kbd></button></div>' +
+      '<a class="hero-guide" href="GUIA.html" target="_blank"><span class="q">?</span><span><b>¿Primera vez en la web?</b><small>Guía de uso con capturas: cómo leer la memoria, usar el Tracer y presentar.</small></span><i>Abrir la guía</i></a></div>' +
       '<figure class="hero-fig"><div class="hero-map"></div><figcaption class="figcap"><span>FIG. 0 · Topología lógica en vivo</span><span>Paquetes reales del simulador</span></figcaption></figure>' +
       '</div>' +
       '<div class="facts">' + [[350, 'puestos en Barcelona'], [150, 'puestos en Zaragoza'], [6, 'VLAN por sede'], [105, 'equipos en el Packet Tracer'], [169, 'capturas de evidencia'], [1034758, 'euros con IVA']].map(function (f) { return '<div class="fact rv"><b data-n="' + f[0] + '">0</b><span>' + f[1] + '</span></div>'; }).join('') + '</div></section>';
@@ -25,7 +26,8 @@
       card('02', 'LogiTrans Tracer', 'El Packet Tracer dentro de la web: consola de cada equipo, simulación paquete a paquete y ' + LT.SCENARIOS.length + ' escenarios que repiten las pruebas de la memoria.', '#/tracer', 'Abrir el simulador') +
       card('03', nChk + ' comprobaciones', 'Cada prueba lleva su comando, lo que demuestra, la captura real y, si es de red, el botón para ejecutarla en vivo.', '#/s/3.C1', 'Ver un ejemplo') +
       card('04', 'Modo presentación', 'Para la defensa: diapositivas a pantalla completa generadas desde la misma memoria, con vista del presentador. <kbd>Esc</kbd> vuelve al mismo punto.', null, 'Presentar', 'present') +
-      '</div></section>';
+      '</div><div class="guide-strip rv"><div><span class="kick">Guía de uso</span><h3>Todo lo que se puede hacer, paso a paso</h3><p>La memoria y sus comprobaciones, las piezas interactivas, la consola de cada equipo, los escenarios, el modo simulación y la presentación. Con capturas de cada pantalla.</p></div>' +
+      '<div class="gs-links"><a class="btn sun" href="GUIA.html" target="_blank">Abrir la guía</a><a href="GUIA.html#tracer" target="_blank">Cómo usar el Tracer</a><a href="GUIA.html#memoria" target="_blank">Cómo leer la memoria</a><a href="GUIA.html#presentacion" target="_blank">Cómo presentar</a></div></div></section>';
 
     /* Capítulos */
     h += '<section class="home-sec"><div class="sec-head"><span class="kick">Índice</span><h2>La memoria, punto por punto</h2><p>El mismo índice que el documento final de Joan: de los planos de las instalaciones a la auditoría.</p></div><div class="chapters">';

@@ -250,3 +250,4 @@ body.pop-open { overflow: hidden; }
   .pop-map { overflow: auto; } .pop-map .tr-map { min-width: 800px; height: 100%; }
   .svc { grid-template-columns: 1fr; } .svc-n { flex-direction: row; flex-wrap: wrap; }
 }
+.tr-hint { flex: 1 1 260px; text-align: right; min-width: 0; }
