@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de uso · LogiTrans</title>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  :root {
+    --paper: #F2EEE4; --paper-2: #E9E3D5; --white: #FFFDF8; --ink: #14212E; --ink-2: #33414F; --muted: #6B7380;
+    --line: #D8D0BF; --sun: #F2B416; --sun-2: #FBE3A0; --sun-ink: #7A5800; --blue: #2B67B3; --green: #2E8A4C;
+    --font-h: 'Archivo', 'Arial Narrow', system-ui, sans-serif; --font: 'IBM Plex Sans', system-ui, sans-serif; --mono: 'IBM Plex Mono', Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16.5px/1.65 var(--font); }
+  a { color: var(--ink); text-decoration-color: var(--sun); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  h1, h2, h3 { font-family: var(--font-h); line-height: 1.1; margin: 0; }
+  code, kbd { font-family: var(--mono); font-size: .86em; }
+  code { background: var(--white); border: 1px solid var(--line); padding: 1px 5px; white-space: nowrap; }
+  kbd { display: inline-block; min-width: 1.7em; text-align: center; padding: 1px 6px; background: var(--white); border: 1px solid var(--line); border-bottom-width: 3px; font-weight: 600; }
+  .wrap { display: grid; grid-template-columns: 260px minmax(0, 1fr); max-width: 1240px; margin: 0 auto; gap: 56px; padding: 0 40px; }
+  nav.idx { position: sticky; top: 0; align-self: start; padding: 40px 0; max-height: 100vh; overflow: auto; }
+  nav.idx .brand { font: 900 22px/1 var(--font-h); letter-spacing: -.01em; }
+  nav.idx .brand small { display: block; font: 500 10.5px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  nav.idx ol { list-style: none; padding: 0; margin: 28px 0 0; counter-reset: n; border-top: 2px solid var(--ink); }
+  nav.idx li { counter-increment: n; border-bottom: 1px solid var(--line); }
+  nav.idx li a { display: grid; grid-template-columns: 30px 1fr; padding: 9px 0; text-decoration: none; font-size: 14.5px; }
+  nav.idx li a::before { content: counter(n, decimal-leading-zero); font: 500 11px/2 var(--mono); color: var(--muted); }
+  nav.idx li a:hover { color: var(--blue); }
+  nav.idx .open { display: block; margin-top: 24px; text-align: center; padding: 12px; background: var(--ink); color: var(--white); text-decoration: none; font: 600 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+  nav.idx .open:hover { background: var(--sun); color: var(--ink); }
+  main { padding: 40px 0 120px; min-width: 0; }
+  header.hero { padding: 30px 0 40px; border-bottom: 2px solid var(--ink); }
+  .kick { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--sun-ink); display: flex; align-items: center; gap: 10px; }
+  .kick::before { content: ''; width: 26px; height: 2px; background: var(--sun); }
+  header.hero h1 { font-size: clamp(40px, 5vw, 66px); font-weight: 900; margin: 18px 0 18px; letter-spacing: -.02em; }
+  header.hero p { font-size: 19px; color: var(--ink-2); max-width: 62ch; margin: 0; }
+  .quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+  .quick div { background: var(--white); border: 1px solid var(--line); padding: 18px 20px; }
+  .quick b { font: 800 17px/1.2 var(--font-h); display: block; margin-bottom: 6px; }
+  .quick p { font-size: 14.5px; margin: 0; color: var(--ink-2); }
+  section { padding: 56px 0 10px; }
+  section > h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 900; display: flex; align-items: baseline; gap: 14px; }
+  section > h2 span { font: 700 14px/1 var(--mono); color: var(--sun-ink); }
+  section > p.lead { font-size: 18px; color: var(--ink-2); max-width: 66ch; }
+  h3 { font-size: 21px; margin: 34px 0 10px; }
+  p, li { max-width: 72ch; }
+  ul.steps, ol.steps { padding-left: 22px; }
+  ol.steps li, ul.steps li { margin: 6px 0; }
+  ol.steps li::marker { font: 700 13px var(--mono); color: var(--sun-ink); }
+  figure { margin: 22px 0 8px; }
+  figure a { display: block; border: 1px solid var(--line); box-shadow: 0 10px 30px -18px rgba(20, 33, 46, .45); }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { font: 500 12px/1.5 var(--mono); color: var(--muted); margin-top: 8px; }
+  .tip { background: var(--white); border-left: 4px solid var(--sun); padding: 14px 18px; margin: 20px 0; max-width: 72ch; }
+  .tip.blue { border-left-color: var(--blue); }
+  .tip b.t { font: 600 10.5px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--sun-ink); display: block; }
+  .tip.blue b.t { color: var(--blue); }
+  .tip p { margin: 4px 0 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 6px; font-size: 15px; background: var(--white); }
+  th { text-align: left; font: 600 10.5px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 11px 14px 9px; border-bottom: 2px solid var(--ink); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { white-space: nowrap; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .card { background: var(--white); border: 1px solid var(--line); padding: 18px 20px; }
+  .card h4 { margin: 0 0 6px; font: 800 16px/1.2 var(--font-h); }
+  .card p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+  footer { margin-top: 70px; padding-top: 20px; border-top: 1px solid var(--line); font: 500 12px/1.6 var(--mono); color: var(--muted); }
+  @media (max-width: 960px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; padding: 0 20px; }
+    nav.idx { position: static; max-height: none; padding-bottom: 0; }
+    .quick, .two { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="idx" aria-label="Índice de la guía">
+    <div class="brand">LogiTrans<small>Guía de uso de la web</small></div>
+    <ol>
+      <li><a href="#abrir">Abrir la web</a></li>
+      <li><a href="#barra">La barra de arriba</a></li>
+      <li><a href="#memoria">Leer la memoria</a></li>
+      <li><a href="#comprobaciones">Comprobaciones y capturas</a></li>
+      <li><a href="#widgets">Las piezas interactivas</a></li>
+      <li><a href="#buscar">Buscar</a></li>
+      <li><a href="#tracer">El Tracer: lo básico</a></li>
+      <li><a href="#consola">El Tracer: la consola</a></li>
+      <li><a href="#escenarios">El Tracer: escenarios</a></li>
+      <li><a href="#simulacion">El Tracer: simulación</a></li>
+      <li><a href="#presentacion">Modo presentación</a></li>
+      <li><a href="#atajos">Atajos de teclado</a></li>
+      <li><a href="#problemas">Si algo no va</a></li>
+    </ol>
+    <a class="open" href="index.html">Abrir la web</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <span class="kick">ASIX2C 0379 · LogiTrans</span>
+      <h1>Cómo usar la web</h1>
+      <p>Esta web reúne todo el proyecto: la memoria completa, una réplica del Packet Tracer que funciona dentro del navegador y un modo para presentar. Esta guía explica cada parte desde cero, para quien la abre por primera vez.</p>
+      <div class="quick">
+        <div><b>Para leer</b><p>Entrá en «Memoria» y avanzá por el índice de la izquierda, del punto 0 al 6.</p></div>
+        <div><b>Para probar la red</b><p>Entrá en «Tracer» y elegí un escenario: la web te va diciendo qué hacer.</p></div>
+        <div><b>Para presentar</b><p>Pulsá <kbd>P</kbd> en cualquier momento. <kbd>Esc</kbd> vuelve donde estabas.</p></div>
+      </div>
+    </header>
+
+    <section id="abrir">
+      <h2><span>01</span>Abrir la web</h2>
+      <ol class="steps">
+        <li>Abrí la carpeta <code>LOGITRANS</code> y hacé doble clic en <code>index.html</code>.</li>
+        <li>Se abre en el navegador. No hace falta Internet ni instalar nada: todo, incluidas las fuentes y las imágenes, está dentro de la carpeta.</li>
+        <li>Funciona mejor en Chrome o Edge y con la ventana a pantalla completa (<kbd>F11</kbd>).</li>
+      </ol>
+      <div class="tip"><b class="t">Idioma</b><p>El botón <code>ES | CA</code> de la barra cambia toda la web entre castellano y catalán, y la web lo recuerda para la próxima vez. Las salidas de los equipos Cisco quedan en inglés, como en el Packet Tracer real.</p></div>
+    </section>
+
+    <section id="barra">
+      <h2><span>02</span>La barra de arriba</h2>
+      <p class="lead">Siempre está visible y lleva a las cuatro partes de la web.</p>
+      <figure><a href="assets/guia/01-inicio.jpg" target="_blank"><img src="assets/guia/01-inicio.jpg" alt="Portada de la web" loading="lazy"></a><figcaption>La portada. Arriba, la barra con las cuatro partes, el buscador, el idioma y «Presentar».</figcaption></figure>
+      <table>
+        <thead><tr><th>Botón</th><th>Qué hay</th></tr></thead>
+        <tbody>
+          <tr><td><b>Inicio</b></td><td>La portada: resumen del proyecto, las cifras, quién hizo qué (diagrama de Gantt y tabla de responsables) y las descargas.</td></tr>
+          <tr><td><b>Memoria</b></td><td>Todo el trabajo, en el mismo orden que el documento final: planos, infraestructura física, direccionamiento, seguridad, servicios y auditoría.</td></tr>
+          <tr><td><b>Tracer</b></td><td>La réplica del Packet Tracer: la red completa, con consola en cada equipo.</td></tr>
+          <tr><td><b>Presupuesto</b></td><td>Lo que cuesta montar las dos sedes, por partidas.</td></tr>
+          <tr><td><b>Buscar en la memoria</b></td><td>Busca en todo el texto, las comprobaciones y las capturas. Ver <a href="#buscar">Buscar</a>.</td></tr>
+          <tr><td><b>ES | CA</b></td><td>Cambia el idioma.</td></tr>
+          <tr><td><b>Presentar</b></td><td>Abre el modo presentación en el punto donde estás.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="memoria">
+      <h2><span>03</span>Leer la memoria</h2>
+      <p class="lead">Cada punto de la memoria es una página. La pantalla tiene tres columnas.</p>
+      <figure><a href="assets/guia/02-apartado.jpg" target="_blank"><img src="assets/guia/02-apartado.jpg" alt="Un apartado de la memoria" loading="lazy"></a><figcaption>Punto 4.B1. Izquierda: índice de toda la memoria. Centro: el texto. Derecha: «En este punto».</figcaption></figure>
+      <div class="two">
+        <div class="card"><h4>Izquierda: el índice</h4><p>Todos los puntos del 0 al 6. El que estás leyendo queda marcado en amarillo y debajo aparecen sus subapartados. Clic en cualquiera para saltar.</p></div>
+        <div class="card"><h4>Derecha: «En este punto»</h4><p>Los subapartados de la página actual, para saltar dentro de ella. Debajo hay accesos directos: «Abrir escenario» lleva al Tracer con la prueba de ese punto y «Presentar» lo muestra en diapositivas.</p></div>
+      </div>
+      <p>Para pasar al punto anterior o al siguiente sin usar el ratón, pulsá <kbd>[</kbd> y <kbd>]</kbd>. Arriba de cada página, la ruta («Inicio / Memoria / capítulo») sirve para volver atrás.</p>
+    </section>
+
+    <section id="comprobaciones">
+      <h2><span>04</span>Comprobaciones y capturas</h2>
+      <p class="lead">Cada vez que la memoria afirma que algo funciona, lo demuestra con una comprobación: un equipo, un comando y su resultado.</p>
+      <figure><a href="assets/guia/03-comprobacion.jpg" target="_blank"><img src="assets/guia/03-comprobacion.jpg" alt="Comprobaciones en el Packet Tracer" loading="lazy"></a><figcaption>Cada tarjeta dice en qué equipo se hizo la prueba (en negro), qué comando se ejecutó y qué demuestra.</figcaption></figure>
+      <ul class="steps">
+        <li><b>Ver captura real</b>: abre la captura original de la memoria, a pantalla completa. Con las flechas pasás a la siguiente y <kbd>Esc</kbd> la cierra. También podés hacer clic en la miniatura de la derecha.</li>
+        <li><b>Ejecutar en el Tracer</b>: abre una ventana con ese mismo equipo y ese mismo comando ya ejecutado, así se ve que la salida es real y se puede seguir escribiendo comandos. Para volver, cerrá la ventana con la <code>×</code>.</li>
+      </ul>
+    </section>
+
+    <section id="widgets">
+      <h2><span>05</span>Las piezas interactivas</h2>
+      <p class="lead">Muchos puntos tienen una pieza para tocar: un plano, un rack, el radar de Nmap, un calculador de subredes… Todas avisan qué hacer con un texto corto encima o al lado.</p>
+      <figure><a href="assets/guia/04-widget.jpg" target="_blank"><img src="assets/guia/04-widget.jpg" alt="Widget del escaneo Nmap" loading="lazy"></a><figcaption>Punto 6.1. «Escanear» lanza el escaneo, cada fila de la tabla explica un puerto y «Aplicar LogiTrans-bloqueo-ASUS» cierra los puertos que sobran.</figcaption></figure>
+      <p>Cómo se usan casi todas:</p>
+      <ul class="steps">
+        <li>Los <b>botones amarillos</b> hacen la acción principal (escanear, enviar un paquete, aplicar una regla).</li>
+        <li>Los <b>botones en grupo</b>, como «Desde el laboratorio | Desde Internet», cambian el punto de vista.</li>
+        <li>Las <b>filas, puertos y equipos</b> se pueden tocar para ver la explicación.</li>
+        <li>Los botones con <code>▶</code> abren ese comando en el Tracer.</li>
+      </ul>
+      <div class="tip blue"><b class="t">Todo está conectado</b><p>Las piezas de la memoria y el Tracer comparten la misma red. Si apagás un puerto o activás una regla en una pieza, el Tracer lo refleja. Para dejarlo todo como en las capturas, usá «Reiniciar la red» en el Tracer.</p></div>
+    </section>
+
+    <section id="buscar">
+      <h2><span>06</span>Buscar</h2>
+      <p>Pulsá <kbd>Ctrl</kbd> <kbd>K</kbd> (o <kbd>/</kbd>) en cualquier página, o clic en «Buscar en la memoria». Escribí lo que buscás, por ejemplo <code>dhcp snooping</code>, <code>10.1.50.12</code> o <code>show access-lists</code>. Con las flechas elegís un resultado y con <kbd>Enter</kbd> vas a él. Busca en el texto, en las comprobaciones y en los pies de las capturas.</p>
+      <figure><a href="assets/guia/05-buscar.jpg" target="_blank"><img src="assets/guia/05-buscar.jpg" alt="Buscador" loading="lazy"></a><figcaption>El buscador con «dhcp snooping».</figcaption></figure>
+    </section>
+
+    <section id="tracer">
+      <h2><span>07</span>El Tracer: lo básico</h2>
+      <p class="lead">LogiTrans Tracer es una réplica del Packet Tracer del proyecto que funciona dentro de la web. Sirve para enseñar la red funcionando sin abrir Cisco Packet Tracer.</p>
+      <figure><a href="assets/guia/06-tracer.jpg" target="_blank"><img src="assets/guia/06-tracer.jpg" alt="LogiTrans Tracer" loading="lazy"></a><figcaption>El mapa con las dos sedes y el Internet simulado en el centro. A la derecha, el panel con Escenarios, Simulación y Equipos.</figcaption></figure>
+      <div class="two">
+        <div class="card"><h4>El mapa</h4><p>Barcelona a la izquierda, Zaragoza a la derecha e Internet (cuatro ISP en anillo) en el medio. La línea discontinua de arriba es el túnel VPN. Debajo de cada equipo está su nombre y su IP.</p></div>
+        <div class="card"><h4>El panel de la derecha</h4><p><b>Escenarios</b>: las pruebas de la memoria, guiadas. <b>Simulación</b>: los paquetes salto a salto. <b>Equipos</b>: la lista de todos los equipos para abrirlos.</p></div>
+      </div>
+      <h3>Abrir un equipo</h3>
+      <p>Clic en cualquier equipo del mapa. Se abre una ventana con las mismas pestañas que en Packet Tracer:</p>
+      <table>
+        <thead><tr><th>Pestaña</th><th>Qué muestra</th><th>En qué equipos</th></tr></thead>
+        <tbody>
+          <tr><td><b>Físico</b></td><td>El frontal del equipo con las luces de cada puerto: verde conectado, gris apagado, rojo parpadeando si el puerto se cortó por seguridad. Pasá el ratón por un puerto para ver su VLAN.</td><td>Todos</td></tr>
+          <tr><td><b>Config</b></td><td>La configuración resumida: interfaces, IP y VLAN.</td><td>Todos</td></tr>
+          <tr><td><b>CLI</b></td><td>La consola de comandos de Cisco.</td><td>Routers, switches y firewalls</td></tr>
+          <tr><td><b>Escritorio</b></td><td>Configuración IP, Símbolo del sistema y Navegador web, como en un PC de Packet Tracer.</td><td>PC y servidores</td></tr>
+          <tr><td><b>Servicios</b></td><td>DHCP, DNS, AAA y los demás servicios del servidor.</td><td>Servidores</td></tr>
+        </tbody>
+      </table>
+      <p>Las ventanas se pueden mover arrastrando la barra de arriba y se cierran con la <code>×</code>. Se pueden tener varias abiertas a la vez.</p>
+      <div class="tip"><b class="t">Volver a empezar</b><p>«Reiniciar la red», arriba, deja todo como en las capturas: puertos encendidos, contadores de las ACL y ventanas cerradas.</p></div>
+      <p>Es una réplica fiel pero reducida: 46 de los 105 equipos del fichero original, con la misma topología, el mismo direccionamiento y las mismas listas de acceso. Las respuestas de los equipos se reconstruyeron a partir de las capturas de la memoria.</p>
+    </section>
+
+    <section id="consola">
+      <h2><span>08</span>El Tracer: la consola</h2>
+      <p class="lead">En la pestaña CLI se escriben comandos de verdad, como en un Cisco.</p>
+      <figure><a href="assets/guia/07-consola.jpg" target="_blank"><img src="assets/guia/07-consola.jpg" alt="Consola del BCN-CORE1" loading="lazy"></a><figcaption>BCN-CORE1 con <code>show ip interface brief</code>.</figcaption></figure>
+      <ul class="steps">
+        <li>Escribí el comando y pulsá <kbd>Enter</kbd>.</li>
+        <li>Se aceptan abreviaturas como en IOS: <code>sh ip int br</code> es lo mismo que <code>show ip interface brief</code>.</li>
+        <li><kbd>Tab</kbd> completa la palabra y <kbd>?</kbd> muestra la lista de comandos que acepta ese equipo.</li>
+        <li><kbd>↑</kbd> y <kbd>↓</kbd> recuperan los comandos anteriores.</li>
+        <li>Se puede filtrar como en IOS: <code>show running-config | include ospf</code>.</li>
+      </ul>
+      <h3>Comandos para empezar</h3>
+      <table>
+        <thead><tr><th>Equipo</th><th>Comando</th><th>Qué enseña</th></tr></thead>
+        <tbody>
+          <tr><td>BCN-CORE1</td><td><code>show ip interface brief</code></td><td>Las interfaces y las IP de cada VLAN</td></tr>
+          <tr><td>BCN-CORE1</td><td><code>show standby brief</code></td><td>HSRP: qué core es la puerta de enlace activa</td></tr>
+          <tr><td>BCN-CORE1</td><td><code>show access-lists</code></td><td>Las ACL con sus contadores reales</td></tr>
+          <tr><td>BCN-P1-ACC1</td><td><code>show port-security</code></td><td>Port Security por puerto</td></tr>
+          <tr><td>BCN-P1-ACC1</td><td><code>show ip dhcp snooping</code></td><td>Puertos de confianza y límite de peticiones</td></tr>
+          <tr><td>BCN-RT1</td><td><code>show ip ospf neighbor</code></td><td>Los vecinos OSPF</td></tr>
+          <tr><td>BCN-RT1</td><td><code>show crypto isakmp sa</code></td><td>El estado de la VPN</td></tr>
+          <tr><td>BCN-RT1</td><td><code>show ip nat translations</code></td><td>Las traducciones NAT</td></tr>
+          <tr><td>BCN-FW</td><td><code>show access-list</code></td><td>Las reglas del firewall ASA</td></tr>
+          <tr><td>P1-ADM-03</td><td><code>ipconfig</code>, <code>ping 10.1.50.10</code>, <code>tracert 10.2.50.10</code></td><td>Escritorio → Símbolo del sistema de un PC de Administración</td></tr>
+        </tbody>
+      </table>
+      <p>En los puntos 5 y 6 también aparecen consolas de Windows (Símbolo del sistema y PowerShell) del servidor de dominio y del equipo de auditoría. Funcionan igual.</p>
+    </section>
+
+    <section id="escenarios">
+      <h2><span>09</span>El Tracer: escenarios</h2>
+      <p class="lead">Lo más fácil para enseñar la red. Cada escenario repite una prueba de la memoria paso a paso y explica cada paso en una frase.</p>
+      <figure><a href="assets/guia/08-escenario.jpg" target="_blank"><img src="assets/guia/08-escenario.jpg" alt="Escenario Port Security" loading="lazy"></a><figcaption>Escenario «Port Security: un PC intruso», en el paso 3 de 6. El switch ya cortó el puerto.</figcaption></figure>
+      <ol class="steps">
+        <li>En el panel de la derecha, pestaña <b>Escenarios</b>, elegí uno. El número amarillo es el punto de la memoria que demuestra.</li>
+        <li>Pulsá <b>Empezar</b>. Cada clic en <b>Paso siguiente</b> (o la tecla <kbd>N</kbd>) hace un paso: resalta los equipos, abre la consola, escribe el comando o provoca el problema (desenchufar un PC, cortar un cable, conectar un DHCP pirata…).</li>
+        <li><b>Reproducir todo</b> los hace todos seguidos. <b>Reiniciar</b> vuelve al principio.</li>
+        <li>«Todos los escenarios», arriba, vuelve a la lista.</li>
+      </ol>
+      <p>Hay 17 escenarios: topología, IPv4 y HSRP, IPv6, VLAN, VPN, OSPF, NAT, Port Security, DHCP snooping, STP, BPDU Guard, las tres ACL, RADIUS, exposición desde Internet y la revisión final. Desde cada punto de la memoria, el botón «Abrir escenario» de la derecha lleva directo al suyo.</p>
+    </section>
+
+    <section id="simulacion">
+      <h2><span>10</span>El Tracer: simulación</h2>
+      <p class="lead">Igual que el modo simulación de Packet Tracer: se ve cada paquete viajando de equipo en equipo y qué decidió cada uno.</p>
+      <figure><a href="assets/guia/09-simulacion.jpg" target="_blank"><img src="assets/guia/09-simulacion.jpg" alt="Modo simulación" loading="lazy"></a><figcaption>Un ping de P1-ADM-03 (Barcelona) a SRV-ZGZ01 (Zaragoza). En el mapa se ve el camino. A la derecha, cada salto y lo que hizo el CORE1.</figcaption></figure>
+      <ol class="steps">
+        <li>Arriba, cambiá de <b>Tiempo real</b> a <b>Simulación</b>.</li>
+        <li>Pulsá <b>Añadir PDU</b> y hacé clic en dos equipos del mapa: primero el origen (un PC o un servidor) y después el destino.</li>
+        <li>El paquete recorre la red. En la pestaña <b>Simulación</b> aparece la lista de eventos: clic en uno para ver qué hizo ese equipo (reenviar, traducir con NAT, cifrar en la VPN, descartar por una ACL…).</li>
+        <li><b>Reproducir</b> o <b>Pausa</b> controla la animación, <b>Avanzar</b> va de a un salto y <b>Vaciar</b> borra la lista.</li>
+      </ol>
+      <p>Abajo del mapa queda la tabla de PDU enviados con «Correcto» o «Fallido». «Repetir» vuelve a mandar el mismo paquete. Esta tabla funciona también en Tiempo real.</p>
+    </section>
+
+    <section id="presentacion">
+      <h2><span>11</span>Modo presentación</h2>
+      <p class="lead">Para la defensa ante el tribunal: diapositivas a pantalla completa hechas con la misma memoria, con las piezas interactivas funcionando.</p>
+      <figure><a href="assets/guia/10-presentacion.jpg" target="_blank"><img src="assets/guia/10-presentacion.jpg" alt="Modo presentación" loading="lazy"></a><figcaption>La diapositiva del punto 3.C1. Abajo a la derecha, los controles.</figcaption></figure>
+      <ol class="steps">
+        <li>Pulsá <kbd>P</kbd> o el botón «Presentar». Empieza en el punto donde estabas.</li>
+        <li><kbd>→</kbd> o <kbd>Espacio</kbd> avanza y <kbd>←</kbd> retrocede. Algunas diapositivas tienen varios pasos antes de pasar a la siguiente.</li>
+        <li><kbd>G</kbd> muestra todas las diapositivas para saltar a cualquiera. <kbd>B</kbd> pone la pantalla en negro.</li>
+        <li><kbd>S</kbd> abre la <b>vista del presentador</b> en otra ventana: la diapositiva actual con sus pasos, las notas de qué decir, el título de la siguiente, la hora y un cronómetro. Tiene sus propios botones de anterior y siguiente. Se mueve sola con la presentación. Lo ideal es dejarla en el portátil y la presentación en el proyector.</li>
+        <li><kbd>Esc</kbd> sale y te deja en el mismo punto de la memoria.</li>
+      </ol>
+    </section>
+
+    <section id="atajos">
+      <h2><span>12</span>Atajos de teclado</h2>
+      <p>Dentro de la web, <kbd>?</kbd> muestra esta lista.</p>
+      <table>
+        <thead><tr><th>Tecla</th><th>Qué hace</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>Ctrl</kbd> <kbd>K</kbd> o <kbd>/</kbd></td><td>Buscar en toda la memoria</td></tr>
+          <tr><td><kbd>[</kbd> <kbd>]</kbd></td><td>Punto anterior o siguiente de la memoria</td></tr>
+          <tr><td><kbd>T</kbd></td><td>Abrir el Tracer</td></tr>
+          <tr><td><kbd>N</kbd></td><td>Paso siguiente del escenario abierto en el Tracer</td></tr>
+          <tr><td><kbd>P</kbd></td><td>Modo presentación</td></tr>
+          <tr><td><kbd>→</kbd> <kbd>Espacio</kbd> · <kbd>←</kbd></td><td>Avanzar y retroceder en la presentación</td></tr>
+          <tr><td><kbd>G</kbd> · <kbd>B</kbd> · <kbd>S</kbd></td><td>Todas las diapositivas · pantalla en negro · vista del presentador</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Cerrar lo que esté abierto o salir de la presentación</td></tr>
+          <tr><td><kbd>?</kbd></td><td>Ayuda de atajos</td></tr>
+        </tbody>
+      </table>
+      <p>Mientras escribís en una consola o en el buscador, las letras se escriben normalmente y no activan atajos.</p>
+    </section>
+
+    <section id="problemas">
+      <h2><span>13</span>Si algo no va</h2>
+      <table>
+        <thead><tr><th>Pasa esto</th><th>Hacé esto</th></tr></thead>
+        <tbody>
+          <tr><td>Se ve una versión vieja</td><td>Recargá con <kbd>Ctrl</kbd> <kbd>F5</kbd>.</td></tr>
+          <tr><td>La consola no escribe</td><td>Hacé clic dentro de la ventana de la consola.</td></tr>
+          <tr><td>Un puerto quedó apagado o una ACL cambió</td><td>«Reiniciar la red» en el Tracer.</td></tr>
+          <tr><td>La vista del presentador no se mueve</td><td>Abrila con <kbd>S</kbd> desde la presentación, en el mismo navegador. Si el navegador bloquea la ventana nueva, permití las ventanas emergentes.</td></tr>
+          <tr><td>No se ve nada al abrir el archivo</td><td>Comprobá que se abrió <code>index.html</code> desde la carpeta completa: la web necesita las carpetas <code>css</code>, <code>js</code> y <code>assets</code> al lado.</td></tr>
+        </tbody>
+      </table>
+      <footer>LogiTrans · ASIX2C 0379 · Institut F. Vidal i Barraquer · Galo Lepore Rossi, Joan Infantes Lopez, Robert Purcharea, Oliver Molina Montero</footer>
+    </section>
+  </main>
+</div>
+</body>
+</html>
