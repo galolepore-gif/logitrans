@@ -19,7 +19,7 @@
       var sec = s.sec;
       h += '<div class="ss"><div class="ss-l"><span class="ss-n">' + (s.id === '0' ? '0.' : s.id) + '</span><h2>' + sec.t + '</h2>' + (sec.lead ? '<p class="sl-lead">' + sec.lead + '</p>' : '') +
         '<ol class="pts">' + (sec.subs || []).slice(0, 7).map(function (x, k) { return '<li data-st="' + (k + 1) + '"><i>' + x[0] + '</i>' + x[1] + '</li>'; }).join('') + ((sec.subs || []).length > 7 ? '<li data-st="7" class="more">y ' + ((sec.subs.length) - 7) + ' puntos más en la memoria</li>' : '') + '</ol>' +
-        (sec.sc ? '<p class="ss-sc"><span class="lbl">En el Tracer</span>' + sec.sc[1] + '</p>' : '') + '</div><div class="ss-r"><div class="vis"></div></div></div>';
+        (sec.sc ? '<p class="ss-sc"><span class="lbl">En el Tracer</span>' + sec.sc[1] + '</p>' : '') + '</div><div class="ss-r"><div class="vis">' + s.panes.map(function (p, k) { return p == null ? '' : '<div class="vp" data-vp="' + k + '"></div>'; }).join('') + '</div></div></div>';
     } else if (s.kind === 'budget') {
       var T = LT.BUDGET_TOTAL;
       h += '<span class="kick">Presupuesto</span><h2>1.034.758 € con IVA</h2><div class="bd">' + LT.BUDGET.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (r) { return '<div class="bd-r"><span>' + r[0] + '</span><i style="--w:' + (r[1] / LT.BUDGET[0][1] * 100).toFixed(1) + '%"></i><b>' + LT.fmt(r[1]) + ' €</b></div>'; }).join('') + '</div><p class="sl-lead">Base ' + LT.fmt(T.net) + ' € · IVA ' + LT.fmt(T.iva, 2) + ' €</p>';
@@ -31,8 +31,31 @@
     h += '</div><footer class="sl-foot"><span>LOGITRANS</span><span>' + LT.esc(s.t) + '</span><span>' + (i + 1) + ' / ' + slides.length + '</span></footer></section>';
     return h;
   }
+  /* Pieza visual de cada subapartado: su widget, si no su figura, sus comprobaciones con la captura o su tabla. */
+  function subPane(sub) {
+    var d = document.createElement('div'); d.innerHTML = sub[2] || '';
+    var w = LT.$('.w[data-w]', d); if (w) return w.outerHTML;
+    var f = LT.$('figure.fig', d); if (f) return f.outerHTML;
+    var c = LT.$$('.chk', d);
+    if (c.length) return '<div class="vp-chk">' + c.slice(0, 4).map(function (x) { return x.outerHTML; }).join('') + (c.length > 4 ? '<p class="vp-more">' + (LT.lang === 'ca' ? '+ ' + (c.length - 4) + ' comprovacions més a la memòria' : '+ ' + (c.length - 4) + ' comprobaciones más en la memoria') + '</p>' : '') + '</div>';
+    var e = LT.$('.ev-grid', d); if (e) return e.outerHTML;
+    var t = LT.$('.tbl-wrap', d) || LT.$('table', d);
+    if (t) return '<div class="vp-tbl">' + t.outerHTML + '</div>';
+    return null;
+  }
+  function subNote(sub) {
+    var d = document.createElement('div'); d.innerHTML = sub[2] || '';
+    var p = LT.$('p', d), tx = p ? p.textContent.replace(/\s+/g, ' ').trim() : '';
+    return sub[0] + ' · ' + sub[1] + (tx ? '. ' + (tx.length > 320 ? tx.slice(0, 317) + '…' : tx) : '');
+  }
   function build() {
     slides = LT.buildSlides();
+    slides.forEach(function (s) {
+      if (s.kind !== 'sec') return;
+      var subs = (s.sec.subs || []).slice(0, s.steps);
+      s.panes = [s.vis ? LT.D.w(s.vis.w, s.vis.o) : null].concat(subs.map(subPane));
+      s.stepNotes = [s.notes].concat(subs.map(subNote));
+    });
     deck = LT.$('#deck');
     deck.innerHTML = '<div class="dk-stage"><div class="dk-frame"></div></div><div class="dk-bar"><i></i></div>' +
       '<div class="dk-ctl"><button data-k="prev" aria-label="Anterior">‹</button><span class="dk-n"></span><button data-k="next" aria-label="Siguiente">›</button><button data-k="grid">Todas <kbd>G</kbd></button><button data-k="pres">Presentador <kbd>S</kbd></button><button data-k="exit">Salir <kbd>Esc</kbd></button></div>' +
@@ -48,21 +71,31 @@
     cur = Math.max(0, Math.min(slides.length - 1, i)); step = st || 0;
     LT.$$('.slide', deck).forEach(function (el, k) { el.classList.toggle('on', k === cur); el.classList.toggle('past', k < cur); });
     var el = LT.$('.slide.on', deck), s = slides[cur];
-    if (s.kind === 'sec' && s.vis) { var v = LT.$('.vis', el); if (!v.dataset.done) { v.dataset.done = 1; v.innerHTML = LT.D.w(s.vis.w, s.vis.o); LT.hydrate(v); } }
-    if (s.kind === 'sec' && !s.vis) { var v2 = LT.$('.vis', el); if (!v2.dataset.done) { v2.dataset.done = 1; } }
     paintStep();
     LT.$('.dk-n', deck).textContent = (cur + 1) + ' / ' + slides.length;
     LT.$('.dk-bar i', deck).style.width = ((cur + 1) / slides.length * 100) + '%';
     if (s.kind === 'sec') history.replaceState(null, '', '#/s/' + s.id);
     sync();
   }
-  function paintStep() { var el = LT.$('.slide.on', deck); LT.$$('[data-st]', el).forEach(function (x) { x.classList.toggle('in', +x.dataset.st <= step); x.classList.toggle('now', +x.dataset.st === step); }); }
+  function paintStep() {
+    var el = LT.$('.slide.on', deck), s = slides[cur];
+    LT.$$('[data-st]', el).forEach(function (x) { x.classList.toggle('in', +x.dataset.st <= step); x.classList.toggle('now', +x.dataset.st === step); });
+    if (s.kind !== 'sec') return;
+    /* Un subapartado sin pieza propia sigue mostrando la última que hubo */
+    var k = step; while (k > 0 && s.panes[k] == null) k--;
+    LT.$$('.vp', el).forEach(function (vp) {
+      var on = +vp.dataset.vp === k;
+      if (on && !vp.dataset.done) { vp.dataset.done = 1; vp.innerHTML = s.panes[k]; LT.hydrate(vp); }
+      vp.classList.toggle('on', on);
+    });
+    var vis = LT.$('.vis', el); if (vis) vis.scrollTop = 0;
+  }
   function next() { var s = slides[cur]; if (s.steps && step < s.steps) { step++; paintStep(); sync(); return; } if (cur < slides.length - 1) go(cur + 1, 0); }
   function prev() { if (step > 0) { step--; paintStep(); sync(); return; } if (cur > 0) { var p = slides[cur - 1]; go(cur - 1, p.steps || 0); } }
   function sync() {
     if (!bc) return;
     var s = slides[cur], n = slides[cur + 1];
-    bc.postMessage({ t: 'state', i: cur, n: slides.length, step: step, steps: s.steps || 0, title: s.t, notes: s.notes || '', next: n ? n.t : 'Fin', t0: t0 });
+    bc.postMessage({ t: 'state', i: cur, n: slides.length, step: step, steps: s.steps || 0, title: s.t, notes: (s.stepNotes && s.stepNotes[step]) || s.notes || '', next: n ? n.t : 'Fin', t0: t0 });
   }
   function presenter() { var w = window.open('presenter.html', 'lt-presenter', 'width=1100,height=720'); if (!w) LT.toast('El navegador bloqueó la ventana del presentador.'); setTimeout(sync, 800); }
   function key(e) {

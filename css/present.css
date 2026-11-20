@@ -104,3 +104,13 @@ body.presenting #app { visibility: hidden; }
 .dk-grid b { font: 700 15px/1.25 var(--font-h); }
 .dk-black { position: absolute; inset: 0; z-index: 6; background: #000; display: none; }
 #deck.black .dk-black { display: block; }
+
+/* Una pieza por subapartado: solo se ve la del paso actual */
+.vis .vp { display: none; }
+.vis .vp.on { display: block; animation: vp-in .35s ease; }
+@keyframes vp-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.vp-chk { display: grid; gap: 12px; }
+.vp-chk .chk { margin: 0; }
+.vp-more { margin: 4px 0 0; font: 500 12px/1.4 var(--mono); color: var(--muted); }
+.vp-tbl .tbl-wrap { margin: 0; }
+.vis .fig { margin: 0; }
