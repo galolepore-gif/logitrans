@@ -613,3 +613,19 @@ span.dot { width: auto; }
 .tr-guide { margin-left: 0; }
 @media (max-width: 1100px) { .guide-btn span { display: none; } .guide-btn { padding: 0 6px; } .guide-strip { grid-template-columns: 1fr; } .gs-links { justify-content: flex-start; } }
 @media (max-width: 560px) { .hero-guide i { display: none; } }
+
+/* Pantallas de portátil (1280 a 1500 px, lo normal con el zoom al 100 %) */
+.brand b, .brand small, .search-btn span, .guide-btn, .top nav a, .btn { white-space: nowrap; }
+.brand, .guide-btn, .lang-btn, .btn.present { flex-shrink: 0; }
+@media (max-width: 1500px) {
+  .top { gap: 14px; }
+  .top nav { margin-left: 6px; }
+  .search-btn { min-width: 0; }
+  .search-btn span { display: none; }
+  .hero-in { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; }
+  .hero-cta { gap: 10px; }
+  .hero-cta .btn { padding: 12px 14px; letter-spacing: .09em; }
+}
+@media (max-width: 1200px) {
+  .guide-btn span, .btn.present span { display: none; }
+}
