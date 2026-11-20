@@ -85,7 +85,7 @@
     var ch = LT.chapterOf(id), i = LT.ORDER.indexOf(id);
     var prev = LT.SECTIONS[LT.ORDER[i - 1]], next = LT.SECTIONS[LT.ORDER[i + 1]];
     var h = '<div class="doc"><article class="doc-main">';
-    h += '<header class="doc-head"><div class="crumbs"><a href="#/">Memoria</a><span>/</span><span>' + ch.n + ' · ' + ch.t + '</span></div>';
+    h += '<header class="doc-head"><div class="crumbs"><a href="#/">Inicio</a><span>/</span><a href="#/s/0">Memoria</a><span>/</span><span>' + ch.n + ' · ' + ch.t + '</span></div>';
     h += '<span class="num">' + (id === '0' ? '0.' : id) + '</span><h1>' + S.t + '</h1>';
     if (S.lead) h += '<p class="lead">' + S.lead + '</p>';
     if (S.meta) h += '<div class="meta">' + S.meta + '</div>';

@@ -217,12 +217,78 @@ LT.BUDGET = [
 ];
 LT.BUDGET_TOTAL = { net: 855172, iva: 179586.12, total: 1034758.12 };
 
+/* Reparto real: tarjetas del Trello (Sprint 1 y 2) y diagrama de Gantt por punto de la rúbrica.
+   tasks: [nombre, puntos de la rúbrica, con quién]. Sprint 1 aparte en s1. */
 LT.TEAM = [
-  { id: 'galo', name: 'Galo Lepore Rossi', role: 'Scrum Master', color: '--v99', initial: 'G', does: 'Packet Tracer completo (red), memoria técnica y coordinación del equipo.' },
-  { id: 'joan', name: 'Joan Infantes Lopez', role: 'Product Owner', color: '--brand', initial: 'J', does: 'Racks, cableado, SAI, canalización, etiquetado, mitigación e informe de auditoría.' },
-  { id: 'robert', name: 'Robert Purcharea', role: 'Developer', color: '--v20', initial: 'R', does: 'Active Directory, GPO, RAID 5, cifrado, firewall del sistema y antivirus.' },
-  { id: 'oliver', name: 'Oliver Molina Montero', role: 'Developer', color: '--v50', initial: 'O', does: 'WordPress, área de clientes, repositorio con streaming, FOG y auditoría (Nmap, WPScan).' }
+  { id: 'galo', name: 'Galo Lepore Rossi', role: 'Scrum Master', color: '--v99', initial: 'G',
+    does: 'Toda la red en Packet Tracer: direccionamiento, OSPF, VPN, NAT, seguridad de capa 2, firewall y ACL. Coordinación Scrum.',
+    tasks: [
+      ['Packet Tracer resumido', '2.C'],
+      ['Direccionamiento IPv4 aplicado en PT', '3.A1'],
+      ['IPv6 en Packet Tracer', '3.A2'],
+      ['VPN IPsec site-to-site', '3.C1'],
+      ['Internet simulado y OSPFv2/v3 con autenticación', '3.C2'],
+      ['NAT/PAT y publicación de la web', '3.C3'],
+      ['Port Security justificado', '4.A1'],
+      ['DHCP snooping completo', '4.A2'],
+      ['STP con PortFast y BPDU Guard', '4.A3'],
+      ['Firewall perimetral y ACL por VLAN', '4.B1 4.B2 4.B3'],
+      ['Pruebas de conectividad', '3.A1 3.B 3.C1', 'joan'],
+      ['Esquema VLAN = tercer octeto', '3.A1', 'joan'],
+      ['Wi-Fi: SSID, 802.1X y portal de invitados', '5.A2', 'robert'],
+      ['DHCP, relay y DNS', '', 'robert'],
+      ['RADIUS (NPS), 802.1X y AAA en los Cisco', '5.A2', 'robert'],
+      ['Menos servidores, menos racks', '2.B1 2.B3', 'joan robert']
+    ],
+    s1: ['Arranque del proyecto y Scrum', 'Elección de ubicaciones', 'Planos y diseño físico', 'Packet Tracer del Sprint 1'] },
+  { id: 'joan', name: 'Joan Infantes Lopez', role: 'Product Owner', color: '--orange', initial: 'J',
+    does: 'Racks y CPD, etiquetado y canalización, alzado de racks, VLAN, informe de mitigación y entrega final.',
+    tasks: [
+      ['Racks y CPD redimensionados', '2.B1 2.C'],
+      ['Etiquetado y canalización en metros', '2.A2'],
+      ['Alzado de racks (Rack Elevation)', '2.B2'],
+      ['Mitigación e informe de auditoría', '6.3'],
+      ['Entrega final del proyecto', ''],
+      ['Scrum del Sprint 2: review, retro y Gantt', ''],
+      ['Pruebas de conectividad', '3.A1 3.B 3.C1', 'galo'],
+      ['Esquema VLAN = tercer octeto', '3.A1', 'galo'],
+      ['Menos servidores, menos racks', '2.B1 2.B3', 'galo robert']
+    ],
+    s1: ['Arranque del proyecto y Scrum', 'Planos y diseño físico', 'Topología y VLAN', 'Direccionamiento IPv4/IPv6', 'Hardware, materiales y presupuesto', 'Informe del Sprint 1'] },
+  { id: 'robert', name: 'Robert Purcharea', role: 'Developer', color: '--v20', initial: 'R',
+    does: 'Active Directory, GPO, RADIUS y 802.1X, RAID 5 con cifrado, firewall local y antivirus.',
+    tasks: [
+      ['Active Directory (logitrans.local)', '5.A1'],
+      ['Políticas de grupo (GPO)', '5.A3'],
+      ['RAID 5, cifrado y documentos', '5.C1'],
+      ['Firewall local y antivirus', '5.C2'],
+      ['Wi-Fi: SSID, 802.1X y portal de invitados', '5.A2', 'galo'],
+      ['DHCP, relay y DNS', '', 'galo'],
+      ['RADIUS (NPS), 802.1X y AAA en los Cisco', '5.A2', 'galo'],
+      ['Menos servidores, menos racks', '2.B1 2.B3', 'galo joan']
+    ],
+    s1: ['Hardware, materiales y presupuesto'] },
+  { id: 'oliver', name: 'Oliver Molina Montero', role: 'Developer', color: '--v50', initial: 'O',
+    does: 'WordPress y área de clientes, repositorio con streaming, FOG y auditoría con Nmap y WPScan.',
+    tasks: [
+      ['WordPress corporativo (LAMP/LEMP)', '5.B1'],
+      ['Área de clientes (/clients)', '5.B2'],
+      ['Repositorio de medios con streaming', '5.D'],
+      ['Despliegue de software e imágenes (FOG)', '5.E'],
+      ['Escaneo de puertos con Nmap', '6.1'],
+      ['Análisis de vulnerabilidades (WPScan)', '6.2'],
+      ['Pruebas de seguridad', '6.3']
+    ],
+    s1: ['Topología y VLAN', 'Hardware, materiales y presupuesto', 'Packet Tracer del Sprint 1'] }
 ];
+/* Responsables de cada punto según el diagrama de Gantt (01.10.2026 a 19.11.2026). */
+LT.GANTT = {
+  '2.A1': 'galo joan', '2.A2': 'joan', '2.B1': 'joan', '2.B2': 'joan', '2.B3': 'galo robert', '2.C': 'galo oliver',
+  '3.A1': 'galo joan', '3.A2': 'galo joan', '3.B': 'joan', '3.C1': 'galo', '3.C2': 'galo', '3.C3': 'galo',
+  '4.A1': 'galo', '4.A2': 'galo', '4.A3': 'galo', '4.B1': 'galo joan', '4.B2': 'galo joan', '4.B3': 'galo joan',
+  '5.A1': 'robert', '5.A2': 'robert', '5.A3': 'oliver joan galo', '5.B1': 'oliver', '5.B2': 'oliver', '5.C1': 'robert',
+  '5.C2': 'galo', '5.D': 'oliver', '5.E': 'oliver', '6.1': 'oliver', '6.2': 'oliver joan', '6.3': 'galo joan'
+};
 
 LT.SPRINTS = [
   { n: 1, name: 'Diseño', items: ['Ubicaciones y planos', 'VLAN y direccionamiento IPv4/IPv6', 'Hardware, cableado y racks', 'Cobertura Wi-Fi y presupuesto', 'Topología física y capa 2 en PT'], state: 'Entregado' },

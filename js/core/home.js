@@ -11,9 +11,9 @@
     var h = '<div class="home">';
     /* Portada */
     h += '<section class="hero grid-bg"><div class="hero-in">' +
-      '<div class="hero-txt"><span class="kick">ASIX2C · Proyecto final · Sprint 3</span>' +
-      '<h1>Una red para mover mercancía entre <em>Barcelona</em> y <em>Zaragoza</em>.</h1>' +
-      '<p class="lead">La infraestructura completa de LogiTrans: oficina central de cuatro plantas, almacén de 9.000 m², VPN entre sedes, seguridad por capas y servicios. Toda la memoria, el Packet Tracer y las pruebas, en una sola web.</p>' +
+      '<div class="hero-txt"><span class="kick">ASIX2C · Proyecto final</span>' +
+      '<h1>Infraestructura de red de <em>LogiTrans</em></h1>' +
+      '<p class="lead">Oficina central de cuatro plantas, almacén de 9.000 m², VPN entre sedes, seguridad por capas y servicios. Toda la memoria, el Packet Tracer y las pruebas, en una sola web.</p>' +
       '<div class="hero-cta"><a class="btn sun" href="#/s/0">Empezar por los planos</a><a class="btn ghost" href="#/tracer">Abrir el Tracer</a><button class="btn ghost" data-act="present">Modo presentación <kbd>P</kbd></button></div></div>' +
       '<figure class="hero-fig"><div class="hero-map"></div><figcaption class="figcap"><span>FIG. 0 · Topología lógica en vivo</span><span>Paquetes reales del simulador</span></figcaption></figure>' +
       '</div>' +
@@ -39,8 +39,8 @@
       LT.SCENARIOS.slice(0, 9).map(function (s) { return '<a href="#/tracer/' + s.id + '"><i>' + s.ref + '</i>' + s.t + '</a>'; }).join('') + '<a href="#/tracer" class="more">y ' + (LT.SCENARIOS.length - 9) + ' más</a></div></div></div></section>';
 
     /* Equipo y sprints */
-    h += '<section class="home-sec"><div class="sec-head"><span class="kick">Equipo ASIX2C 0379</span><h2>Quién hizo qué</h2></div><div class="team">' +
-      LT.TEAM.map(function (t) { return '<article class="member rv"><span class="av" style="--c:var(' + t.color + ')">' + t.initial + '</span><div><b>' + t.name + '</b><small>' + t.role + '</small><p>' + t.does + '</p></div></article>'; }).join('') + '</div>' +
+    h += '<section class="home-sec" id="equipo"><div class="sec-head"><span class="kick">Equipo ASIX2C 0379</span><h2>Quién hizo qué</h2><p>Las tarjetas del Trello de cada uno y su parte del diagrama de Gantt, del 1 de octubre al 19 de noviembre de 2026. Cada número lleva a su punto de la memoria.</p></div>' +
+      '<div class="team2">' + LT.TEAM.map(teamCard).join('') + '</div>' + teamMatrix() +
       '<div class="sprints">' + LT.SPRINTS.map(function (s) { return '<article class="sprint rv"><span class="lbl">Sprint ' + s.n + ' · ' + s.state + '</span><h4>' + s.name + '</h4><ul>' + s.items.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul></article>'; }).join('') + '</div></section>';
 
     /* Descargas */
@@ -56,6 +56,45 @@
     var m = LT.Tracer.map(LT.$('.hero-map', view), { onDevice: function (id) { LT.go('#/tracer'); setTimeout(function () { LT.Tracer.win(id); }, 60); } });
     demo(m);
   };
+  /* ---------- Equipo: tarjetas del Trello + matriz del Gantt ---------- */
+  function first(id) { var t = LT.TEAM.filter(function (m) { return m.id === id; })[0]; return t ? t.name.split(' ')[0] : id; }
+  function withWho(ids) {
+    var n = ids.split(' ').map(first), ca = LT.lang === 'ca';
+    return (ca ? 'amb ' : 'con ') + (n.length > 1 ? n.slice(0, -1).join(', ') + (ca ? ' i ' : ' y ') + n[n.length - 1] : n[0]);
+  }
+  function chips(pts) { return pts ? pts.split(' ').map(function (p) { return '<a class="pt" href="#/s/' + p + '" title="' + (LT.SECTIONS[p] ? LT.SECTIONS[p].t : p) + '">' + p + '</a>'; }).join('') : ''; }
+  function teamCard(t) {
+    var pts = {};
+    t.tasks.forEach(function (k) { if (k[1]) k[1].split(' ').forEach(function (p) { pts[p] = 1; }); });
+    Object.keys(LT.GANTT).forEach(function (p) { if (LT.GANTT[p].split(' ').indexOf(t.id) >= 0) pts[p] = 1; });
+    var nOwn = t.tasks.filter(function (k) { return !k[2]; }).length;
+    return '<article class="member2 rv" style="--c:var(' + t.color + ')"><header><span class="av">' + t.initial + '</span><div><b>' + t.name + '</b><small>' + t.role + '</small></div>' +
+      '<dl><div><dt>' + t.tasks.length + '</dt><dd>' + (LT.lang === 'ca' ? 'targetes' : 'tarjetas') + '</dd></div><div><dt>' + nOwn + '</dt><dd>' + (LT.lang === 'ca' ? 'pròpies' : 'propias') + '</dd></div><div><dt>' + Object.keys(pts).length + '</dt><dd>' + (LT.lang === 'ca' ? 'punts' : 'puntos') + '</dd></div></dl></header>' +
+      '<p class="does">' + t.does + '</p>' +
+      '<span class="lbl">Sprint 2 · Trello</span><ul class="tasks">' + t.tasks.map(function (k) {
+        return '<li><span class="tn">' + k[0] + '</span>' + (k[2] ? '<em class="with">' + withWho(k[2]) + '</em>' : '') + '<span class="pts">' + chips(k[1]) + '</span></li>';
+      }).join('') + '</ul>' +
+      '<p class="s1"><span class="lbl">Sprint 1</span> ' + t.s1.join(' · ') + '</p></article>';
+  }
+  function teamMatrix() {
+    var ca = LT.lang === 'ca', trello = {};
+    LT.TEAM.forEach(function (t) { t.tasks.forEach(function (k) { if (k[1]) k[1].split(' ').forEach(function (p) { (trello[p] = trello[p] || {})[t.id] = 1; }); }); });
+    var rows = '';
+    LT.CHAPTERS.forEach(function (c) {
+      if (c.n === '0') return;
+      rows += '<tr class="ch"><th colspan="' + (LT.TEAM.length + 1) + '">' + c.n + ' · ' + c.t + '</th></tr>';
+      c.s.forEach(function (id) {
+        var g = (LT.GANTT[id] || '').split(' ');
+        rows += '<tr><td><a href="#/s/' + id + '"><i>' + id + '</i>' + (LT.SECTIONS[id] ? LT.SECTIONS[id].t : '') + '</a></td>' + LT.TEAM.map(function (t) {
+          var on = g.indexOf(t.id) >= 0, tr = trello[id] && trello[id][t.id];
+          return '<td class="dot' + (on ? ' on' : tr ? ' tr' : '') + '" style="--c:var(' + t.color + ')">' + (on || tr ? '<span title="' + t.name + '"></span>' : '') + '</td>';
+        }).join('') + '</tr>';
+      });
+    });
+    return '<div class="matrix rv"><div class="mx-head"><h3>' + (ca ? 'Els 30 punts de la rúbrica' : 'Los 30 puntos de la rúbrica') + '</h3><p class="legend"><span class="dot on"><span></span></span>' + (ca ? 'Responsable segons el Gantt' : 'Responsable según el Gantt') + '<span class="dot tr"><span></span></span>' + (ca ? 'Hi va col·laborar segons el Trello' : 'Colaboró según el Trello') + '</p></div>' +
+      '<div class="mx-scroll"><table><thead><tr><th>' + (ca ? 'Punt' : 'Punto') + '</th>' + LT.TEAM.map(function (t) { return '<th style="--c:var(' + t.color + ')"><span class="av">' + t.initial + '</span>' + t.name.split(' ')[0] + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }
+
   function card(n, t, p, href, cta, act) { return '<article class="how-c rv"><span class="n">' + n + '</span><h3>' + t + '</h3><p>' + p + '</p>' + (href ? '<a class="link" href="' + href + '">' + cta + '</a>' : '<button class="link" data-act="' + act + '">' + cta + '</button>') + '</article>'; }
   function dl(href, t, ext) { return '<a class="dl" href="' + href + '" download><span>' + ext + '</span><b>' + t + '</b><small>Descargar</small></a>'; }
 
@@ -85,7 +124,7 @@
     clearInterval(demoTimer);
     var view = LT.$('#view'), max = LT.BUDGET[0][1], T = LT.BUDGET_TOTAL;
     var rows = LT.BUDGET.slice().sort(function (a, b) { return b[1] - a[1]; });
-    view.innerHTML = '<div class="budget"><header class="doc-head"><div class="crumbs"><a href="#/">Memoria</a><span>/</span><span>Presupuesto</span></div><span class="num">€</span><h1>Presupuesto del proyecto</h1><p class="lead">Lo que cuesta montar las dos sedes: equipos, electrónica de red, cableado, servidores, software e instalación.</p></header>' +
+    view.innerHTML = '<div class="budget"><header class="doc-head"><div class="crumbs"><a href="#/">Inicio</a><span>/</span><span>Presupuesto</span></div><span class="num">€</span><h1>Presupuesto del proyecto</h1><p class="lead">Lo que cuesta montar las dos sedes: equipos, electrónica de red, cableado, servidores, software e instalación.</p></header>' +
       '<div class="b-total"><div><span class="lbl">Base imponible</span><b data-n="' + T.net + '">0</b><small>euros</small></div><div><span class="lbl">IVA 21 %</span><b data-n="' + T.iva + '" data-d="2">0</b><small>euros</small></div><div class="big"><span class="lbl">Total</span><b data-n="' + T.total + '" data-d="2">0</b><small>euros</small></div></div>' +
       '<figure class="b-chart"><ol>' + rows.map(function (r) { var pc = r[1] / T.net * 100; return '<li class="rv"><div class="b-l"><b>' + r[0] + '</b><small>' + r[2] + '</small></div><div class="b-bar"><i style="--w:' + (r[1] / max * 100).toFixed(1) + '%"></i></div><div class="b-v"><b>' + LT.fmt(r[1]) + ' €</b><small>' + pc.toFixed(1).replace('.', ',') + ' %</small></div></li>'; }).join('') + '</ol>' +
       '<figcaption class="figcap"><span>FIG. P · Reparto por categoría, sin IVA</span><span>Fuente: presupuesto de la memoria</span></figcaption></figure>' +

@@ -892,3 +892,13 @@
   .fg-t li { grid-template-columns: 1fr 70px; }
   .fg-t li .bar { grid-column: 1 / -1; grid-row: 2; }
 }
+
+/* El texto de la memoria no puede invadir la columna «En este punto»: los widgets se adaptan al ancho real del texto. */
+.doc-main { container-type: inline-size; }
+.nm-side, .rp-c > * { min-width: 0; }
+.nm-t td { white-space: normal; overflow-wrap: anywhere; }
+@container (max-width: 880px) {
+  .w-nmap { grid-template-columns: 1fr; }
+  .nm-radar { max-width: 260px; width: 100%; margin: 0 auto; }
+  .rp-c { grid-template-columns: 1fr; }
+}

@@ -25,7 +25,7 @@
     LT.markToc(key);
     LT.$$('.top nav a').forEach(function (a) {
       var n = a.dataset.nav;
-      a.classList.toggle('on', n === key || (n === 'planos' && key === '0') || (n === 'home' && /^\d/.test(key) && key !== '0'));
+      a.classList.toggle('on', n === key || (n === 'memoria' && /^\d/.test(key)));
     });
     var S = LT.SECTIONS[key];
     document.title = S ? (key === '0' ? '0' : key) + ' · ' + S.t + ' · LogiTrans' : key === 'tracer' ? 'LogiTrans Tracer' : key === 'presupuesto' ? 'Presupuesto · LogiTrans' : 'LogiTrans · Memoria del proyecto de red';
