@@ -263,7 +263,7 @@
   LT.sec({
     id: '2.C', t: 'Topologia física al Packet Tracer', short: 'Topologia al Packet Tracer',
     lead: 'Vam tornar a muntar el Packet Tracer sobre els plànols nous (un sol rack al CPD) i, com es va demanar a la revisió, amb una versió simplificada: un parell d’equips per VLAN.',
-    sc: ['topo', 'Recorre la topologia completa del Packet Tracer, equip per equip, sense obrir el Packet Tracer.'],
+    sc: ['topo', 'Recorre la topologia completa del Packet Tracer, equip per equip.'],
     subs: [
       ['2.C.1', 'Criteri: un Packet Tracer simplificat',
         D.p('A l’Sprint 1 el Packet Tracer tenia tots els equips dels plànols (més de 800 dispositius). A la revisió se’ns va demanar una còpia simplificada amb un parell d’equips per VLAN, per poder configurar i provar-ho tot de debò. El fitxer d’aquest sprint té <b>105 dispositius</b>: tota l’electrònica de xarxa real (cores, routers, tallafocs, un switch d’accés per planta) i, penjant de cada switch, només els equips necessaris per provar cada VLAN.') +

@@ -1127,4 +1127,5 @@ LT.I18N_CA = {"ASIX2C · Proyecto final · Sprint 3":"ASIX2C · Projecte final �
 "Cómo usar el Tracer":"Com fer servir el Tracer",
 "Cómo leer la memoria":"Com llegir la memòria",
 "Cómo presentar":"Com presentar",
-"¿Cómo se usa?":"Com es fa servir?"};
+"¿Cómo se usa?":"Com es fa servir?",
+"Cada escenario repite una prueba de la memoria, paso a paso, en esta red.":"Cada escenari repeteix una prova de la memòria, pas a pas, en aquesta xarxa."};

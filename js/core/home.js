@@ -37,7 +37,7 @@
     h += '</div></section>';
 
     /* Tracer */
-    h += '<section class="home-sec tracer-teaser"><div class="tt-in"><div><span class="kick">Simulador</span><h2>Presentar el Packet Tracer sin abrir el Packet Tracer</h2><p>Clic en cualquier equipo para abrir su consola. Probá <code>show access-lists</code> en un core, un <code>ping</code> desde un PC o la web desde PC-INTERNET. Las ACL cuentan cada paquete con los contadores reales de las capturas.</p><div class="sc-chips">' +
+    h += '<section class="home-sec tracer-teaser"><div class="tt-in"><div><span class="kick">Simulador</span><h2>Packet Tracer</h2><p>Clic en cualquier equipo para abrir su consola. Probá <code>show access-lists</code> en un core, un <code>ping</code> desde un PC o la web desde PC-INTERNET. Las ACL cuentan cada paquete con los contadores reales de las capturas.</p><div class="sc-chips">' +
       LT.SCENARIOS.slice(0, 9).map(function (s) { return '<a href="#/tracer/' + s.id + '"><i>' + s.ref + '</i>' + s.t + '</a>'; }).join('') + '<a href="#/tracer" class="more">y ' + (LT.SCENARIOS.length - 9) + ' más</a></div></div></div></section>';
 
     /* Equipo y sprints */

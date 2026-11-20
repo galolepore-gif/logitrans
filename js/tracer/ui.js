@@ -524,7 +524,7 @@
   function scPanel(el, m) {
     var by = {};
     LT.SCENARIOS.forEach(function (s) { var ch = LT.chapterOf(s.ref); var k = ch ? ch.n + ' · ' + ch.t : 'Otros'; (by[k] = by[k] || []).push(s); });
-    var h = '<p class="intro">Cada escenario repite una prueba de la memoria, paso a paso, en esta red. Sirve para presentar el Packet Tracer sin abrirlo.</p>';
+    var h = '<p class="intro">Cada escenario repite una prueba de la memoria, paso a paso, en esta red.</p>';
     Object.keys(by).forEach(function (k) { h += '<p class="lbl">' + k + '</p><div class="sclist">' + by[k].map(function (s) { return '<button data-s="' + s.id + '"><i>' + s.ref + '</i><b>' + s.t + '</b><small>' + s.steps.length + ' pasos</small></button>'; }).join('') + '</div>'; });
     el.innerHTML = h;
     LT.$$('[data-s]', el).forEach(function (b) { b.onclick = function () { history.replaceState(null, '', '#/tracer/' + b.dataset.s); openScenario(el, m, b.dataset.s); }; });
