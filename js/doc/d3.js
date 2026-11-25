@@ -28,7 +28,7 @@
           [D.vl(40) + ' Convidats', '10.1.40.0/25', '255.255.255.128', '100', '120', '126', '10.1.40.1', '.2 – .126', '10.1.40.127'],
           [D.vl(50) + ' Servidors', '10.1.50.0/25', '255.255.255.128', '58', '70', '126', '10.1.50.1', '.2 – .126', '10.1.50.127'],
           [D.vl(99) + ' Gestió', '10.1.99.0/27', '255.255.255.224', '17', '21', '30', '10.1.99.1', '.2 – .30', '10.1.99.31']
-        ], 'Tabla 13. Subredes IPv4 de la oficina central.', { mono: [1, 2, 6, 7, 8] })],
+        ], 'Tabla 17. Subredes IPv4 de la oficina central.', { mono: [1, 2, 6, 7, 8] })],
       ['3.A1.4', 'Subredes del almacén (10.2.X.0)',
         D.p('Mismo criterio, con máscaras más ajustadas porque el almacén tiene menos hosts en cada VLAN, salvo en su propia VLAN 30.') +
         D.w('vlsm', { site: 'ZGZ' }) +
@@ -39,7 +39,7 @@
           [D.vl(40) + ' Convidats', '10.2.40.0/27', '255.255.255.224', '20', '24', '30', '10.2.40.1', '.2 – .30', '10.2.40.31'],
           [D.vl(50) + ' Servidors', '10.2.50.0/27', '255.255.255.224', '12', '15', '30', '10.2.50.1', '.2 – .30', '10.2.50.31'],
           [D.vl(99) + ' Gestió', '10.2.99.0/26', '255.255.255.192', '26', '32', '62', '10.2.99.1', '.2 – .62', '10.2.99.63']
-        ], 'Tabla 14. Subredes IPv4 del almacén.', { mono: [1, 2, 6, 7, 8] })],
+        ], 'Tabla 18. Subredes IPv4 del almacén.', { mono: [1, 2, 6, 7, 8] })],
       ['3.A1.5', 'Enlaces WAN y direcciones públicas',
         D.p('Para los enlaces entre routers y hacia Internet usamos subredes /30 (justo 2 direcciones útiles, una en cada extremo).') +
         D.tbl(['Enlace', 'Red', 'Extremo A', 'Extremo B'], [
@@ -48,7 +48,7 @@
           ['ISP ↔ Oficina central (respaldo)', '85.100.1.4/30', '85.100.1.5 — ISP', '85.100.1.6 — BCN-RT2 (WAN)'],
           ['ISP ↔ Almacén (principal)', '85.100.2.0/30', '85.100.2.1 — ISP', '85.100.2.2 — ZGZ-RT1 (WAN)'],
           ['ISP ↔ Almacén (respaldo)', '85.100.2.4/30', '85.100.2.5 — ISP', '85.100.2.6 — ZGZ-RT2 (WAN)']
-        ], 'Tabla 15. Enlaces WAN.', { mono: [1, 2, 3] }) +
+        ], 'Tabla 19. Enlaces WAN.', { mono: [1, 2, 3] }) +
         D.p('Las direcciones 85.100.X.X son públicas simuladas para el entorno del Packet Tracer. En producción las asignaría el proveedor de Internet.',
           'Dentro de cada sede, los enlaces internos entre el core, el firewall y los routers también son /30, y reutilizan el tercer octeto para la infraestructura (253, 254 y 255), que no corresponde a ninguna VLAN de usuario:') +
         D.tbl(['Enlace interno (S = 1 BCN, 2 ZGZ)', 'Red', 'Extremo A', 'Extremo B'], [
@@ -58,7 +58,7 @@
           ['RT1 ↔ firewall', '10.S.254.0/30', '.1 — RT1', '.2 — ASA (outside)'],
           ['RT2 ↔ firewall', '10.S.254.4/30', '.5 — RT2', '.6 — ASA (wanbak)'],
           ['RT1 ↔ RT2', '10.S.255.0/30', '.1 — RT1', '.2 — RT2']
-        ], 'Tabla 16. Enlaces de tránsito dentro de cada sede.', { mono: [1, 2, 3] })],
+        ], 'Tabla 20. Enlaces de tránsito dentro de cada sede.', { mono: [1, 2, 3] })],
       ['3.A1.6', 'NAT',
         D.p('En cada sede el router frontera aplica:') +
         D.ul(['<b>NAT de origen (PAT)</b>: todas las VLAN internas salen a Internet con la IP pública de su WAN. Así ninguna IP interna queda expuesta.',
@@ -98,18 +98,18 @@
       ['3.A2.3', 'Subredes IPv6 de la oficina central',
         D.tbl(['VLAN', 'Red IPv6', 'CORE1 / CORE2'], [
           [D.vl(10) + ' Direcció', '2001:db8:acad:1010::/64', '…:1010::2 / …:1010::3'], [D.vl(20) + ' Administració', '2001:db8:acad:1020::/64', '…:1020::2 / …:1020::3'], [D.vl(40) + ' Convidats', '2001:db8:acad:1040::/64', '…:1040::2 / …:1040::3'], [D.vl(50) + ' Servidors', '2001:db8:acad:1050::/64', '…:1050::2 / …:1050::3'], [D.vl(99) + ' Gestió', '2001:db8:acad:1099::/64', '…:1099::2 / …:1099::3']
-        ], 'Tabla 17. Subredes IPv6 de la oficina central.', { mono: [1, 2] })],
+        ], 'Tabla 21. Subredes IPv6 de la oficina central.', { mono: [1, 2] })],
       ['3.A2.4', 'Subredes IPv6 del almacén',
         D.tbl(['VLAN', 'Red IPv6', 'CORE1 / CORE2'], [
           [D.vl(10) + ' Direcció', '2001:db8:acad:2010::/64', '…:2010::2 / …:2010::3'], [D.vl(20) + ' Administració', '2001:db8:acad:2020::/64', '…:2020::2 / …:2020::3'], [D.vl(30) + ' Magatzem', '2001:db8:acad:2030::/64', '…:2030::2 / …:2030::3'], [D.vl(40) + ' Convidats', '2001:db8:acad:2040::/64', '…:2040::2 / …:2040::3'], [D.vl(50) + ' Servidors', '2001:db8:acad:2050::/64', '…:2050::2 / …:2050::3'], [D.vl(99) + ' Gestió', '2001:db8:acad:2099::/64', '…:2099::2 / …:2099::3']
-        ], 'Tabla 18. Subredes IPv6 del almacén.', { mono: [1, 2] }) +
+        ], 'Tabla 22. Subredes IPv6 del almacén.', { mono: [1, 2] }) +
         D.note('En el Sprint 1 indicábamos la ::1 como puerta de enlace. En el Packet Tracer los cores tienen la ::2 y la ::3, y los clientes no necesitan ninguna dirección global como puerta de enlace: en IPv6 la puerta de enlace es siempre una dirección link-local (FE80::) que el cliente aprende por el anuncio de router (RA). Para mantener la redundancia también en IPv6, cada VLAN tiene un grupo HSRP de IPv6 que genera una link-local virtual compartida entre los dos cores.', 'fix')],
       ['3.A2.5', 'Enlaces WAN en IPv6',
         D.p('Para los enlaces entre routers y hacia Internet usamos el prefijo f0XX en el campo de subred, para que queden visualmente separados de las VLAN de usuario. Los enlaces internos de cada sede usan SF0X (1F01, 1F02… en Barcelona y 2F01, 2F02… en Zaragoza), dentro del /52 de su sede.') +
         D.tbl(['Enlace', 'Red IPv6'], [
           ['Túnel VPN (oficina ↔ almacén)', '2001:db8:acad:f001::/64'], ['ISP ↔ Oficina central', '2001:db8:acad:f002::/64'], ['ISP ↔ Almacén', '2001:db8:acad:f003::/64'],
           ['Firewall ↔ CORE1 / CORE2', '2001:db8:acad:SF01::/64 y SF02::/64'], ['RT1 ↔ firewall / RT2 ↔ firewall', '2001:db8:acad:SF03::/64 y SF04::/64'], ['RT1 ↔ RT2 / CORE1 ↔ CORE2', '2001:db8:acad:SF05::/64 y SF06::/64']
-        ], 'Tabla 19. Enlaces WAN y de tránsito en IPv6 (S = 1 o 2).', { mono: [1] })],
+        ], 'Tabla 23. Enlaces WAN y de tránsito en IPv6 (S = 1 o 2).', { mono: [1] })],
       ['3.A2.6', 'Cómo se reparte IPv6 a los clientes',
         D.p('En IPv6 no hace falta DHCP: los clientes pueden autoconfigurarse con SLAAC a partir del prefijo /64 que anuncia el router. En nuestro entorno usamos esta combinación:') +
         D.ul(['<b>Clientes normales</b> (PC, portátiles, móviles) → SLAAC + DNS por DHCPv6 stateless. No hay que mantener una tabla de concesiones y aun así los clientes reciben el DNS corporativo. En el Packet Tracer lo hace cada SVI del core con <code>ipv6 nd other-config-flag</code> y un pool <code>ipv6 dhcp pool V6-DNS</code> que solo reparte el DNS y el dominio.',
@@ -140,12 +140,12 @@
         D.ul(['Cada departamento tiene su propia VLAN, con un ID entre 10 y 99.', 'Todas las VLAN están en las dos sedes salvo Magatzem, que solo existe en el almacén.', 'Los hosts se reparten de forma proporcional: la oficina central dispone de 350 plazas y el almacén de 70 libres (150 en total menos 80 de la VLAN Magatzem).', 'Cada VLAN se dimensiona con un margen de crecimiento del 20 % sobre los hosts actuales.', 'La VLAN de Convidats funciona solo por Wi-Fi, aislada de los servidores internos y con acceso solo a Internet.', 'La VLAN de Gestió se usa únicamente para administrar los equipos de red (switches, routers, AP y firewalls).'])],
       ['3.B.2', 'Tabla resumen de VLAN',
         D.w('vlancards') +
-        D.tbl(['ID', 'Nombre', 'Propósito', 'Hosts', '+20 %', 'Acceso', 'Presencia'], LT.VLANS.map(function (v) { return [D.vl(v.id), v.name, v.purpose, v.hosts, v.plus, v.access, v.where]; }), 'Tabla 20. VLAN del proyecto.') +
+        D.tbl(['ID', 'Nombre', 'Propósito', 'Hosts', '+20 %', 'Acceso', 'Presencia'], LT.VLANS.map(function (v) { return [D.vl(v.id), v.name, v.purpose, v.hosts, v.plus, v.access, v.where]; }), 'Tabla 24. VLAN del proyecto.') +
         D.p('Además de estas seis, en los switches hay tres VLAN técnicas que no llevan usuarios: la <b>999 (Nativa)</b>, que es la VLAN nativa de los troncales y no tiene ningún puerto; la <b>998 (SinUso)</b>, donde van todos los puertos libres, apagados; y la <b>900</b>, que solo existe entre los dos cores para el enlace de tránsito entre ellos.')],
       ['3.B.3', 'Distribución proporcional entre sedes',
         D.p('La VLAN Magatzem (80 hosts) ocupa toda su cuota en el almacén. Las 5 VLAN restantes se reparten entre la oficina central (350 plazas) y las 70 plazas libres del almacén, con una proporción de 350:70, es decir, <b>83,3 % oficina y 16,7 % almacén</b>.') +
         D.w('split') +
-        D.tbl(['VLAN', 'Total', 'Oficina central', 'Almacén'], [['Direcció', 50, 42, 8], ['Administració', 80, 67, 13], ['Magatzem', 80, 0, 80], ['Convidats', 120, 100, 20], ['Servidors', 70, 58, 12], ['Gestió', 20, 17, 3], ['!Total', 420, 284, 136]], 'Tabla 21. Distribución proporcional de hosts entre sedes.', { mono: [1, 2, 3] }) +
+        D.tbl(['VLAN', 'Total', 'Oficina central', 'Almacén'], [['Direcció', 50, 42, 8], ['Administració', 80, 67, 13], ['Magatzem', 80, 0, 80], ['Convidats', 120, 100, 20], ['Servidors', 70, 58, 12], ['Gestió', 20, 17, 3], ['!Total', 420, 284, 136]], 'Tabla 25. Distribución proporcional de hosts entre sedes.', { mono: [1, 2, 3] }) +
         D.p('La oficina central queda con 284 puestos asignados de 350 disponibles (66 plazas de reserva física). El almacén queda con 136 de 150 (14 plazas de reserva). Estas plazas libres permiten crecer sin obra.',
           'Este reparto es el de los departamentos que definió el cliente. En los planos definitivos, el personal de tráfico y operaciones (que no tiene VLAN propia) y todos los equipos de red del almacén hacen crecer la VLAN 20 de Barcelona y la 99 de Zaragoza; por eso esas dos subredes son más grandes (punto 3.A1).')],
       ['3.B.4', 'Características especiales y restricciones de seguridad',
@@ -183,7 +183,7 @@
           ['Qué se cifra', 'ACL-VPN-GRE: todo el GRE entre 85.100.1.2 y 85.100.2.2', 'Todo lo que va por el túnel queda cifrado.'],
           ['Túnel', 'Tunnel0: 10.0.0.1/30 ↔ 10.0.0.2/30 (IPv6 2001:db8:acad:f001::/64)', 'Red punto a punto entre sedes.'],
           ['Sin NAT', 'ACL-NAT excluye el tráfico 10.1.0.0/16 ↔ 10.2.0.0/16', 'El tráfico entre sedes viaja con las IP privadas originales.']
-        ], 'Tabla 22. Parámetros de la VPN.') +
+        ], 'Tabla 26. Parámetros de la VPN.') +
         D.p('Además, los firewalls de cada sede dejan pasar el tráfico entre las dos redes internas (10.1.0.0/16 ↔ 10.2.0.0/16), porque lo que llega por la VPN entra al firewall por la interfaz exterior.')],
       ['3.C1.2', 'Comprobaciones en el Packet Tracer',
         D.note('Antes de mirar la VPN hay que generar tráfico entre sedes (por ejemplo el primer ping de abajo): la VPN se negocia la primera vez que se manda un paquete hacia la otra sede, y por eso el primer paquete se puede perder.') +
@@ -204,7 +204,7 @@
     subs: [
       ['3.C2.1', 'Internet simulado',
         D.p('Internet se simula con cuatro routers ISR 4331 (ISP-1 a ISP-4) en anillo: ISP-1 con ISP-2 e ISP-3, e ISP-4 con ISP-2 e ISP-3. Cada router de la empresa se conecta a un ISP distinto (BCN-RT1 a ISP-1, BCN-RT2 a ISP-2, ZGZ-RT1 a ISP-3 y ZGZ-RT2 a ISP-4), así que la caída de un ISP no deja a ninguna sede sin Internet. En ISP-2 hay además una pequeña red de Internet (203.0.113.0/24) con un PC de pruebas (PC-INTERNET) y un DNS público (DNS-PUBLICO), para probar la red desde fuera.') +
-        D.tbl(['Enlace', 'Red IPv4', 'Red IPv6'], [['ISP-1 ↔ ISP-2', '200.0.0.0/30', '2001:db8:ffff:1::/64'], ['ISP-1 ↔ ISP-3', '200.0.0.4/30', '2001:db8:ffff:2::/64'], ['ISP-2 ↔ ISP-4', '200.0.0.8/30', '2001:db8:ffff:3::/64'], ['ISP-3 ↔ ISP-4', '200.0.0.12/30', '2001:db8:ffff:4::/64'], ['LAN de Internet (ISP-2)', '203.0.113.0/24', '2001:db8:ffff:100::/64']], 'Tabla 23. Redes del Internet simulado.', { mono: [1, 2] }) +
+        D.tbl(['Enlace', 'Red IPv4', 'Red IPv6'], [['ISP-1 ↔ ISP-2', '200.0.0.0/30', '2001:db8:ffff:1::/64'], ['ISP-1 ↔ ISP-3', '200.0.0.4/30', '2001:db8:ffff:2::/64'], ['ISP-2 ↔ ISP-4', '200.0.0.8/30', '2001:db8:ffff:3::/64'], ['ISP-3 ↔ ISP-4', '200.0.0.12/30', '2001:db8:ffff:4::/64'], ['LAN de Internet (ISP-2)', '203.0.113.0/24', '2001:db8:ffff:100::/64']], 'Tabla 27. Redes del Internet simulado.', { mono: [1, 2] }) +
         D.p('Los cuatro ISP usan OSPFv2 (proceso 1, área 0) para IPv4 y OSPFv3 (proceso 1) para IPv6. Los enlaces entre ISP tienen <b>autenticación MD5</b>: un router solo acepta vecinos OSPF que conozcan la clave, así nadie puede conectar un router e inyectar rutas falsas. Los enlaces hacia los clientes (Gi0/0/0) son pasivos: se anuncian, pero no se forma vecindad con los routers de la empresa. Cada ISP redistribuye sus rutas estáticas hacia los clientes.') +
         D.p('Probalo: conectá un router pirata al anillo, con y sin la clave correcta.') + D.w('ospf')],
       ['3.C2.2', 'Enrutamiento dentro de la empresa',
@@ -242,7 +242,7 @@
         D.tbl(['Lista', 'Qué permite', 'Por qué'], [
           ['<b>INSIDE_OUT</b> (de dentro hacia fuera)', 'Tráfico hacia la otra sede; web (80), HTTPS (443), DNS (53) y ping hacia Internet; SSH desde la red de gestión hacia los routers; las respuestas de la web publicada.', 'Los usuarios solo necesitan navegar y resolver nombres. Cualquier otro puerto (FTP, Telnet, etc.) queda cerrado.'],
           ['<b>OUTSIDE_IN</b> (de fuera hacia dentro)', 'Tráfico que viene de la otra sede por la VPN; la web (80 y 443) hacia 10.1.50.12; RADIUS de los routers hacia el servidor; respuestas de ping.', 'Desde Internet solo se llega a la web publicada.']
-        ], 'Tabla 24. Listas de acceso del firewall ASA.') +
+        ], 'Tabla 28. Listas de acceso del firewall ASA.') +
         D.p('Probá el firewall: elegí qué intenta pasar y mirá qué regla lo decide.') + D.w('asa') +
         D.note('El ASA del Packet Tracer no guarda el estado de las conexiones TCP como un ASA real; por eso hay reglas explícitas para las respuestas (la web publicada, el SSH hacia los routers y el RADIUS). En un ASA real esas reglas no harían falta.', 'lim')],
       ['3.C3.4', 'Comprobaciones en el Packet Tracer',

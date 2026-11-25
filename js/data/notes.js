@@ -26,12 +26,13 @@ LT.NOTES = {
     'Cobre Cat 6A U/FTP LSZH del rack a la roseta: 10 Gb, por debajo de los 90 m del enlace permanente.',
     'Entre plantas, fibra OM4 de 12 fibras: 2 × 10 Gb. Entre sedes, la VPN por FTTH.',
     'Etiquetado: cada roseta dice sede, planta, armario, panel y puerto. Escribí una etiqueta en el decodificador y lo muestra.',
-    'Corrección del profe (2.A2): concretamos tipos y metros de canalización.'
+    'Corrección del profe (2.A2): cada caja y toma tiene su derivación en los planos, con metros medidos: 1.053 m de bandeja, tubo Ø 40 a cajas y Ø 32 a tomas.'
   ] },
   rack: { time: 1.5, say: [
     'Este punto (2.B2) en el Sprint 1 fue un 0: no había alzado. Ahora están los cuatro racks, U a U.',
     'Lo pesado abajo (SAI y baterías), servidores, red a la altura de trabajo, acceso con su patch panel, fibra y KVM arriba.',
-    'Pulsá «Cortar la luz»: SAI online de doble conversión, 0 ms de transferencia, aviso SNMP v3 al NOC.'
+    'Pulsá «Cortar la luz»: SAI online de doble conversión, 0 ms de transferencia, aviso SNMP v3 al NOC.',
+    'SAIs recalculados con el PoE de teléfonos, AP y cámaras: el más cargado es el IDF-P2, al 84 %, y cuatro llevan módulo de baterías para pasar de 15 min.'
   ] },
   red: { time: 2.5, say: [
     'Topología completa del Packet Tracer: 105 equipos. Dos cores con HSRP, ASA, dos routers por sede y la VPN.',
@@ -88,16 +89,16 @@ LT.NOTES = {
   mitigacion: { time: 1.5, say: [
     'OWASP Top 10 de 2021 aplicado a la web y al área de clientes.',
     'Cada tarjeta dice la medida y el punto de la memoria donde está la prueba.',
-    'Tabla 34: lo que encontró la auditoría, el riesgo y qué hicimos. Lo pendiente es para producción: Wordfence Premium y certificado válido.'
+    'Tabla 38: lo que encontró la auditoría, el riesgo y qué hicimos. Lo pendiente es para producción: Wordfence Premium y certificado válido.'
   ] },
   correcciones: { time: 1.5, say: [
     'Lo que nos corrigió el profe en el Sprint 1 y cómo quedó.',
     'Los más importantes: servidores centralizados, Packet Tracer de 800 a 105 equipos, ACL de invitados y operarios con mínimo privilegio.'
   ] },
   presupuesto: { time: 1, say: [
-    '1.034.758 € con IVA. 855.172 € sin IVA.',
-    'Más de la mitad son los equipos de usuario: 460 PC, monitores, terminales RF y cámaras.',
-    'La red en sí (core, acceso, frontera, Wi-Fi y cableado) es menos de un cuarto.'
+    '914.686 € con IVA. 755.939 € sin IVA.',
+    'El bloque más grande son los puestos de trabajo (36 %): 330 PC con monitor, teléfonos IP, impresoras y terminales de muelle.',
+    'La red en sí (electrónica, Wi-Fi, cableado, canalizaciones y armarios con SAI) ronda los 287.000 €, algo más de un tercio.'
   ] },
   equipo: { time: 1, say: [
     'Scrum con tres sprints. Galo Scrum Master, Joan Product Owner, Robert y Oliver developers.',

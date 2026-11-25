@@ -27,12 +27,12 @@
           ['Repositori de mitjans', 'Carpeta compartida C:\\Repositorio a l’equip amfitrió (BYWAAKE), amb grups locals que es diuen igual que els de l’AD', 'SRV-HV02, amb els grups del domini'],
           ['FOG (desplegament d’imatges)', 'Màquina virtual Ubuntu amb FOG Project en una xarxa interna aïllada (192.168.50.0/24)', 'Taller IT de la planta 0, a la VLAN 50'],
           ['Auditoria (Nmap i WPScan)', 'Des de l’equip amfitrió contra la web del laboratori', '—']
-        ], 'Taula 26. Entorn de laboratori i equip del disseny de cada servei.') +
+        ], 'Taula 30. Entorn de laboratori i equip del disseny de cada servei.') +
         D.p('Els noms dels grups, dels usuaris i de les carpetes són els mateixos que tindrà la instal·lació real, així que la configuració es pot portar als servidors del disseny sense canviar res.')],
       ['5.A1.2', 'Unitats organitzatives, grups i usuaris',
         D.p('Creem una OU per departament, amb el seu grup de seguretat i dos usuaris d’exemple, com demanava el client (no cal donar d’alta els 500 usuaris). Els permisos no es donen mai a un usuari solt: es donen al grup del departament, i l’usuari els hereta pel fet de ser-ne membre. Quan entra una persona nova, només cal posar-la al grup que toca.') +
         D.w('aduc') +
-        D.tbl(['OU', 'Grup de seguretat', 'Usuaris d’exemple'], LT.AD.map(function (o) { return [o.ou, o.group, o.users.map(function (u) { return '<code>' + u[0] + '</code> (' + u[1] + ')'; }).join(', ')]; }), 'Taula 27. Unitats organitzatives, grups i usuaris d’exemple.') +
+        D.tbl(['OU', 'Grup de seguretat', 'Usuaris d’exemple'], LT.AD.map(function (o) { return [o.ou, o.group, o.users.map(function (u) { return '<code>' + u[0] + '</code> (' + u[1] + ')'; }).join(', ')]; }), 'Taula 31. Unitats organitzatives, grups i usuaris d’exemple.') +
         D.chk('SRV-AD', 'Server Manager → Tools → Active Directory Users and Computers', 'El domini logitrans.local amb les OU Administracio, Convidats, Direccio, Gestio, Magatzem i Servidors. Amb l’OU Administracio seleccionada es veuen el grup Grupo-Administracio i els dos usuaris d’exemple, Laura Castellanos i Pablo Martin.', 95)],
       ['5.A1.3', 'Permisos de cada departament',
         D.p('El client ens demanava pensar quins permisos té cada departament. Els resumim aquí; cadascun s’aplica al punt que s’indica. Tria un grup i una acció:') +
@@ -44,7 +44,7 @@
           ['Grupo-Gestio', 'Administrar els switches i els routers per SSH, modificar el repositori i llegir els registres de l’antivirus.', 'NPS (5.A2), repositori (5.D) i carpeta de registres (5.C2)'],
           ['Grupo-Servidors', 'Administrar els servidors.', 'Administradors dels servidors'],
           ['Grupo-Convidats', 'Cap accés a recursos interns.', 'Wi-Fi de convidats a la VLAN 40 (4.B1)']
-        ], 'Taula 28. Permisos per grup.')],
+        ], 'Taula 32. Permisos per grup.')],
       ['5.A1.4', 'Equips units al domini i inici de sessió',
         D.p('El client Windows 11 està unit al domini i l’usuari entra amb el seu compte de l’AD, per exemple <code>LOGITRANS\\admin.rrhh</code> (Pablo Martin, d’Administració). Ho comprovem amb <code>gpresult /r</code> (punt 5.A3.2): mostra l’usuari <code>CN=Pablo Martin,OU=Administracio,DC=logitrans,DC=local</code>, el domini LOGITRANS i les directives que li ha enviat SRV-AD. És a dir, l’equip és del domini i la sessió l’ha validat el controlador de domini, no l’equip local.') +
         D.w('login')],
@@ -73,7 +73,7 @@
           ['Consola', 'Sempre local, per poder entrar encara que la xarxa estigui caiguda'],
           ['Usuaris al servidor', 'admin.xarxa01 i admin.xarxa02, els dos usuaris de l’OU Gestio de l’Active Directory'],
           ['Accés remot', 'Només SSH v2 i només des de la xarxa de gestió (punt 4.B2)']
-        ], 'Taula 29. Autenticació AAA dels equips Cisco.') +
+        ], 'Taula 33. Autenticació AAA dels equips Cisco.') +
         D.note('Els switches d’accés 2960 del Packet Tracer no tenen les comandes d’AAA amb servidor RADIUS, així que fan servir l’usuari local. Als switches reals (Catalyst 9300) la configuració seria la mateixa que als cores.', 'lim')],
       ['5.A2.2', 'Wi-Fi corporatiu',
         D.p('Al Packet Tracer els tres SSID (<b>LogiTrans-Corp</b> a la VLAN 20, <b>LogiTrans-Almacen</b> a la VLAN 30 i <b>LogiTrans-Invitados</b> a la VLAN 40) estan configurats amb WPA2-PSK i xifratge AES, perquè els punts d’accés del simulador no fan bé el 802.1X. A la instal·lació real, els dos SSID corporatius fan servir <b>WPA2-Enterprise (802.1X)</b> contra l’NPS, i cada empleat entra al Wi-Fi amb el seu usuari de l’Active Directory (punt 5.A2.4). L’SSID de convidats es queda amb WPA2-PSK, perquè els convidats no tenen compte al domini; està aïllat per la VLAN 40 i la seva ACL (4.B1).') +
@@ -102,7 +102,7 @@
       ['5.A3.1', 'GPO aplicades',
         D.p('Amb les directives de grup (GPO) apliquem la mateixa configuració de seguretat a tots els equips i usuaris sense anar equip per equip. Creem vuit GPO i les vinculem al domini o a l’OU que toca. Fes clic a cadascuna:') +
         D.w('gpo') +
-        D.tbl(['GPO', 'Què fa', 'Per què'], LT.GPO_FULL.map(function (g) { return ['<code>' + g[0] + '</code>', g[1], g[2]]; }), 'Taula 30. GPO de LogiTrans.') +
+        D.tbl(['GPO', 'Què fa', 'Per què'], LT.GPO_FULL.map(function (g) { return ['<code>' + g[0] + '</code>', g[1], g[2]]; }), 'Taula 34. GPO de LogiTrans.') +
         D.chk('SRV-AD', 'Group Policy Management → Group Policy Objects', 'Les vuit GPO creades a Group Policy Objects i, a dalt de l’arbre, les que estan vinculades directament al domini logitrans.local.', 109)],
       ['5.A3.2', 'Comprovació al client',
         D.p('Per comprovar que les GPO arriben, iniciem sessió al client Windows 11 amb <code>LOGITRANS\\admin.rrhh</code> (Pablo Martin, OU Administracio) i fem <code>gpresult /r</code>.') +
@@ -118,7 +118,7 @@
         D.p('La web corporativa és un WordPress sobre una pila <b>LEMP</b> (Linux, Nginx, MariaDB i PHP-FPM). En lloc d’instal·lar-ho tot en una sola màquina, cada peça va al seu contenidor Docker i s’aixequen juntes amb <code>docker compose</code>. Així cada servei està aïllat, es pot actualitzar per separat i tota la web es porta a SRV-HV03 copiant la carpeta del projecte.')],
       ['5.B1.1', 'Pila de contenidors',
         D.w('docker') +
-        D.tbl(['Contenidor', 'Imatge', 'Port', 'Funció'], LT.DOCKER.map(function (c) { return ['<b>' + c.name + '</b>', '<code>' + c.image + '</code>', c.port + (c.pub ? ' (publicats)' : ' (intern)'), LT.tr(c.role)]; }), 'Taula 31. Contenidors de la web.') +
+        D.tbl(['Contenidor', 'Imatge', 'Port', 'Funció'], LT.DOCKER.map(function (c) { return ['<b>' + c.name + '</b>', '<code>' + c.image + '</code>', c.port + (c.pub ? ' (publicats)' : ' (intern)'), LT.tr(c.role)]; }), 'Taula 35. Contenidors de la web.') +
         D.p('Només nginx publica ports cap a fora (80 i 443). La base de dades, el WordPress, l’aplicació de clients i el Jellyfin només escolten a la xarxa interna de Docker, així que des de fora no s’hi arriba directament.') +
         D.chk('Equip amfitrió', 'docker compose up -d --wait', 'Els cinc contenidors aixecats i en estat Healthy.', 111, 'HOST|docker compose up -d --wait') +
         D.chk('Equip amfitrió', 'docker compose ps', 'Els cinc contenidors Up (healthy) i la columna de ports: només logitrans-web-nginx-1 té 0.0.0.0:80->80/tcp i 0.0.0.0:443->443/tcp; la resta només té el port intern.', 112, 'HOST|docker compose ps')],
@@ -234,7 +234,7 @@
         D.p('El client vol un repositori amb el material de l’empresa (programes, documents, manuals, imatges del sistema i vídeos) i que els vídeos es puguin veure en streaming però no descarregar, perquè no surtin del servidor.')],
       ['5.D.1', 'Estructura i permisos',
         D.p('Vam crear el repositori amb un script de PowerShell (<code>repositorio-comun.ps1</code>) que fa tres coses: crea les carpetes, els aplica els permisos i comparteix la carpeta a la xarxa. Al laboratori el vam muntar a l’equip amfitrió (BYWAAKE) amb grups locals que es diuen igual que els de l’AD; a la instal·lació real va a SRV-HV02 amb els grups del domini.') +
-        D.tbl(['Carpeta', 'Contingut'], [['Documentos', 'Documents corporatius: procediments, polítiques i plantilles.'], ['ImagenesSO', 'Imatges del sistema operatiu, les que fa servir FOG (punt 5.E).'], ['Manuales', 'Manuals d’ús, per exemple el d’accés al Wi-Fi i a la VPN.'], ['Software', 'Instal·ladors dels programes autoritzats.'], ['Videos', 'Vídeos de formació i presentacions, que es veuen per streaming amb Jellyfin.']], 'Taula 32. Carpetes del repositori.') +
+        D.tbl(['Carpeta', 'Contingut'], [['Documentos', 'Documents corporatius: procediments, polítiques i plantilles.'], ['ImagenesSO', 'Imatges del sistema operatiu, les que fa servir FOG (punt 5.E).'], ['Manuales', 'Manuals d’ús, per exemple el d’accés al Wi-Fi i a la VPN.'], ['Software', 'Instal·ladors dels programes autoritzats.'], ['Videos', 'Vídeos de formació i presentacions, que es veuen per streaming amb Jellyfin.']], 'Taula 36. Carpetes del repositori.') +
         D.p('El criteri de permisos és senzill: <b>tothom pot llegir</b> (veure els manuals i fer servir els instal·ladors), però <b>només Grupo-Gestio pot modificar</b>. Així un usuari no pot esborrar res ni afegir programes no autoritzats.') +
         D.chk('Equip amfitrió (PowerShell)', 'powershell -ExecutionPolicy Bypass -File .\\repositorio-comun.ps1 -CrearUsuariosPrueba', 'Les cinc carpetes creades, els permisos de l’arrel (Grupo-Gestio Modificar (M), Usuaris lectura i execució (RX), SYSTEM i Administradors control total (F)) i el recurs compartit \\\\BYWAAKE\\Repositorio.', 143, 'Equipo anfitrión (PowerShell)|powershell -ExecutionPolicy Bypass -File .\\repositorio-comun.ps1 -CrearUsuariosPrueba') +
         D.chk('Equip amfitrió', 'Explorador de fitxers → C:\\Repositorio', 'Les carpetes Documentos, ImagenesSO, Manuales, Software i Videos.', 144) +

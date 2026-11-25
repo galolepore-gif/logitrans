@@ -171,8 +171,11 @@ LT.EVIDENCE = {};
 LT.EVIDENCE_RAW.trim().split('\n').forEach(function (l) {
   var p = l.split('|');
   var n = +p[0];
-  LT.EVIDENCE[n] = { n: n, dev: p[1], txt: p.slice(2).join('|'), src: 'assets/capturas/ev-' + String(n).padStart(3, '0') + '.webp' };
+  LT.EVIDENCE[n] = { n: n, num: n >= 6 ? n + 2 : n, dev: p[1], txt: p.slice(2).join('|'), src: 'assets/capturas/ev-' + String(n).padStart(3, '0') + '.webp' };
 });
+/* Detalles de canalizaciones (imágenes 6 y 7 de la memoria) */
+LT.EVIDENCE[1006] = { n: 1006, num: 6, dev: 'Plano', txt: 'Detalle de la planta 1: bandejas, derivaciones a cada caja de suelo y toma, y montante del patinillo', src: 'assets/planos/detalle_p1.webp' };
+LT.EVIDENCE[1007] = { n: 1007, num: 7, dev: 'Plano', txt: 'Detalle del almacén: bandeja de los muelles con la derivación a cada muelle, y bandeja del pasillo principal', src: 'assets/planos/detalle_zgz.webp' };
 /* Grupos de evidencias por capítulo */
 LT.EVIDENCE_GROUPS = {
   rack: [6, 7, 8, 11],

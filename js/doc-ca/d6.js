@@ -19,7 +19,7 @@
           ['445/tcp', 'SMB de Windows', 'No per a la web', 'Igual que el 135.'],
           ['1042/tcp', 'Desconegut (afrog?)', 'No', 'Identifiquem el procés i el bloquegem (6.1.2).'],
           ['7778/tcp', 'Desconegut (interwise?)', 'No', 'Igual que l’1042.']
-        ], 'Taula 33. Ports oberts i decisió.', { mono: [0] })],
+        ], 'Taula 37. Ports oberts i decisió.', { mono: [0] })],
       ['6.1.2', 'Identificació i bloqueig dels ports desconeguts',
         D.chk('Equip d’auditoria (PowerShell)', 'Get-NetTCPConnection -LocalPort 1042,7778 -State Listen · Get-Process -Id <PID>', 'El port 7778 és d’ArmouryCrateControlInterface i l’1042 d’asus_framework: dos programes del fabricant de la placa base (ASUS), que no tenen res a veure amb la web.', 158, 'HOST|Get-NetTCPConnection -LocalPort 1042,7778 -State Listen') +
         D.chk('Equip d’auditoria (PowerShell com a administrador)', 'New-NetFirewallRule -DisplayName "LogiTrans-bloqueo-ASUS" -Direction Inbound -Protocol TCP -LocalPort 1042,7778 -Action Block', 'La regla LogiTrans-bloqueo-ASUS creada: Enabled True, Direction Inbound i Action Block.', 159, 'HOST|New-NetFirewallRule -DisplayName "LogiTrans-bloqueo-ASUS" -Direction Inbound -Protocol TCP -LocalPort 1042,7778 -Action Block')],
@@ -62,18 +62,18 @@
           ['WPScan: sense vulnerabilitats ni usuaris enumerables', '—', 'Mantenir WordPress i les imatges actualitzats', '<span class="chip ok">Correcte</span>'],
           ['Convidats amb sortida a tot Internet (versió anterior de l’ACL)', 'Mitjà', 'ACL-INVITADOS-IN reduïda a DHCP, DNS, HTTP i HTTPS (4.B1)', '<span class="chip ok">Aplicat</span>'],
           ['Operaris amb accés a tota la VLAN de servidors (versió anterior de l’ACL)', 'Mitjà', 'ACL-OPERARIOS-IN reduïda a DHCP, DNS, base de dades i web (4.B3)', '<span class="chip ok">Aplicat</span>']
-        ], 'Taula 34. Troballes de l’auditoria i mitigació.')],
+        ], 'Taula 38. Troballes de l’auditoria i mitigació.')],
       ['6.3.2', 'Protecció davant l’OWASP Top 10',
         D.p('L’OWASP Top 10 (versió 2021) és la llista dels deu riscos més importants de les aplicacions web. Així protegim el WordPress i l’àrea de clients. Gira cada carta:') +
         D.w('owasp') +
-        D.tbl(['Risc', 'Com el protegim', 'Punt'], LT.OWASP.map(function (o) { return ['<b>' + o[0] + '</b> · ' + tr(o[1]), tr(o[2]), o[3]]; }), 'Taula 35. Protecció del WordPress i de l’àrea de clients davant l’OWASP Top 10.')],
+        D.tbl(['Risc', 'Com el protegim', 'Punt'], LT.OWASP.map(function (o) { return ['<b>' + o[0] + '</b> · ' + tr(o[1]), tr(o[2]), o[3]]; }), 'Taula 39. Protecció del WordPress i de l’àrea de clients davant l’OWASP Top 10.')],
       ['6.3.3', 'Protecció davant els atacs de capa 2',
         D.p('Tria un atac i llança’l contra el switch d’accés. Cadascun mostra com l’atura la xarxa i en quin punt està configurat.') +
         D.w('attacks', { layer: 2 }) +
-        D.tbl(['Atac', 'En què consisteix', 'Com l’aturem', 'Punt'], LT.ATTACKS.filter(function (a) { return a.layer === 2; }).map(function (a) { return ['<b>' + tr(a.name) + '</b>', tr(a.how), tr(a.defHow), a.ref]; }), 'Taula 36. Protecció davant els atacs de capa 2.')],
+        D.tbl(['Atac', 'En què consisteix', 'Com l’aturem', 'Punt'], LT.ATTACKS.filter(function (a) { return a.layer === 2; }).map(function (a) { return ['<b>' + tr(a.name) + '</b>', tr(a.how), tr(a.defHow), a.ref]; }), 'Taula 40. Protecció davant els atacs de capa 2.')],
       ['6.3.4', 'Protecció davant els atacs de capa 3',
         D.w('attacks', { layer: 3 }) +
-        D.tbl(['Atac', 'En què consisteix', 'Com l’aturem', 'Punt'], LT.ATTACKS.filter(function (a) { return a.layer === 3; }).map(function (a) { return ['<b>' + tr(a.name) + '</b>', tr(a.how), tr(a.defHow), a.ref]; }), 'Taula 37. Protecció davant els atacs de capa 3.')],
+        D.tbl(['Atac', 'En què consisteix', 'Com l’aturem', 'Punt'], LT.ATTACKS.filter(function (a) { return a.layer === 3; }).map(function (a) { return ['<b>' + tr(a.name) + '</b>', tr(a.how), tr(a.defHow), a.ref]; }), 'Taula 41. Protecció davant els atacs de capa 3.')],
       ['6.3.5', 'Verificació de les mesures de xarxa',
         D.p('Per tancar l’auditoria vam tornar a provar al Packet Tracer les mesures de capa 2 en un switch diferent del de les proves del bloc 4 (BCN-P0-ACC1), i el xifratge de la VPN entre seus.') +
         D.chk('BCN-P0-ACC1', 'show port-security · show port-security interface fa0/6', 'A dalt, Fa0/1 (punt d’accés) amb màxim 64 i Restrict, i Fa0/5, Fa0/6 i Fa0/7 amb màxim 1 i Shutdown. A sota, Fa0/6 en Secure-up amb la MAC sticky 0030.BB2E.0743.', 166, 'BCN-P0-ACC1|show port-security') +

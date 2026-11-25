@@ -23,7 +23,7 @@
           notes: (sec.lead || '').replace(/<[^>]+>/g, '') + (sec.sc ? (LT.lang === 'ca' ? ' Escenari al Tracer: ' : ' Escenario en el Tracer: ') + sec.sc[1] : '') + (LT.lang === 'ca' ? ' Punts: ' : ' Puntos: ') + (sec.subs || []).map(function (s) { return s[0] + ' ' + s[1]; }).join(' · ') });
       });
     });
-    S.push({ kind: 'budget', id: 'budget', t: 'Presupuesto', notes: '855.172 € de base y 1.034.758,12 € con IVA. Más de la mitad son los equipos de usuario.' });
+    S.push({ kind: 'budget', id: 'budget', t: 'Presupuesto', notes: '755.939 € de base y 914.686,35 € con IVA. El bloque más grande son los puestos de trabajo (36 %).' });
     S.push({ kind: 'team', id: 'team', t: 'Equipo', notes: 'Reparto del trabajo y sprints.' });
     S.push({ kind: 'end', id: 'end', t: 'Preguntas', notes: 'Abrir el Tracer si piden ver alguna prueba en vivo: tecla T al salir, o el botón de cada comprobación.' });
     return S;

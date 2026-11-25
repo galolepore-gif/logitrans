@@ -14,7 +14,7 @@
           ['Puesto con teléfono IP (PC conectado al teléfono)', '3 (sticky)', 'Shutdown', 'Hay dos equipos: el teléfono y el PC que cuelga de él. El teléfono IP ocupa dos entradas en port-security (ver abajo), así que el máximo real es 3. Un tercer equipo ya supera el límite.'],
           ['Punto de acceso Wi-Fi', '32 (corporativo) / 64 (invitados)', 'Restrict', 'En el puerto del AP aparecen las MAC de todos los clientes inalámbricos. Con Restrict, si se supera el límite solo se descartan los equipos sobrantes y no se corta todo el Wi-Fi.'],
           ['Puerto libre', '—', 'Apagado (VLAN 998)', 'Un puerto que no se usa no tiene que estar nunca activo.']
-        ], 'Tabla 25. Criterio de Port Security.') +
+        ], 'Tabla 29. Criterio de Port Security.') +
         D.p('Las MAC se guardan con <b>sticky</b>: el switch aprende la MAC del primer equipo que se conecta y la guarda en la configuración, así que después de un reinicio sigue sabiendo cuál es el equipo autorizado sin escribir cada MAC a mano.') +
         D.note('Al principio configuramos los puertos con teléfono con un máximo de 2 (teléfono + PC), pero el puerto se desactivaba solo con los equipos legítimos. El mensaje del switch indicaba que la MAC que provocaba la violación era la del propio teléfono (0060.7035.5001): el teléfono IP, además del tráfico de datos, manda tráfico propio de voz, y el switch lo cuenta como una entrada más. Por eso el máximo es 3, que sigue siendo «un PC y un teléfono» y sigue apagando el puerto si se conecta cualquier otro equipo.', 'fix', 'Lo que aprendimos') +
         D.p('Los puertos con teléfono son <code>BCN-P1-ACC1 Fa0/2</code>, <code>BCN-P3-ACC1 Fa0/10</code> y <code>ZGZ-ACC1 Fa0/6</code>. Probalo en el switch:') +

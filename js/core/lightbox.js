@@ -6,7 +6,7 @@
   function show() {
     var e = list[idx]; if (!e) return;
     var img = LT.$('#lb-img'); img.src = e.src; img.alt = e.txt;
-    LT.$('#lb-cap').innerHTML = '<small>IMAGEN ' + e.n + ' DE LA MEMORIA · ' + LT.esc(e.dev.toUpperCase()) + '</small>' + LT.esc(e.txt);
+    LT.$('#lb-cap').innerHTML = '<small>' + (LT.lang === 'ca' ? 'IMATGE ' + e.num + ' DE LA MEMÒRIA · ' : 'IMAGEN ' + e.num + ' DE LA MEMORIA · ') + LT.esc(e.dev.toUpperCase()) + '</small>' + LT.esc(e.txt);
     LT.$('#lb-n').textContent = (idx + 1) + ' / ' + list.length;
     LT.$$('#lb-strip img').forEach(function (im, i) { im.classList.toggle('on', i === idx); if (i === idx) im.scrollIntoView({ block: 'nearest', inline: 'center' }); });
   }

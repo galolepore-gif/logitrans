@@ -1,7 +1,7 @@
 /* Punto 5 de la memoria: servicios */
 (function () {
   var LT = window.LT, D = LT.D;
-  /* Tabla 30 completa de la memoria: GPO, qué hace, por qué */
+  /* Tabla 34 completa de la memoria: GPO, qué hace, por qué */
   LT.GPO_FULL = [
     ['GPO-LogiTrans-Seguridad', 'Directiva base de seguridad del dominio. Entre otras cosas, activa el firewall de Windows Defender en los tres perfiles (5.C2).', 'Que ningún equipo del dominio quede sin la configuración mínima.', 'Dominio'],
     ['GPO-Contrasenas-Bloqueo', 'Contraseñas de 8 caracteres como mínimo y bloqueo de la cuenta después de 3 intentos fallidos.', 'Evita contraseñas débiles y ataques de fuerza bruta.', 'Dominio'],
@@ -28,12 +28,12 @@
           ['Repositorio de medios', 'Carpeta compartida C:\\Repositorio en el equipo anfitrión (BYWAAKE), con grupos locales que se llaman igual que los del AD', 'SRV-HV02, con los grupos del dominio'],
           ['FOG (despliegue de imágenes)', 'Máquina virtual Ubuntu con FOG Project en una red interna aislada (192.168.50.0/24)', 'Taller IT de la planta 0, en la VLAN 50'],
           ['Auditoría (Nmap y WPScan)', 'Desde el equipo anfitrión contra la web del laboratorio', '—']
-        ], 'Tabla 26. Entorno de laboratorio y equipo del diseño de cada servicio.') +
+        ], 'Tabla 30. Entorno de laboratorio y equipo del diseño de cada servicio.') +
         D.p('Los nombres de los grupos, de los usuarios y de las carpetas son los mismos que tendrá la instalación real, así que la configuración se puede llevar a los servidores del diseño sin cambiar nada.')],
       ['5.A1.2', 'Unidades organizativas, grupos y usuarios',
         D.p('Creamos una OU por departamento, con su grupo de seguridad y dos usuarios de ejemplo, como pedía el cliente (no hace falta dar de alta a los 500 usuarios). Los permisos nunca se dan a un usuario suelto: se dan al grupo del departamento, y el usuario los hereda por ser miembro. Cuando entra una persona nueva, solo hay que meterla en el grupo que toca.') +
         D.w('aduc') +
-        D.tbl(['OU', 'Grupo de seguridad', 'Usuarios de ejemplo'], LT.AD.map(function (o) { return [o.ou, o.group, o.users.map(function (u) { return '<code>' + u[0] + '</code> (' + u[1] + ')'; }).join(', ')]; }), 'Tabla 27. Unidades organizativas, grupos y usuarios de ejemplo.') +
+        D.tbl(['OU', 'Grupo de seguridad', 'Usuarios de ejemplo'], LT.AD.map(function (o) { return [o.ou, o.group, o.users.map(function (u) { return '<code>' + u[0] + '</code> (' + u[1] + ')'; }).join(', ')]; }), 'Tabla 31. Unidades organizativas, grupos y usuarios de ejemplo.') +
         D.chk('SRV-AD', 'Server Manager → Tools → Active Directory Users and Computers', 'El dominio logitrans.local con las OU Administracio, Convidats, Direccio, Gestio, Magatzem y Servidors. Con la OU Administracio seleccionada se ven el grupo Grupo-Administracio y los dos usuarios de ejemplo, Laura Castellanos y Pablo Martin.', 95)],
       ['5.A1.3', 'Permisos de cada departamento',
         D.p('El cliente nos pedía pensar qué permisos tiene cada departamento. Los resumimos aquí; cada uno se aplica en el punto que se indica. Elegí un grupo y una acción:') +
@@ -45,7 +45,7 @@
           ['Grupo-Gestio', 'Administrar los switches y routers por SSH, modificar el repositorio y leer los registros del antivirus.', 'NPS (5.A2), repositorio (5.D) y carpeta de registros (5.C2)'],
           ['Grupo-Servidors', 'Administrar los servidores.', 'Administradores de los servidores'],
           ['Grupo-Convidats', 'Ningún acceso a recursos internos.', 'Wi-Fi de invitados en la VLAN 40 (4.B1)']
-        ], 'Tabla 28. Permisos por grupo.')],
+        ], 'Tabla 32. Permisos por grupo.')],
       ['5.A1.4', 'Equipos unidos al dominio e inicio de sesión',
         D.p('El cliente Windows 11 está unido al dominio y el usuario entra con su cuenta del AD, por ejemplo <code>LOGITRANS\\admin.rrhh</code> (Pablo Martin, de Administració). Lo comprobamos con <code>gpresult /r</code> (punto 5.A3.2): muestra el usuario <code>CN=Pablo Martin,OU=Administracio,DC=logitrans,DC=local</code>, el dominio LOGITRANS y las directivas que le mandó SRV-AD. Es decir, el equipo es del dominio y la sesión la validó el controlador de dominio, no el equipo local.') +
         D.w('login')],
@@ -74,7 +74,7 @@
           ['Consola', 'Siempre local, para poder entrar aunque la red esté caída'],
           ['Usuarios en el servidor', 'admin.xarxa01 y admin.xarxa02, los dos usuarios de la OU Gestio del Active Directory'],
           ['Acceso remoto', 'Solo SSH v2 y solo desde la red de gestión (punto 4.B2)']
-        ], 'Tabla 29. Autenticación AAA de los equipos Cisco.') +
+        ], 'Tabla 33. Autenticación AAA de los equipos Cisco.') +
         D.note('Los switches de acceso 2960 del Packet Tracer no tienen los comandos de AAA con servidor RADIUS, así que usan el usuario local. En los switches reales (Catalyst 9300) la configuración sería la misma que en los cores.', 'lim')],
       ['5.A2.2', 'Wi-Fi corporativo',
         D.p('En el Packet Tracer los tres SSID (<b>LogiTrans-Corp</b> en la VLAN 20, <b>LogiTrans-Almacen</b> en la VLAN 30 y <b>LogiTrans-Invitados</b> en la VLAN 40) están configurados con WPA2-PSK y cifrado AES, porque los puntos de acceso del simulador no hacen bien el 802.1X. En la instalación real, los dos SSID corporativos usan <b>WPA2-Enterprise (802.1X)</b> contra el NPS, y cada empleado entra al Wi-Fi con su usuario del Active Directory (punto 5.A2.4). El SSID de invitados se queda con WPA2-PSK, porque los invitados no tienen cuenta en el dominio; está aislado por la VLAN 40 y su ACL (4.B1).') +
@@ -103,7 +103,7 @@
       ['5.A3.1', 'GPO aplicadas',
         D.p('Con las directivas de grupo (GPO) aplicamos la misma configuración de seguridad a todos los equipos y usuarios sin ir equipo por equipo. Creamos ocho GPO y las vinculamos al dominio o a la OU que toca. Hacé clic en cada una:') +
         D.w('gpo') +
-        D.tbl(['GPO', 'Qué hace', 'Por qué'], LT.GPO_FULL.map(function (g) { return ['<code>' + g[0] + '</code>', g[1], g[2]]; }), 'Tabla 30. GPO de LogiTrans.') +
+        D.tbl(['GPO', 'Qué hace', 'Por qué'], LT.GPO_FULL.map(function (g) { return ['<code>' + g[0] + '</code>', g[1], g[2]]; }), 'Tabla 34. GPO de LogiTrans.') +
         D.chk('SRV-AD', 'Group Policy Management → Group Policy Objects', 'Las ocho GPO creadas en Group Policy Objects y, arriba del árbol, las que están vinculadas directamente al dominio logitrans.local.', 109)],
       ['5.A3.2', 'Comprobación en el cliente',
         D.p('Para comprobar que las GPO llegan, iniciamos sesión en el cliente Windows 11 con <code>LOGITRANS\\admin.rrhh</code> (Pablo Martin, OU Administracio) y hacemos <code>gpresult /r</code>.') +
@@ -119,7 +119,7 @@
         D.p('La web corporativa es un WordPress sobre una pila <b>LEMP</b> (Linux, Nginx, MariaDB y PHP-FPM). En lugar de instalarlo todo en una sola máquina, cada pieza va en su contenedor Docker y se levantan juntas con <code>docker compose</code>. Así cada servicio está aislado, se puede actualizar por separado y toda la web se lleva a SRV-HV03 copiando la carpeta del proyecto.')],
       ['5.B1.1', 'Pila de contenedores',
         D.w('docker') +
-        D.tbl(['Contenedor', 'Imagen', 'Puerto', 'Función'], LT.DOCKER.map(function (c) { return ['<b>' + c.name + '</b>', '<code>' + c.image + '</code>', c.port + (c.pub ? ' (publicados)' : ' (interno)'), c.role]; }), 'Tabla 31. Contenedores de la web.') +
+        D.tbl(['Contenedor', 'Imagen', 'Puerto', 'Función'], LT.DOCKER.map(function (c) { return ['<b>' + c.name + '</b>', '<code>' + c.image + '</code>', c.port + (c.pub ? ' (publicados)' : ' (interno)'), c.role]; }), 'Tabla 35. Contenedores de la web.') +
         D.p('Solo nginx publica puertos hacia fuera (80 y 443). La base de datos, el WordPress, la aplicación de clientes y el Jellyfin solo escuchan en la red interna de Docker, así que desde fuera no se llega a ellos directamente.') +
         D.chk('Equipo anfitrión', 'docker compose up -d --wait', 'Los cinco contenedores levantados y en estado Healthy.', 111, 'HOST|docker compose up -d --wait') +
         D.chk('Equipo anfitrión', 'docker compose ps', 'Los cinco contenedores Up (healthy) y la columna de puertos: solo logitrans-web-nginx-1 tiene 0.0.0.0:80->80/tcp y 0.0.0.0:443->443/tcp; el resto solo tiene el puerto interno.', 112, 'HOST|docker compose ps')],
@@ -235,7 +235,7 @@
         D.p('El cliente quiere un repositorio con el material de la empresa (programas, documentos, manuales, imágenes del sistema y vídeos) y que los vídeos se puedan ver en streaming pero no descargar, para que no salgan del servidor.')],
       ['5.D.1', 'Estructura y permisos',
         D.p('Creamos el repositorio con un script de PowerShell (<code>repositorio-comun.ps1</code>) que hace tres cosas: crea las carpetas, les aplica los permisos y comparte la carpeta en la red. En el laboratorio lo montamos en el equipo anfitrión (BYWAAKE) con grupos locales que se llaman igual que los del AD; en la instalación real va en SRV-HV02 con los grupos del dominio.') +
-        D.tbl(['Carpeta', 'Contenido'], [['Documentos', 'Documentos corporativos: procedimientos, políticas y plantillas.'], ['ImagenesSO', 'Imágenes del sistema operativo, las que usa FOG (punto 5.E).'], ['Manuales', 'Manuales de uso, por ejemplo el de acceso al Wi-Fi y a la VPN.'], ['Software', 'Instaladores de los programas autorizados.'], ['Videos', 'Vídeos de formación y presentaciones, que se ven por streaming con Jellyfin.']], 'Tabla 32. Carpetas del repositorio.') +
+        D.tbl(['Carpeta', 'Contenido'], [['Documentos', 'Documentos corporativos: procedimientos, políticas y plantillas.'], ['ImagenesSO', 'Imágenes del sistema operativo, las que usa FOG (punto 5.E).'], ['Manuales', 'Manuales de uso, por ejemplo el de acceso al Wi-Fi y a la VPN.'], ['Software', 'Instaladores de los programas autorizados.'], ['Videos', 'Vídeos de formación y presentaciones, que se ven por streaming con Jellyfin.']], 'Tabla 36. Carpetas del repositorio.') +
         D.p('El criterio de permisos es sencillo: <b>todos pueden leer</b> (ver los manuales y usar los instaladores), pero <b>solo Grupo-Gestio puede modificar</b>. Así un usuario no puede borrar nada ni añadir programas no autorizados.') +
         D.chk('Equipo anfitrión (PowerShell)', 'powershell -ExecutionPolicy Bypass -File .\\repositorio-comun.ps1 -CrearUsuariosPrueba', 'Las cinco carpetas creadas, los permisos de la raíz (Grupo-Gestio Modificar (M), Usuarios lectura y ejecución (RX), SYSTEM y Administradores control total (F)) y el recurso compartido \\\\BYWAAKE\\Repositorio.', 143) +
         D.chk('Equipo anfitrión', 'Explorador de archivos → C:\\Repositorio', 'Las carpetas Documentos, ImagenesSO, Manuales, Software y Videos.', 144) +

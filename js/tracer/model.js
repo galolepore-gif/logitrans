@@ -1,7 +1,7 @@
 /* LogiTrans Tracer · modelo de la red
    Dispositivos, enlaces, direcciones, ACL con sus contadores reales y el motor que decide
    por dónde va un paquete, qué lista lo para y con qué TTL llega.
-   Las salidas se reconstruyen a partir de las capturas de la memoria (imágenes 6 a 169). */
+   Las salidas se reconstruyen a partir de las capturas de la memoria (imágenes 8 a 171). */
 (function () {
   var LT = window.LT;
   var N = LT.NET = { dev: {}, links: [], byIp: {}, virt: {} };

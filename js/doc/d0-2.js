@@ -121,43 +121,106 @@
         D.ul(['<b>Horizontal (P0, P1, P2, P3).</b> Bandeja metálica perforada tipo rejiband, acero galvanizado Sendzimir, 300 × 60 mm, colgada del forjado del falso techo con soportes cada 1,5 m. Recorre los dos pasillos principales de cada planta (norte-sur y este-oeste). En cada bloque de 6 puestos, bajada vertical hasta una caja de suelo con 6 tomas RJ45 Cat 6A. En despachos individuales y salas de reuniones, bajada hasta una toma doble de pared.',
           '<b>Montante vertical (P0 ↔ P1 ↔ P2 ↔ P3).</b> Tubo de acero galvanizado de 125 mm de diámetro en el patinillo técnico que une el CPD de la P0 con los tres IDF de las plantas superiores. Por él pasa solo fibra OM4 (2 enlaces redundantes por planta).',
           '<b>CPD y taller IT.</b> Bandeja metálica de 200 × 60 mm para el conexionado interior entre racks y taller, más canalización elevada bajo el suelo técnico del CPD.',
-          '<b>RITI → CPD.</b> Dos canalizaciones independientes, una por operador, con tubo corrugado ignífugo de 50 mm y entradas opuestas en el edificio.']) +
+          '<b>RITI → CPD.</b> Dos canalizaciones independientes, una por operador, con tubo corrugado ignífugo de 50 mm y entradas opuestas en el edificio.',
+          '<b>Bandeja → toma.</b> Cada caja de suelo o toma cuelga de la bandeja más cercana. El cable sale de la bandeja por el falso techo dentro de un tubo corrugado de PVC libre de halógenos: <b>Ø 40 mm hacia las cajas de suelo</b> (llevan 6 cables; así no pasamos del 40 % de ocupación de la TIA-569) y <b>Ø 32 mm hacia las tomas de pared</b> (llevan 2). Baja hasta la toma (3 m de bajada en la oficina).',
+          '<b>Cómo medimos.</b> Las longitudes salen del plano a escala (1 m = 100 px en la oficina y 50 px en el almacén). La derivación es el recorrido hasta la toma más la bajada. El enlace más largo es el camino completo del rack a la toma: bandeja + derivación + 2 m de reserva en el rack.']) +
         D.h('Almacén de Zaragoza') +
         D.ul(['<b>Nave industrial.</b> Bandeja metálica perforada de 400 × 100 mm, suspendida a 6 m de altura sobre el pasillo principal de carretillas, el pasillo sur y la línea de muelles. Cruza la nave entera sin competir con la iluminación ni con las estanterías altas. En cada muelle, bajada hasta una toma RJ45 para el terminal, protegida con caja IP54.',
           '<b>Oficinas auxiliares (zona oeste).</b> Bandeja de 300 × 60 mm por falso techo, igual que en Barcelona.',
-          '<b>Cuarto de comunicaciones → IDF-02.</b> Bandeja metálica dedicada de 200 × 60 mm suspendida a 6 m, que recorre los 150 m de la nave de oeste a este sobre el pasillo principal. Por ella pasa solo la fibra OM4 (2 enlaces redundantes).'])],
+          '<b>Cuarto de comunicaciones → IDF-02.</b> Bandeja metálica dedicada de 200 × 60 mm suspendida a 6 m, que recorre los 150 m de la nave de oeste a este sobre el pasillo principal. Por ella pasa solo la fibra OM4 (2 enlaces redundantes).',
+          '<b>Bajadas de la nave.</b> La bandeja va a 6 m. La bajada hasta la toma del muelle o la caja se hace con tubo de acero galvanizado rígido Ø 32 mm fijado al pilar y termina en una caja estanca IP54, porque pasan carretillas.',
+          '<b>Bajada al IDF-02 (nueva).</b> Bandeja de 300 × 60 mm por el muro este (35 m). Une la bandeja de los muelles y la del pasillo principal con el armario mural, así la mitad este de la nave se cablea desde el IDF-02.',
+          '<b>Reparto de los muelles.</b> Los muelles 1–5 cuelgan del rack R1 del cuarto de comunicaciones y los muelles 6–9 del IDF-02. Así ningún enlace de cobre de la nave pasa de 90 m (el más largo ronda los 85 m).']) +
+        D.h('Derivaciones hasta cada toma y distancias') +
+        D.tbl(['Planta', 'Tramo de bandeja (posición en los ejes)', 'Longitud', 'Alimenta', 'Derivación más larga', 'Enlace más largo'], [
+          ['P0', 'Vertical en el eje E–F, fila 2', '2,2 m', '1 caja', '11,3 m', '17,7 m'],
+          ['P0', 'Horizontal entre filas 1–2, ejes A–E', '32,3 m', '1 caja + 3 tomas', '8,9 m', '28,9 m'],
+          ['P0', 'Vertical en el eje C–D, fila 2', '4,1 m', 'Solo paso de cable', '—', '—'],
+          ['P0', 'Vertical en el eje A–B, filas 2–3', '10,2 m', '5 cajas', '6,4 m', '44,7 m'],
+          ['P0', 'Horizontal entre filas 3–4, ejes A–F', '38,8 m', '2 cajas + 6 tomas', '9,7 m', '53,2 m'],
+          ['P0', 'Vertical en el eje E–F, filas 2–3', '8,3 m', '2 tomas', '7,9 m', '11,8 m'],
+          ['P0', 'Vertical en el eje C–D, fila 3', '1,9 m', '1 caja', '3,9 m', '30,8 m'],
+          ['P0', 'Vertical en el eje D–E, fila 3', '1,9 m', '1 caja', '3,4 m', '25,2 m'],
+          ['P1', 'Vertical en el eje C–D, fila 2', '4,1 m', 'Solo paso de cable', '—', '—'],
+          ['P1', 'Horizontal entre filas 1–2, ejes A–F', '38,8 m', '9 cajas + 4 tomas', '13,7 m', '35,1 m'],
+          ['P1', 'Vertical en el eje B–C, filas 2–4', '16,9 m', '7 cajas', '8,8 m', '41,9 m'],
+          ['P1', 'Vertical en el eje D–E, filas 2–4', '16,9 m', '5 cajas + 1 toma', '14,2 m', '29,0 m'],
+          ['P1', 'Horizontal entre filas 3–4, ejes C–D', '8,0 m', '2 tomas', '7,8 m', '26,4 m'],
+          ['P2', 'Vertical en el eje C–D, fila 2', '4,1 m', 'Solo paso de cable', '—', '—'],
+          ['P2', 'Horizontal entre filas 1–2, ejes A–F', '38,8 m', '8 cajas + 5 tomas', '13,7 m', '35,1 m'],
+          ['P2', 'Vertical en el eje B–C, filas 2–4', '16,9 m', '7 cajas', '8,8 m', '41,9 m'],
+          ['P2', 'Vertical en el eje D–E, filas 2–4', '16,9 m', '4 cajas + 1 toma', '5,9 m', '20,7 m'],
+          ['P2', 'Horizontal entre filas 3–4, ejes C–D', '8,0 m', '2 tomas', '7,8 m', '26,4 m'],
+          ['P3', 'Vertical en el eje C–D, fila 2', '4,1 m', 'Solo paso de cable', '—', '—'],
+          ['P3', 'Horizontal entre filas 1–2, ejes A–F', '38,8 m', '7 cajas + 4 tomas', '8,3 m', '35,1 m'],
+          ['P3', 'Vertical en el eje B–C, filas 2–4', '16,9 m', '8 cajas', '8,8 m', '41,9 m'],
+          ['P3', 'Vertical en el eje E–F, filas 2–3', '10,2 m', '1 caja + 2 tomas', '7,7 m', '34,9 m'],
+          ['P3', 'Horizontal entre filas 3–4, ejes C–F', '22,9 m', '3 tomas', '6,2 m', '58,4 m'],
+          ['P3', 'Vertical en el eje D–E, fila 3', '1,9 m', '1 caja + 1 toma', '8,3 m', '53,4 m'],
+          ['P3', 'Vertical en el eje D–E, fila 3', '1,9 m', '1 caja + 1 toma', '8,3 m', '49,4 m']
+        ], 'Tabla 5. Tramos de bandeja de la oficina de Barcelona y tomas que alimenta cada uno.', { mono: [2, 4, 5] }) +
+        D.tbl(['Planta', 'Bandeja 300 × 60', 'Cajas de suelo', 'Tomas de pared', 'Derivaciones (tubo Ø 40 / Ø 32)', 'Enlace más largo'], [
+          ['P0', '101,7 m', '11', '11', '147,9 m', '53,2 m'],
+          ['P1', '86,0 m', '21', '7', '206,1 m', '41,9 m'],
+          ['P2', '86,7 m', '19', '8', '200,3 m', '41,9 m'],
+          ['P3', '96,8 m', '18', '11', '196,5 m', '58,4 m'],
+          ['!Total oficina', '371,2 m', '69', '37', '750,8 m', '≤ 59 m']
+        ], 'Tabla 6. Resumen de canalizaciones por planta de la oficina.', { mono: [1, 2, 3, 4, 5] }) +
+        D.p('Ningún enlace de la oficina pasa de 59 m (el más largo está en la P3, hacia el office de dirección), lejos del límite de 90 m.') +
+        D.fig(1006, 'Detalle de la planta 1: bandejas (discontinuas), derivaciones a cada caja de suelo y toma (continuas) y montante del patinillo.') +
+        D.p('En la nave hay 13 cajas de suelo y 16 tomas (terminales de muelle, oficinas y zona de preparación de pedidos).') +
+        D.tbl(['Tramo de bandeja (posición en los ejes)', 'Bandeja (mm)', 'Longitud', 'Alimenta', 'Derivación más larga / Enlace más largo'], [
+          ['Vertical en el eje B–C, filas 2–4', '400 × 100', '22,0 m', '1 toma', '10,0 m / ≈ 38 m'],
+          ['Horizontal entre filas 2–3, ejes C–K', '400 × 100', '125,0 m', '2 cajas', '17,0 m / ≈ 90 m'],
+          ['Vertical en el eje B–C, filas 4–5', '400 × 100', '9,3 m', 'Solo paso de cable', '—'],
+          ['Horizontal entre filas 4–5, ejes C–I', '400 × 100', '102,7 m', 'Solo paso de cable', '—'],
+          ['Vertical en el eje I–J, filas 4–5', '400 × 100', '8,8 m', 'Solo paso de cable', '—'],
+          ['Horizontal en la fila 4, ejes I–K', '400 × 100', '22,0 m', '4 cajas', '12,5 m / ≈ 50 m'],
+          ['Horizontal entre filas 1–2, ejes B–K', '400 × 100', '129,3 m', '10 tomas', '9,5 m / ≈ 85 m'],
+          ['Vertical en el eje B–C, filas 1–2', '400 × 100', '18,3 m', '3 tomas', '22,1 m / ≈ 55 m'],
+          ['Horizontal entre filas 2–3, ejes B–C', '400 × 100', '4,3 m', 'Solo paso de cable', '—'],
+          ['Horizontal entre filas 4–5, ejes A–C', '300 × 60 (oficinas)', '22,0 m', '7 cajas + 2 tomas', '11,3 m / ≈ 45 m'],
+          ['Vertical en el eje J–K, filas 1–2', '300 × 60 (bajada al IDF-02, nueva)', '18,3 m', 'Solo paso de cable', '—'],
+          ['Vertical en el eje J–K, filas 2–4', '300 × 60 (bajada al IDF-02, nueva)', '16,8 m', 'Solo paso de cable', '—']
+        ], 'Tabla 7. Tramos de bandeja del almacén y tomas que alimenta cada uno.', { mono: [2, 4] }) +
+        D.fig(1007, 'Detalle del almacén: bandeja de la línea de muelles con la derivación a la toma de cada muelle, y bandeja del pasillo principal.')],
       ['2.A2.4', 'Material de las canalizaciones',
         D.tbl(['Elemento', 'Material', 'Por qué'], [
           ['Bandeja horizontal 300 × 60 mm (oficina)', 'Acero galvanizado Sendzimir, perforada', 'Resistente, ligera, galvanizada en caliente para no oxidarse, disipa calor y es fácil de montar en el falso techo.'],
-          ['Bandeja horizontal 400 × 100 mm (almacén)', 'Acero galvanizado Sendzimir, perforada', 'La misma razón, con más sección porque lleva más cables y tramos más largos (90 m hasta el IDF-02).'],
+          ['Bandeja horizontal 400 × 100 mm (almacén)', 'Acero galvanizado Sendzimir, perforada', 'La misma razón, con más sección porque lleva más cables y tramos más largos (150 m hasta el IDF-02 de la nave).'],
           ['Montante vertical (oficina)', 'Tubo de acero galvanizado Ø 125 mm', 'Protección mecánica y continuidad eléctrica (tierra). El patinillo técnico ya tiene reserva ignífuga EI-120.'],
-          ['Bajada a caja de suelo', 'Tubo flexible corrugado de PVC libre de halógenos', 'Flexible para pasar entre las vigas del forjado técnico. Libre de halógenos porque la cubierta LSZH no tiene sentido si el tubo los desprende.'],
+          ['Derivación y bajada a caja de suelo o toma (oficina)', 'Tubo corrugado flexible de PVC libre de halógenos: Ø 40 mm a cajas de suelo, Ø 32 mm a tomas de pared', 'Va por el falso techo desde la bandeja hasta la toma. Flexible para pasar entre vigas; libre de halógenos porque la cubierta LSZH no tiene sentido si el tubo los desprende.'],
+          ['Bajada a toma de muelle o caja (nave)', 'Tubo de acero galvanizado rígido Ø 32 mm + caja estanca IP54', 'Baja 6 m por el pilar desde la bandeja hasta la caja IP54. Tiene que aguantar golpes de carretillas y el polvo de la nave.'],
+          ['Bajada al IDF-02 (nave)', 'Bandeja de acero galvanizado perforada 300 × 60 mm por el muro este', 'Lleva el cobre de la mitad este de la nave hasta el armario mural, separado de la fibra.'],
           ['Entrada RITI', 'Tubo corrugado ignífugo Ø 50 mm', 'Cumple el RD 346/2011 (ICT) para entradas de operador.'],
           ['Caja de suelo', 'Acero inoxidable con tapa de latón, 6 conectores RJ45', 'Se camina por encima: tiene que aguantar carga y humedad.'],
           ['Toma de pared', 'Marco de PVC con conector RJ45 Cat 6A', 'Despachos y salas individuales.']
-        ], 'Tabla 5. Material de las canalizaciones.')],
+        ], 'Tabla 8. Material de las canalizaciones.')],
       ['2.A2.5', 'Metros de canalización a comprar',
-        D.tbl(['Tipo', 'Zona', 'Metros estimados'], [
-          ['Bandeja 300 × 60 mm (acero galvanizado perforado)', 'Oficina BCN · pasillos P0 a P3', '4 × 80 m = 320 m'],
-          ['Bandeja 400 × 100 mm (acero galvanizado perforado)', 'Almacén · nave industrial (3 recorridos)', '150 + 150 + 60 = 360 m'],
-          ['Bandeja 300 × 60 mm', 'Almacén · zona de oficinas auxiliares', '40 m'],
+        D.tbl(['Tipo', 'Zona', 'Metros'], [
+          ['Bandeja 300 × 60 mm (acero galvanizado perforado)', 'Oficina BCN · pasillos P0 a P3', '371,2 m medidos (P0 102 · P1 86 · P2 87 · P3 97)'],
+          ['Bandeja 400 × 100 mm (acero galvanizado perforado)', 'Almacén · nave industrial (3 recorridos)', '445,0 m medidos (muelles 129 + pasillo principal 125 + pasillo sur 103 + verticales y uniones 88)'],
+          ['Bandeja 300 × 60 mm', 'Almacén · zona de oficinas auxiliares', '22,0 m'],
+          ['Bandeja 300 × 60 mm', 'Almacén · bajada por el muro este hasta el IDF-02 (nueva)', '35,1 m'],
           ['Bandeja 200 × 60 mm', 'Almacén · tramo cuarto de comunicaciones → IDF-02', '150 m'],
           ['Bandeja 200 × 60 mm', 'CPD y taller IT (BCN)', '30 m'],
           ['Tubo de acero galvanizado Ø 125 mm', 'Montante vertical de la oficina (P0 ↔ P3)', '16 m'],
           ['Tubo corrugado ignífugo Ø 50 mm', 'Entradas RITI (2 operadores)', '2 × 10 m = 20 m'],
-          ['Tubo corrugado flexible PVC Ø 32 mm', 'Bajadas a cajas de suelo (oficina)', '≈ 600 m']
-        ], 'Tabla 6. Metros de bandeja y tubo a comprar.', { mono: [2] }) +
-        D.p('En total: <b>≈ 900 m de bandeja metálica</b> en tres secciones distintas, 16 m de tubo de montante, 20 m de tubo ignífugo en el RITI y ≈ 600 m de tubo corrugado para las bajadas a las cajas de suelo.')],
+          ['Tubo corrugado flexible PVC Ø 40 mm', 'Derivaciones a cajas de suelo (oficinas)', '556,0 m medidos (oficina BCN 492 + oficinas almacén 64)'],
+          ['Tubo corrugado flexible PVC Ø 32 mm', 'Derivaciones a tomas de pared (oficinas)', '319,3 m medidos (oficina BCN 259 + oficinas almacén 61)'],
+          ['Tubo de acero galvanizado Ø 32 mm', 'Bajadas a muelles y cajas de la nave (14 bajadas)', '150,0 m medidos']
+        ], 'Tabla 9. Metros de bandeja y tubo a comprar.', { mono: [2] }) +
+        D.p('En total: <b>≈ 1.053 m de bandeja metálica</b> (300 × 60, 400 × 100 y 200 × 60), 16 m de tubo de montante, 20 m de tubo ignífugo en el RITI, <b>≈ 556 m de tubo corrugado Ø 40 mm y ≈ 319 m de Ø 32 mm</b> para las derivaciones y <b>150 m de tubo de acero Ø 32 mm</b> para las bajadas de la nave. Son los metros medidos en los planos; a la compra se le suma un 10 % de margen por recortes y curvas.')],
       ['2.A2.6', 'Metros de cable a comprar',
         D.w('reels') +
         D.tbl(['Zona', 'Tomas', 'Distancia media', 'Metros brutos'], [
-          ['Oficina P0', '96', '50 m', '4.800'], ['Oficina P1', '154', '40 m', '6.160'], ['Oficina P2', '144', '40 m', '5.760'], ['Oficina P3', '144', '40 m', '5.760'], ['Almacén (oeste + este)', '152', '70 m', '10.640'],
-          ['!Subtotal', '690 tomas', '', '33.120 m'], ['!+ 10 % de pérdidas y margen', '', '', '≈ 36.500 m']
-        ], 'Tabla 7. Metros de cable Cat 6A U/FTP LSZH. Equivale a unas 37 bobinas de 1.000 m.', { mono: [1, 3] }) +
+          ['Oficina P0', '100', '50 m', '5.000'], ['Oficina P1', '154', '40 m', '6.160'], ['Oficina P2', '144', '40 m', '5.760'], ['Oficina P3', '144', '40 m', '5.760'], ['Almacén (oeste + este)', '152', '70 m', '10.640'],
+          ['!Subtotal', '694 tomas', '', '33.320 m'], ['!+ 10 % de pérdidas y margen', '', '', '≈ 36.700 m']
+        ], 'Tabla 10. Metros de cable Cat 6A U/FTP LSZH. Equivale a unas 37 bobinas de 1.000 m.', { mono: [1, 3] }) +
         D.tbl(['Enlace', 'Metros'], [
-          ['CPD → IDF-P1 (× 2 enlaces redundantes)', '≈ 30'], ['CPD → IDF-P2 (× 2)', '≈ 50'], ['CPD → IDF-P3 (× 2)', '≈ 70'], ['Cuarto de comunicaciones → IDF-02 (× 2)', '≈ 270'], ['RITI → CPD (fibra monomodo de 2 operadores)', '≈ 30'],
-          ['!Subtotal', '≈ 450 m'], ['!+ 15 % de margen y patch de rack', '≈ 520 m']
-        ], 'Tabla 8. Metros de fibra OM4 multimodo (12 fibras).', { mono: [1] }) +
+          ['CPD → IDF-P1 (× 2 enlaces redundantes)', '≈ 30'], ['CPD → IDF-P2 (× 2)', '≈ 50'], ['CPD → IDF-P3 (× 2)', '≈ 70'], ['Cuarto de comunicaciones → IDF-02 (× 2)', '≈ 320'], ['RITI → CPD (fibra monomodo de 2 operadores)', '≈ 30'],
+          ['!Subtotal', '≈ 500 m'], ['!+ 15 % de margen y patch de rack', '≈ 575 m']
+        ], 'Tabla 11. Metros de fibra OM4 multimodo (12 fibras).', { mono: [1] }) +
         D.p('Los modelos exactos de bobinas, latiguillos, paneles LC-LC y transceptores SFP+ están en el presupuesto.')]
     ]
   });
@@ -173,14 +236,14 @@
           '<b>Permitir ventilación de delante hacia atrás.</b> Los pasivos (paneles, organizadores) no tienen problema; los switches y servidores necesitan aire frío delante y salida por detrás.'])],
       ['2.B1.2', 'Inventario de armarios',
         D.tbl(['Código', 'Ubicación', 'Tipo', 'Medida', 'Contenido principal'], [
-          ['<b>R1 (CPD)</b>', 'BCN · P0 · CPD', 'Rack de pie 19"', '42U, 800 × 1000 mm', 'Cores, firewall, routers, switch de acceso P0, servidores, SAI, paneles de parcheo'],
+          ['<b>R1 (CPD)</b>', 'BCN · P0 · CPD', 'Rack de pie 19"', '42U, 800 × 1000 mm', 'Cores, firewall, routers, 2 switches de acceso P0, servidores, SAI, paneles de parcheo'],
           ['<b>R2 (reserva)</b>', 'BCN · P0 · CPD', 'Espacio reservado', '42U', 'Vacío. Reservado físicamente en el plano para crecer.'],
           ['<b>IDF-P1</b>', 'BCN · P1 · patinillo', 'Rack de pie 19"', '42U, 600 × 800 mm', '4 switches de acceso, patch panels, SAI, patch de fibra'],
           ['<b>IDF-P2</b>', 'BCN · P2 · patinillo', 'Rack de pie 19"', '42U, 600 × 800 mm', '3 switches de acceso, patch panels, SAI, patch de fibra'],
           ['<b>IDF-P3</b>', 'BCN · P3 · patinillo', 'Rack de pie 19"', '42U, 600 × 800 mm', '3 switches de acceso, patch panels, SAI, patch de fibra'],
-          ['<b>R1 (ZGZ)</b>', 'ZGZ · cuarto de comunicaciones', 'Rack de pie 19"', '42U, 800 × 1000 mm', 'Routers, firewall, cores, switches de acceso de oficina, servidor local, SAI, paneles'],
+          ['<b>R1 (ZGZ)</b>', 'ZGZ · cuarto de comunicaciones', 'Rack de pie 19"', '42U, 800 × 1000 mm', 'Routers, firewall, cores, 3 switches de acceso, servidor local, SAI, paneles'],
           ['<b>IDF-02</b>', 'ZGZ · extremo este de la nave', 'Armario mural 19"', '12U, 600 × 450 mm', '1 switch de acceso, SAI compacto, patch panel, patch de fibra']
-        ], 'Tabla 9. Inventario de armarios. Total: 6 armarios operativos y 1 espacio de reserva en el CPD de Barcelona.')],
+        ], 'Tabla 12. Inventario de armarios. Total: 6 armarios operativos y 1 espacio de reserva en el CPD de Barcelona.')],
       ['2.B1.3', 'Espacios técnicos asociados',
         D.p('Los armarios por sí solos no alcanzan: tiene que haber salas preparadas alrededor.') +
         D.h('Oficina de Barcelona') +
@@ -193,25 +256,42 @@
         D.ul(['<b>Cuarto de comunicaciones (45 m²).</b> En el extremo oeste de la nave, dentro de la zona de oficinas. Climatización de precisión de 2,5 kW, control de acceso por tarjeta, extinción por aerosol, SAI del rack y SAI dedicado al servidor local.',
           '<b>IDF-02.</b> Armario mural en el extremo este de la nave, montado sobre un pilar estructural a 2,5 m de altura, con ventilación forzada por dos ventiladores superiores. El SAI compacto va dentro del propio armario.'])],
       ['2.B1.4', 'Redimensionado de los SAI',
-        D.p('El SAI tiene que dar continuidad eléctrica solo a los equipos críticos: electrónica de red (cores, firewall, routers, switches de acceso), servidores y AP. No alimenta PC, teléfonos IP (que ya llevan su batería), impresoras, pantallas ni la climatización. El objetivo es <b>15 a 20 minutos de autonomía</b>, el tiempo necesario para:') +
+        D.p('El SAI tiene que dar continuidad eléctrica solo a los equipos críticos: electrónica de red (cores, firewall, routers, switches de acceso), servidores y AP. No alimenta PC, impresoras, pantallas ni la climatización. Los teléfonos IP, los AP y las cámaras <b>sí cuentan</b>, porque se alimentan por PoE desde los switches. El objetivo es <b>15 a 20 minutos de autonomía</b>, el tiempo necesario para:') +
         D.ul(['Un apagado controlado de los servidores si el corte es largo.', 'El arranque de un grupo electrógeno externo, si la empresa lo contrata más adelante.', 'Absorber microcortes y transitorios de la red, que es lo que pasa en el 90 % de los casos.']) +
+        D.p('Para saber si cada SAI es el correcto calculamos la carga real de cada rack: el consumo de cada equipo según su hoja de datos, más todo lo que los switches entregan por PoE (teléfonos, AP y cámaras), contando un 10 % de pérdidas de la fuente en la parte PoE. Primero, el consumo de cada equipo:') +
+        D.tbl(['Equipo', 'Consumo considerado', 'De dónde sale'], [
+          ['Cisco Catalyst 9500-24Y4C (core BCN)', '250 W', 'Hoja de datos de Cisco, consumo típico'],
+          ['Cisco Catalyst 9300-48P (core ZGZ)', '150 W', 'Hoja de datos de Cisco, sin carga PoE (hace de core)'],
+          ['Cisco Catalyst 9300L-48P-4X (acceso)', '110 W + PoE', 'Hoja de datos de Cisco. Presupuesto PoE de 505 W con la fuente de 715 W'],
+          ['Cisco ISR 4331 (router)', '70 W', 'Hoja de datos de Cisco, consumo típico'],
+          ['Cisco ASA 5506-X (firewall)', '25 W', 'Hoja de datos de Cisco'],
+          ['Dell PowerEdge R450 (servidor)', '300 W', 'Configuración del proyecto con carga media'],
+          ['Consola KVM 1U', '30 W', 'Hoja de datos del fabricante'],
+          ['Teléfono IP (PoE clase 2)', '6 W', 'Clase PoE del teléfono'],
+          ['AP Wi-Fi 6 (PoE+)', '20 W (máx. 25,5 W)', 'Consumo típico del AP; el máximo es el límite PoE+'],
+          ['Cámara IP (PoE)', '7 W', 'Clase PoE de la cámara']
+        ], 'Tabla 13. Consumo de cada equipo que cuelga del SAI.', { mono: [1] }) +
         D.w('upsload') +
-        D.tbl(['Rack', 'Equipos críticos', 'Potencia aproximada'], [
-          ['BCN · CPD R1', '2 cores + ASA + 2 routers + 1 switch de acceso + 3 servidores físicos', '≈ 2.400 W'],
-          ['BCN · IDF-P1', '4 switches de acceso Catalyst 9300L-48P (PoE+)', '≈ 1.200 W'],
-          ['BCN · IDF-P2', '3 switches de acceso Catalyst 9300L-48P (PoE+)', '≈ 900 W'],
-          ['BCN · IDF-P3', '3 switches de acceso Catalyst 9300L-48P (PoE+)', '≈ 900 W'],
-          ['ZGZ · CPD R1', '2 routers + ASA + 2 cores + 2 switches de acceso + 1 servidor', '≈ 1.600 W'],
-          ['ZGZ · IDF-02', '1 switch de acceso Catalyst 9300L-48P (PoE+)', '≈ 350 W']
-        ], 'Tabla 10. Carga de cada rack (carga real con un factor de uso ≈ 0,7).', { mono: [2] }) +
-        D.tbl(['Rack', 'Modelo de SAI', 'Capacidad', 'Tipo', 'Autonomía a plena carga', 'U'], [
-          ['BCN · CPD R1', 'APC Smart-UPS SRT 6000VA (SRT6KRMXLI)', '6.000 VA / 6.000 W', 'Online doble conversión', '15 min a 2.400 W', '4U'],
-          ['BCN · IDF-P1', 'APC Smart-UPS SRT 2200VA (SRT2200RMXLI)', '2.200 VA / 1.980 W', 'Online doble conversión', '18 min a 1.200 W', '2U'],
-          ['BCN · IDF-P2', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 VA / 1.500 W', 'Online doble conversión', '15 min a 900 W', '2U'],
-          ['BCN · IDF-P3', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 VA / 1.500 W', 'Online doble conversión', '15 min a 900 W', '2U'],
-          ['ZGZ · CPD R1', 'APC Smart-UPS SRT 3000VA (SRT3000RMXLI)', '3.000 VA / 2.700 W', 'Online doble conversión', '18 min a 1.600 W', '2U'],
-          ['ZGZ · IDF-02', 'APC Smart-UPS SRT 1000VA (SRT1000RMXLI)', '1.000 VA / 1.000 W', 'Online doble conversión', '15 min a 350 W', '2U']
-        ], 'Tabla 11. Modelos de SAI elegidos.')],
+        D.tbl(['Rack', 'Equipos', 'Consumo de los equipos', 'PoE entregado', 'Carga total', 'PoE por switch'], [
+          ['BCN · CPD R1', '2 cores + ASA + 2 routers + 3 servidores + KVM + 2 switches de acceso', '1.815 W', '30 tel. + 12 AP = 420 W', '<b>2.282 W</b>', '210 W por switch (42 % de 505 W)'],
+          ['BCN · IDF-P1', '4 switches de acceso', '440 W', '117 tel. + 14 AP = 982 W', '<b>1.531 W</b>', '246 W (49 %)'],
+          ['BCN · IDF-P2', '3 switches de acceso', '330 W', '93 tel. + 14 AP = 838 W', '<b>1.261 W</b>', '279 W (55 %)'],
+          ['BCN · IDF-P3', '3 switches de acceso', '330 W', '62 tel. + 14 AP = 652 W', '<b>1.054 W</b>', '217 W (43 %)'],
+          ['ZGZ · CPD R1', '2 routers + ASA + 2 cores + 3 switches de acceso + 1 servidor + KVM', '1.125 W', '28 tel. + 10 AP + 6 cám. = 410 W', '<b>1.581 W</b>', '137 W por switch (27 %)'],
+          ['ZGZ · IDF-02', '1 switch de acceso', '110 W', '7 AP + 6 cám. = 182 W', '<b>312 W</b>', '182 W (36 %)']
+        ], 'Tabla 14. Carga real de cada rack.', { mono: [2, 4] }) +
+        D.p('Carga total = consumo de los equipos + PoE entregado ÷ 0,9 (rendimiento de la fuente PoE ≈ 90 %). Ningún switch llega a su presupuesto PoE de 505 W, así que el PoE está bien repartido. El cálculo del Sprint 1 no contaba el PoE de los teléfonos y los AP, y por eso daba cargas más bajas en los IDF.') +
+        D.tbl(['Rack', 'Modelo de SAI', 'Capacidad', 'Carga real', 'Autonomía real', 'Módulo de baterías extra'], [
+          ['BCN · CPD R1', 'APC Smart-UPS SRT 6000VA (SRT6KRMXLI)', '6.000 W', '2.282 W (38 %)', '≈ 17 min', 'No hace falta'],
+          ['BCN · IDF-P1', 'APC Smart-UPS SRT 2200VA (SRT2200RMXLI)', '1.980 W', '1.531 W (77 %)', '≈ 6 min → ≈ 24 min', '1 × SRT72RMBP (2U)'],
+          ['BCN · IDF-P2', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 W', '1.261 W (84 %)', '≈ 8 min → ≈ 35 min', '1 × SRT48RMBP (2U)'],
+          ['BCN · IDF-P3', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 W', '1.054 W (70 %)', '≈ 11 min → ≈ 43 min', '1 × SRT48RMBP (2U)'],
+          ['ZGZ · CPD R1', 'APC Smart-UPS SRT 3000VA (SRT3000RMXLI)', '2.700 W', '1.581 W (59 %)', '≈ 10 min → ≈ 35 min', '1 × SRT96RMBP (2U)'],
+          ['ZGZ · IDF-02', 'APC Smart-UPS SRT 1000VA (SRT1000RMXLI)', '1.000 W', '312 W (31 %)', '≈ 41 min', 'No hace falta']
+        ], 'Tabla 15. Modelos de SAI elegidos y autonomía con la carga real.', { mono: [2, 3, 4] }) +
+        D.p('<b>Conclusión:</b> ningún SAI queda sobrecargado (el más cargado es el del IDF-P2, al 84 %), pero <b>cuatro no llegaban a los 15 min</b> que nos habíamos marcado: los tres IDF de Barcelona y el CPD de Zaragoza. En lugar de cambiarlos por un modelo más grande, <b>les agregamos un módulo de baterías externo</b> de la misma serie. Va debajo del SAI (2U; en los IDF y en el CPD de Zaragoza sobra espacio) y multiplica la autonomía. Los SAIs del CPD de Barcelona y del IDF-02 ya llegan al mínimo tal como están.') +
+        D.p('<b>Autonomías.</b> Son aproximadas, a partir de la curva de autonomía que publica APC para la serie SRT; la real depende del estado y la temperatura de las baterías.') +
+        D.p('<b>Costo.</b> Los cuatro módulos suman ≈ 3.000 € + IVA y ya están en el presupuesto.')],
       ['2.B1.5', 'Por qué SAI online de doble conversión y no línea interactiva',
         D.p('El SAI de línea interactiva (el típico de casa o de una oficina pequeña) es más barato, pero conmuta a batería cuando detecta el corte y tarda <b>2 a 6 ms</b> en hacerlo. Para un PC de usuario es invisible, pero un servidor o un switch de core con ese tiempo de transferencia puede reiniciarse si la tensión de entrada ya venía degradada antes del corte.',
           'El SAI online de doble conversión regenera la señal todo el tiempo: la corriente siempre pasa por el rectificador y el inversor, las baterías están en línea y <b>no hay tiempo de transferencia</b>. Es lo que se pide para electrónica crítica y es lo que ponemos en todos los racks del proyecto. Cortá la luz en los dos y comparalos:') +
@@ -274,7 +354,7 @@
           ['PC, teléfonos e impresoras', '10 PC, 2 teléfonos IP, 2 impresoras', '10 PC, 1 teléfono IP, 1 impresora de etiquetas, 2 cámaras', 'PC-INTERNET', 'PC-PT, 7960, Printer-PT'],
           ['Wi-Fi', '4 AP, 2 móviles', '3 AP, 2 móviles, 1 tableta', '—', 'AccessPoint-PT'],
           ['Cableado', '4 paneles de parcheo, rosetas', '3 paneles de parcheo, rosetas', '—', 'Copper Patch Panel / Wall Mount']
-        ], 'Tabla 12. Dispositivos del Packet Tracer simplificado.') +
+        ], 'Tabla 16. Dispositivos del Packet Tracer simplificado.') +
         D.p('La nomenclatura sigue siempre el mismo patrón: <code>SEDE-PLANTA-FUNCIÓN-NÚMERO</code>. Por ejemplo, <code>P1-ADM-03</code> es el puesto 3 de administración de la planta 1 y <code>BCN-P1-ACC1</code> es el switch de acceso de esa planta.')],
       ['2.C.2', 'Topología lógica',
         D.p('Cada sede sigue el mismo esquema de tres niveles: <b>acceso → core → firewall → routers → Internet</b>. Cada switch de acceso tiene dos enlaces troncales, uno a cada core; los dos cores están unidos por un EtherChannel de dos cables; el firewall ASA tiene una pata hacia cada core y otra hacia cada router; y cada router sale a Internet por un ISP distinto. Así ninguna parte de la red depende de un solo cable ni de un solo equipo.') +

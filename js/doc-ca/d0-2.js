@@ -123,43 +123,106 @@
         D.ul(['<b>Horitzontal (P0, P1, P2, P3).</b> Safata metàl·lica perforada tipus rejiband, acer galvanitzat Sendzimir, 300 × 60 mm, penjada del forjat del fals sostre amb suports cada 1,5 m. Recorre els dos passadissos principals de cada planta (nord-sud i est-oest). A cada bloc de 6 llocs, baixada vertical fins a una caixa de terra amb 6 preses RJ45 Cat 6A. Als despatxos individuals i a les sales de reunions, baixada fins a una presa doble de paret.',
           '<b>Muntant vertical (P0 ↔ P1 ↔ P2 ↔ P3).</b> Tub d’acer galvanitzat de 125 mm de diàmetre al patinet tècnic que uneix el CPD de la P0 amb els tres IDF de les plantes superiors. Hi passa només fibra OM4 (2 enllaços redundants per planta).',
           '<b>CPD i taller IT.</b> Safata metàl·lica de 200 × 60 mm per al connexionat interior entre racks i taller, més canalització elevada sota el terra tècnic del CPD.',
-          '<b>RITI → CPD.</b> Dues canalitzacions independents, una per operador, amb tub corrugat ignífug de 50 mm i entrades oposades a l’edifici.']) +
+          '<b>RITI → CPD.</b> Dues canalitzacions independents, una per operador, amb tub corrugat ignífug de 50 mm i entrades oposades a l’edifici.',
+          '<b>Safata → presa.</b> Cada caixa de terra o presa penja de la safata més propera. El cable surt de la safata pel fals sostre dins d’un tub corrugat de PVC lliure d’halògens: <b>Ø 40 mm cap a les caixes de terra</b> (porten 6 cables; així no passem del 40 % d’ocupació de la TIA-569) i <b>Ø 32 mm cap a les preses de paret</b> (en porten 2). Baixa fins a la presa (3 m de baixada a l’oficina).',
+          '<b>Com hem mesurat.</b> Les longituds surten del plànol a escala (1 m = 100 px a l’oficina i 50 px al magatzem). La derivació és el recorregut fins a la presa més la baixada. L’enllaç més llarg és el camí complet del rack a la presa: safata + derivació + 2 m de reserva al rack.']) +
         D.h('Magatzem de Saragossa') +
         D.ul(['<b>Nau industrial.</b> Safata metàl·lica perforada de 400 × 100 mm, suspesa a 6 m d’alçada sobre el passadís principal de carretons, el passadís sud i la línia de molls. Travessa tota la nau sense competir amb la il·luminació ni amb les prestatgeries altes. A cada moll, baixada fins a una presa RJ45 per al terminal, protegida amb caixa IP54.',
           '<b>Oficines auxiliars (zona oest).</b> Safata de 300 × 60 mm pel fals sostre, igual que a Barcelona.',
-          '<b>Sala de comunicacions → IDF-02.</b> Safata metàl·lica dedicada de 200 × 60 mm suspesa a 6 m, que recorre els 150 m de la nau d’oest a est sobre el passadís principal. Hi passa només la fibra OM4 (2 enllaços redundants).'])],
+          '<b>Sala de comunicacions → IDF-02.</b> Safata metàl·lica dedicada de 200 × 60 mm suspesa a 6 m, que recorre els 150 m de la nau d’oest a est sobre el passadís principal. Hi passa només la fibra OM4 (2 enllaços redundants).',
+          '<b>Baixades de la nau.</b> La safata va a 6 m. La baixada fins a la presa del moll o la caixa es fa amb tub d’acer galvanitzat rígid Ø 32 mm fixat al pilar i acaba en una caixa estanca IP54, perquè hi passen carretons.',
+          '<b>Baixada a l’IDF-02 (nova).</b> Safata de 300 × 60 mm pel mur est (35 m). Uneix la safata dels molls i la del passadís principal amb l’armari mural, així la meitat est de la nau es cableja des de l’IDF-02.',
+          '<b>Repartiment dels molls.</b> Els molls 1–5 pengen del rack R1 de la sala de comunicacions i els molls 6–9, de l’IDF-02. Així cap enllaç de coure de la nau passa de 90 m (el més llarg ronda els 85 m).']) +
+        D.h('Derivacions fins a cada presa i distàncies') +
+        D.tbl(['Planta', 'Tram de safata (posició als eixos)', 'Longitud', 'Alimenta', 'Derivació més llarga', 'Enllaç més llarg'], [
+          ['P0', 'Vertical a l’eix E–F, fila 2', '2,2 m', '1 caixa', '11,3 m', '17,7 m'],
+          ['P0', 'Horitzontal entre files 1–2, eixos A–E', '32,3 m', '1 caixa + 3 preses', '8,9 m', '28,9 m'],
+          ['P0', 'Vertical a l’eix C–D, fila 2', '4,1 m', 'Només pas de cable', '—', '—'],
+          ['P0', 'Vertical a l’eix A–B, files 2–3', '10,2 m', '5 caixes', '6,4 m', '44,7 m'],
+          ['P0', 'Horitzontal entre files 3–4, eixos A–F', '38,8 m', '2 caixes + 6 preses', '9,7 m', '53,2 m'],
+          ['P0', 'Vertical a l’eix E–F, files 2–3', '8,3 m', '2 preses', '7,9 m', '11,8 m'],
+          ['P0', 'Vertical a l’eix C–D, fila 3', '1,9 m', '1 caixa', '3,9 m', '30,8 m'],
+          ['P0', 'Vertical a l’eix D–E, fila 3', '1,9 m', '1 caixa', '3,4 m', '25,2 m'],
+          ['P1', 'Vertical a l’eix C–D, fila 2', '4,1 m', 'Només pas de cable', '—', '—'],
+          ['P1', 'Horitzontal entre files 1–2, eixos A–F', '38,8 m', '9 caixes + 4 preses', '13,7 m', '35,1 m'],
+          ['P1', 'Vertical a l’eix B–C, files 2–4', '16,9 m', '7 caixes', '8,8 m', '41,9 m'],
+          ['P1', 'Vertical a l’eix D–E, files 2–4', '16,9 m', '5 caixes + 1 presa', '14,2 m', '29,0 m'],
+          ['P1', 'Horitzontal entre files 3–4, eixos C–D', '8,0 m', '2 preses', '7,8 m', '26,4 m'],
+          ['P2', 'Vertical a l’eix C–D, fila 2', '4,1 m', 'Només pas de cable', '—', '—'],
+          ['P2', 'Horitzontal entre files 1–2, eixos A–F', '38,8 m', '8 caixes + 5 preses', '13,7 m', '35,1 m'],
+          ['P2', 'Vertical a l’eix B–C, files 2–4', '16,9 m', '7 caixes', '8,8 m', '41,9 m'],
+          ['P2', 'Vertical a l’eix D–E, files 2–4', '16,9 m', '4 caixes + 1 presa', '5,9 m', '20,7 m'],
+          ['P2', 'Horitzontal entre files 3–4, eixos C–D', '8,0 m', '2 preses', '7,8 m', '26,4 m'],
+          ['P3', 'Vertical a l’eix C–D, fila 2', '4,1 m', 'Només pas de cable', '—', '—'],
+          ['P3', 'Horitzontal entre files 1–2, eixos A–F', '38,8 m', '7 caixes + 4 preses', '8,3 m', '35,1 m'],
+          ['P3', 'Vertical a l’eix B–C, files 2–4', '16,9 m', '8 caixes', '8,8 m', '41,9 m'],
+          ['P3', 'Vertical a l’eix E–F, files 2–3', '10,2 m', '1 caixa + 2 preses', '7,7 m', '34,9 m'],
+          ['P3', 'Horitzontal entre files 3–4, eixos C–F', '22,9 m', '3 preses', '6,2 m', '58,4 m'],
+          ['P3', 'Vertical a l’eix D–E, fila 3', '1,9 m', '1 caixa + 1 presa', '8,3 m', '53,4 m'],
+          ['P3', 'Vertical a l’eix D–E, fila 3', '1,9 m', '1 caixa + 1 presa', '8,3 m', '49,4 m']
+        ], 'Taula 5. Trams de safata de l’oficina de Barcelona i preses que alimenta cada un.', { mono: [2, 4, 5] }) +
+        D.tbl(['Planta', 'Safata 300 × 60', 'Caixes de terra', 'Preses de paret', 'Derivacions (tub Ø 40 / Ø 32)', 'Enllaç més llarg'], [
+          ['P0', '101,7 m', '11', '11', '147,9 m', '53,2 m'],
+          ['P1', '86,0 m', '21', '7', '206,1 m', '41,9 m'],
+          ['P2', '86,7 m', '19', '8', '200,3 m', '41,9 m'],
+          ['P3', '96,8 m', '18', '11', '196,5 m', '58,4 m'],
+          ['!Total oficina', '371,2 m', '69', '37', '750,8 m', '≤ 59 m']
+        ], 'Taula 6. Resum de canalitzacions per planta de l’oficina.', { mono: [1, 2, 3, 4, 5] }) +
+        D.p('Cap enllaç de l’oficina passa de 59 m (el més llarg és a la P3, cap a l’office de direcció), lluny del límit de 90 m.') +
+        D.fig(1006, 'Detall de la planta 1: safates (discontínues), derivacions a cada caixa de terra i presa (contínues) i muntant del patinet.') +
+        D.p('A la nau hi ha 13 caixes de terra i 16 preses (terminals de moll, oficines i zona de preparació de comandes).') +
+        D.tbl(['Tram de safata (posició als eixos)', 'Safata (mm)', 'Longitud', 'Alimenta', 'Derivació més llarga / Enllaç més llarg'], [
+          ['Vertical a l’eix B–C, files 2–4', '400 × 100', '22,0 m', '1 presa', '10,0 m / ≈ 38 m'],
+          ['Horitzontal entre files 2–3, eixos C–K', '400 × 100', '125,0 m', '2 caixes', '17,0 m / ≈ 90 m'],
+          ['Vertical a l’eix B–C, files 4–5', '400 × 100', '9,3 m', 'Només pas de cable', '—'],
+          ['Horitzontal entre files 4–5, eixos C–I', '400 × 100', '102,7 m', 'Només pas de cable', '—'],
+          ['Vertical a l’eix I–J, files 4–5', '400 × 100', '8,8 m', 'Només pas de cable', '—'],
+          ['Horitzontal a la fila 4, eixos I–K', '400 × 100', '22,0 m', '4 caixes', '12,5 m / ≈ 50 m'],
+          ['Horitzontal entre files 1–2, eixos B–K', '400 × 100', '129,3 m', '10 preses', '9,5 m / ≈ 85 m'],
+          ['Vertical a l’eix B–C, files 1–2', '400 × 100', '18,3 m', '3 preses', '22,1 m / ≈ 55 m'],
+          ['Horitzontal entre files 2–3, eixos B–C', '400 × 100', '4,3 m', 'Només pas de cable', '—'],
+          ['Horitzontal entre files 4–5, eixos A–C', '300 × 60 (oficines)', '22,0 m', '7 caixes + 2 preses', '11,3 m / ≈ 45 m'],
+          ['Vertical a l’eix J–K, files 1–2', '300 × 60 (baixada a l’IDF-02, nova)', '18,3 m', 'Només pas de cable', '—'],
+          ['Vertical a l’eix J–K, files 2–4', '300 × 60 (baixada a l’IDF-02, nova)', '16,8 m', 'Només pas de cable', '—']
+        ], 'Taula 7. Trams de safata del magatzem i preses que alimenta cada un.', { mono: [2, 4] }) +
+        D.fig(1007, 'Detall del magatzem: safata de la línia de molls amb la derivació a la presa de cada moll, i safata del passadís principal.')],
       ['2.A2.4', 'Material de les canalitzacions',
         D.tbl(['Element', 'Material', 'Per què'], [
           ['Safata horitzontal 300 × 60 mm (oficina)', 'Acer galvanitzat Sendzimir, perforada', 'Resistent, lleugera, galvanitzada en calent perquè no s’oxidi, dissipa calor i és fàcil de muntar al fals sostre.'],
-          ['Safata horitzontal 400 × 100 mm (magatzem)', 'Acer galvanitzat Sendzimir, perforada', 'La mateixa raó, amb més secció perquè porta més cables i trams més llargs (90 m fins a l’IDF-02).'],
+          ['Safata horitzontal 400 × 100 mm (magatzem)', 'Acer galvanitzat Sendzimir, perforada', 'La mateixa raó, amb més secció perquè porta més cables i trams més llargs (150 m fins a l’IDF-02 de la nau).'],
           ['Muntant vertical (oficina)', 'Tub d’acer galvanitzat Ø 125 mm', 'Protecció mecànica i continuïtat elèctrica (terra). El patinet tècnic ja té reserva ignífuga EI-120.'],
-          ['Baixada a caixa de terra', 'Tub flexible corrugat de PVC lliure d’halògens', 'Flexible per passar entre les bigues del forjat tècnic. Lliure d’halògens perquè la coberta LSZH no té sentit si el tub els desprèn.'],
+          ['Derivació i baixada a caixa de terra o presa (oficina)', 'Tub corrugat flexible de PVC lliure d’halògens: Ø 40 mm a caixes de terra, Ø 32 mm a preses de paret', 'Va pel fals sostre des de la safata fins a la presa. Flexible per passar entre bigues; lliure d’halògens perquè la coberta LSZH no té sentit si el tub els desprèn.'],
+          ['Baixada a presa de moll o caixa (nau)', 'Tub d’acer galvanitzat rígid Ø 32 mm + caixa estanca IP54', 'Baixa 6 m pel pilar des de la safata fins a la caixa IP54. Ha d’aguantar cops de carretons i la pols de la nau.'],
+          ['Baixada a l’IDF-02 (nau)', 'Safata d’acer galvanitzat perforada 300 × 60 mm pel mur est', 'Porta el coure de la meitat est de la nau fins a l’armari mural, separat de la fibra.'],
           ['Entrada RITI', 'Tub corrugat ignífug Ø 50 mm', 'Compleix el RD 346/2011 (ICT) per a entrades d’operador.'],
           ['Caixa de terra', 'Acer inoxidable amb tapa de llautó, 6 connectors RJ45', 'S’hi camina per sobre: ha d’aguantar càrrega i humitat.'],
           ['Presa de paret', 'Marc de PVC amb connector RJ45 Cat 6A', 'Despatxos i sales individuals.']
-        ], 'Taula 5. Material de les canalitzacions.')],
+        ], 'Taula 8. Material de les canalitzacions.')],
       ['2.A2.5', 'Metres de canalització a comprar',
-        D.tbl(['Tipus', 'Zona', 'Metres estimats'], [
-          ['Safata 300 × 60 mm (acer galvanitzat perforat)', 'Oficina BCN · passadissos P0 a P3', '4 × 80 m = 320 m'],
-          ['Safata 400 × 100 mm (acer galvanitzat perforat)', 'Magatzem · nau industrial (3 recorreguts)', '150 + 150 + 60 = 360 m'],
-          ['Safata 300 × 60 mm', 'Magatzem · zona d’oficines auxiliars', '40 m'],
+        D.tbl(['Tipus', 'Zona', 'Metres'], [
+          ['Safata 300 × 60 mm (acer galvanitzat perforat)', 'Oficina BCN · passadissos P0 a P3', '371,2 m mesurats (P0 102 · P1 86 · P2 87 · P3 97)'],
+          ['Safata 400 × 100 mm (acer galvanitzat perforat)', 'Magatzem · nau industrial (3 recorreguts)', '445,0 m mesurats (molls 129 + passadís principal 125 + passadís sud 103 + verticals i unions 88)'],
+          ['Safata 300 × 60 mm', 'Magatzem · zona d’oficines auxiliars', '22,0 m'],
+          ['Safata 300 × 60 mm', 'Magatzem · baixada pel mur est fins a l’IDF-02 (nova)', '35,1 m'],
           ['Safata 200 × 60 mm', 'Magatzem · tram sala de comunicacions → IDF-02', '150 m'],
           ['Safata 200 × 60 mm', 'CPD i taller IT (BCN)', '30 m'],
           ['Tub d’acer galvanitzat Ø 125 mm', 'Muntant vertical de l’oficina (P0 ↔ P3)', '16 m'],
           ['Tub corrugat ignífug Ø 50 mm', 'Entrades RITI (2 operadors)', '2 × 10 m = 20 m'],
-          ['Tub corrugat flexible PVC Ø 32 mm', 'Baixades a caixes de terra (oficina)', '≈ 600 m']
-        ], 'Taula 6. Metres de safata i tub a comprar.', { mono: [2] }) +
-        D.p('En total: <b>≈ 900 m de safata metàl·lica</b> en tres seccions diferents, 16 m de tub de muntant, 20 m de tub ignífug al RITI i ≈ 600 m de tub corrugat per a les baixades a les caixes de terra.')],
+          ['Tub corrugat flexible PVC Ø 40 mm', 'Derivacions a caixes de terra (oficines)', '556,0 m mesurats (oficina BCN 492 + oficines magatzem 64)'],
+          ['Tub corrugat flexible PVC Ø 32 mm', 'Derivacions a preses de paret (oficines)', '319,3 m mesurats (oficina BCN 259 + oficines magatzem 61)'],
+          ['Tub d’acer galvanitzat Ø 32 mm', 'Baixades a molls i caixes de la nau (14 baixades)', '150,0 m mesurats']
+        ], 'Taula 9. Metres de safata i tub a comprar.', { mono: [2] }) +
+        D.p('En total: <b>≈ 1.053 m de safata metàl·lica</b> (300 × 60, 400 × 100 i 200 × 60), 16 m de tub de muntant, 20 m de tub ignífug al RITI, <b>≈ 556 m de tub corrugat Ø 40 mm i ≈ 319 m de Ø 32 mm</b> per a les derivacions i <b>150 m de tub d’acer Ø 32 mm</b> per a les baixades de la nau. Són els metres mesurats als plànols; a la compra s’hi suma un 10 % de marge per retalls i corbes.')],
       ['2.A2.6', 'Metres de cable a comprar',
         D.w('reels') +
         D.tbl(['Zona', 'Preses', 'Distància mitjana', 'Metres bruts'], [
-          ['Oficina P0', '96', '50 m', '4.800'], ['Oficina P1', '154', '40 m', '6.160'], ['Oficina P2', '144', '40 m', '5.760'], ['Oficina P3', '144', '40 m', '5.760'], ['Magatzem (oest + est)', '152', '70 m', '10.640'],
-          ['!Subtotal', '690 preses', '', '33.120 m'], ['!+ 10 % de pèrdues i marge', '', '', '≈ 36.500 m']
-        ], 'Taula 7. Metres de cable Cat 6A U/FTP LSZH. Equival a unes 37 bobines de 1.000 m.', { mono: [1, 3] }) +
+          ['Oficina P0', '100', '50 m', '5.000'], ['Oficina P1', '154', '40 m', '6.160'], ['Oficina P2', '144', '40 m', '5.760'], ['Oficina P3', '144', '40 m', '5.760'], ['Magatzem (oest + est)', '152', '70 m', '10.640'],
+          ['!Subtotal', '694 preses', '', '33.320 m'], ['!+ 10 % de pèrdues i marge', '', '', '≈ 36.700 m']
+        ], 'Taula 10. Metres de cable Cat 6A U/FTP LSZH. Equival a unes 37 bobines de 1.000 m.', { mono: [1, 3] }) +
         D.tbl(['Enllaç', 'Metres'], [
-          ['CPD → IDF-P1 (× 2 enllaços redundants)', '≈ 30'], ['CPD → IDF-P2 (× 2)', '≈ 50'], ['CPD → IDF-P3 (× 2)', '≈ 70'], ['Sala de comunicacions → IDF-02 (× 2)', '≈ 270'], ['RITI → CPD (fibra monomode de 2 operadors)', '≈ 30'],
-          ['!Subtotal', '≈ 450 m'], ['!+ 15 % de marge i patch de rack', '≈ 520 m']
-        ], 'Taula 8. Metres de fibra OM4 multimode (12 fibres).', { mono: [1] }) +
+          ['CPD → IDF-P1 (× 2 enllaços redundants)', '≈ 30'], ['CPD → IDF-P2 (× 2)', '≈ 50'], ['CPD → IDF-P3 (× 2)', '≈ 70'], ['Sala de comunicacions → IDF-02 (× 2)', '≈ 320'], ['RITI → CPD (fibra monomode de 2 operadors)', '≈ 30'],
+          ['!Subtotal', '≈ 500 m'], ['!+ 15 % de marge i patch de rack', '≈ 575 m']
+        ], 'Taula 11. Metres de fibra OM4 multimode (12 fibres).', { mono: [1] }) +
         D.p('Els models exactes de bobines, latiguillos, panells LC-LC i transceptors SFP+ són al pressupost.')]
     ]
   });
@@ -175,14 +238,14 @@
           '<b>Permetre ventilació de davant cap enrere.</b> Els passius (panells, organitzadors) no tenen problema; els switches i els servidors necessiten aire fred al davant i sortida pel darrere.'])],
       ['2.B1.2', 'Inventari d’armaris',
         D.tbl(['Codi', 'Ubicació', 'Tipus', 'Mida', 'Contingut principal'], [
-          ['<b>R1 (CPD)</b>', 'BCN · P0 · CPD', 'Rack de peu 19"', '42U, 800 × 1000 mm', 'Cores, tallafoc, routers, switch d’accés P0, servidors, SAI, panells de connexions'],
+          ['<b>R1 (CPD)</b>', 'BCN · P0 · CPD', 'Rack de peu 19"', '42U, 800 × 1000 mm', 'Cores, tallafoc, routers, 2 switches d’accés P0, servidors, SAI, panells de connexions'],
           ['<b>R2 (reserva)</b>', 'BCN · P0 · CPD', 'Espai reservat', '42U', 'Buit. Reservat físicament al plànol per créixer.'],
           ['<b>IDF-P1</b>', 'BCN · P1 · patinet', 'Rack de peu 19"', '42U, 600 × 800 mm', '4 switches d’accés, patch panels, SAI, patch de fibra'],
           ['<b>IDF-P2</b>', 'BCN · P2 · patinet', 'Rack de peu 19"', '42U, 600 × 800 mm', '3 switches d’accés, patch panels, SAI, patch de fibra'],
           ['<b>IDF-P3</b>', 'BCN · P3 · patinet', 'Rack de peu 19"', '42U, 600 × 800 mm', '3 switches d’accés, patch panels, SAI, patch de fibra'],
-          ['<b>R1 (ZGZ)</b>', 'ZGZ · sala de comunicacions', 'Rack de peu 19"', '42U, 800 × 1000 mm', 'Routers, tallafoc, cores, switches d’accés d’oficina, servidor local, SAI, panells'],
+          ['<b>R1 (ZGZ)</b>', 'ZGZ · sala de comunicacions', 'Rack de peu 19"', '42U, 800 × 1000 mm', 'Routers, tallafoc, cores, 3 switches d’accés, servidor local, SAI, panells'],
           ['<b>IDF-02</b>', 'ZGZ · extrem est de la nau', 'Armari mural 19"', '12U, 600 × 450 mm', '1 switch d’accés, SAI compacte, patch panel, patch de fibra']
-        ], 'Taula 9. Inventari d’armaris. Total: 6 armaris operatius i 1 espai de reserva al CPD de Barcelona.')],
+        ], 'Taula 12. Inventari d’armaris. Total: 6 armaris operatius i 1 espai de reserva al CPD de Barcelona.')],
       ['2.B1.3', 'Espais tècnics associats',
         D.p('Els armaris sols no n’hi ha prou: hi ha d’haver sales preparades al voltant.') +
         D.h('Oficina de Barcelona') +
@@ -195,25 +258,42 @@
         D.ul(['<b>Sala de comunicacions (45 m²).</b> A l’extrem oest de la nau, dins de la zona d’oficines. Climatització de precisió de 2,5 kW, control d’accés per targeta, extinció per aerosol, SAI del rack i SAI dedicat al servidor local.',
           '<b>IDF-02.</b> Armari mural a l’extrem est de la nau, muntat sobre un pilar estructural a 2,5 m d’alçada, amb ventilació forçada per dos ventiladors superiors. El SAI compacte va dins del mateix armari.'])],
       ['2.B1.4', 'Redimensionament dels SAI',
-        D.p('El SAI ha de donar continuïtat elèctrica només als equips crítics: electrònica de xarxa (cores, tallafoc, routers, switches d’accés), servidors i AP. No alimenta PC, telèfons IP (que ja porten la seva bateria), impressores, pantalles ni la climatització. L’objectiu és <b>de 15 a 20 minuts d’autonomia</b>, el temps necessari per a:') +
+        D.p('El SAI ha de donar continuïtat elèctrica només als equips crítics: electrònica de xarxa (cores, tallafoc, routers, switches d’accés), servidors i AP. No alimenta PC, impressores, pantalles ni la climatització. Els telèfons IP, els AP i les càmeres <b>sí que hi compten</b>, perquè s’alimenten per PoE des dels switches. L’objectiu és <b>de 15 a 20 minuts d’autonomia</b>, el temps necessari per a:') +
         D.ul(['Una aturada controlada dels servidors si el tall és llarg.', 'L’arrencada d’un grup electrogen extern, si l’empresa el contracta més endavant.', 'Absorbir microtalls i transitoris de la xarxa, que és el que passa en el 90 % dels casos.']) +
+        D.p('Per saber si cada SAI és el correcte calculem la càrrega real de cada rack: el consum de cada equip segons el seu full de dades, més tot el que els switches entreguen per PoE (telèfons, AP i càmeres), comptant un 10 % de pèrdues de la font en la part PoE. Primer, el consum de cada equip:') +
+        D.tbl(['Equip', 'Consum considerat', 'D’on surt'], [
+          ['Cisco Catalyst 9500-24Y4C (core BCN)', '250 W', 'Full de dades de Cisco, consum típic'],
+          ['Cisco Catalyst 9300-48P (core ZGZ)', '150 W', 'Full de dades de Cisco, sense càrrega PoE (fa de core)'],
+          ['Cisco Catalyst 9300L-48P-4X (accés)', '110 W + PoE', 'Full de dades de Cisco. Pressupost PoE de 505 W amb la font de 715 W'],
+          ['Cisco ISR 4331 (router)', '70 W', 'Full de dades de Cisco, consum típic'],
+          ['Cisco ASA 5506-X (tallafoc)', '25 W', 'Full de dades de Cisco'],
+          ['Dell PowerEdge R450 (servidor)', '300 W', 'Configuració del projecte amb càrrega mitjana'],
+          ['Consola KVM 1U', '30 W', 'Full de dades del fabricant'],
+          ['Telèfon IP (PoE classe 2)', '6 W', 'Classe PoE del telèfon'],
+          ['AP Wi-Fi 6 (PoE+)', '20 W (màx. 25,5 W)', 'Consum típic de l’AP; el màxim és el límit PoE+'],
+          ['Càmera IP (PoE)', '7 W', 'Classe PoE de la càmera']
+        ], 'Taula 13. Consum de cada equip que penja del SAI.', { mono: [1] }) +
         D.w('upsload') +
-        D.tbl(['Rack', 'Equips crítics', 'Potència aproximada'], [
-          ['BCN · CPD R1', '2 cores + ASA + 2 routers + 1 switch d’accés + 3 servidors físics', '≈ 2.400 W'],
-          ['BCN · IDF-P1', '4 switches d’accés Catalyst 9300L-48P (PoE+)', '≈ 1.200 W'],
-          ['BCN · IDF-P2', '3 switches d’accés Catalyst 9300L-48P (PoE+)', '≈ 900 W'],
-          ['BCN · IDF-P3', '3 switches d’accés Catalyst 9300L-48P (PoE+)', '≈ 900 W'],
-          ['ZGZ · CPD R1', '2 routers + ASA + 2 cores + 2 switches d’accés + 1 servidor', '≈ 1.600 W'],
-          ['ZGZ · IDF-02', '1 switch d’accés Catalyst 9300L-48P (PoE+)', '≈ 350 W']
-        ], 'Taula 10. Càrrega de cada rack (càrrega real amb un factor d’ús ≈ 0,7).', { mono: [2] }) +
-        D.tbl(['Rack', 'Model de SAI', 'Capacitat', 'Tipus', 'Autonomia a plena càrrega', 'U'], [
-          ['BCN · CPD R1', 'APC Smart-UPS SRT 6000VA (SRT6KRMXLI)', '6.000 VA / 6.000 W', 'Online doble conversió', '15 min a 2.400 W', '4U'],
-          ['BCN · IDF-P1', 'APC Smart-UPS SRT 2200VA (SRT2200RMXLI)', '2.200 VA / 1.980 W', 'Online doble conversió', '18 min a 1.200 W', '2U'],
-          ['BCN · IDF-P2', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 VA / 1.500 W', 'Online doble conversió', '15 min a 900 W', '2U'],
-          ['BCN · IDF-P3', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 VA / 1.500 W', 'Online doble conversió', '15 min a 900 W', '2U'],
-          ['ZGZ · CPD R1', 'APC Smart-UPS SRT 3000VA (SRT3000RMXLI)', '3.000 VA / 2.700 W', 'Online doble conversió', '18 min a 1.600 W', '2U'],
-          ['ZGZ · IDF-02', 'APC Smart-UPS SRT 1000VA (SRT1000RMXLI)', '1.000 VA / 1.000 W', 'Online doble conversió', '15 min a 350 W', '2U']
-        ], 'Taula 11. Models de SAI triats.')],
+        D.tbl(['Rack', 'Equips', 'Consum dels equips', 'PoE entregat', 'Càrrega total', 'PoE per switch'], [
+          ['BCN · CPD R1', '2 cores + ASA + 2 routers + 3 servidors + KVM + 2 switches d’accés', '1.815 W', '30 tel. + 12 AP = 420 W', '<b>2.282 W</b>', '210 W per switch (42 % de 505 W)'],
+          ['BCN · IDF-P1', '4 switches d’accés', '440 W', '117 tel. + 14 AP = 982 W', '<b>1.531 W</b>', '246 W (49 %)'],
+          ['BCN · IDF-P2', '3 switches d’accés', '330 W', '93 tel. + 14 AP = 838 W', '<b>1.261 W</b>', '279 W (55 %)'],
+          ['BCN · IDF-P3', '3 switches d’accés', '330 W', '62 tel. + 14 AP = 652 W', '<b>1.054 W</b>', '217 W (43 %)'],
+          ['ZGZ · CPD R1', '2 routers + ASA + 2 cores + 3 switches d’accés + 1 servidor + KVM', '1.125 W', '28 tel. + 10 AP + 6 càm. = 410 W', '<b>1.581 W</b>', '137 W per switch (27 %)'],
+          ['ZGZ · IDF-02', '1 switch d’accés', '110 W', '7 AP + 6 càm. = 182 W', '<b>312 W</b>', '182 W (36 %)']
+        ], 'Taula 14. Càrrega real de cada rack.', { mono: [2, 4] }) +
+        D.p('Càrrega total = consum dels equips + PoE entregat ÷ 0,9 (rendiment de la font PoE ≈ 90 %). Cap switch arriba al seu pressupost PoE de 505 W, així que el PoE està ben repartit. El càlcul del Sprint 1 no comptava el PoE dels telèfons i els AP, i per això donava càrregues més baixes als IDF.') +
+        D.tbl(['Rack', 'Model de SAI', 'Capacitat', 'Càrrega real', 'Autonomia real', 'Mòdul de bateries extra'], [
+          ['BCN · CPD R1', 'APC Smart-UPS SRT 6000VA (SRT6KRMXLI)', '6.000 W', '2.282 W (38 %)', '≈ 17 min', 'No cal'],
+          ['BCN · IDF-P1', 'APC Smart-UPS SRT 2200VA (SRT2200RMXLI)', '1.980 W', '1.531 W (77 %)', '≈ 6 min → ≈ 24 min', '1 × SRT72RMBP (2U)'],
+          ['BCN · IDF-P2', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 W', '1.261 W (84 %)', '≈ 8 min → ≈ 35 min', '1 × SRT48RMBP (2U)'],
+          ['BCN · IDF-P3', 'APC Smart-UPS SRT 1500VA (SRT1500RMXLI)', '1.500 W', '1.054 W (70 %)', '≈ 11 min → ≈ 43 min', '1 × SRT48RMBP (2U)'],
+          ['ZGZ · CPD R1', 'APC Smart-UPS SRT 3000VA (SRT3000RMXLI)', '2.700 W', '1.581 W (59 %)', '≈ 10 min → ≈ 35 min', '1 × SRT96RMBP (2U)'],
+          ['ZGZ · IDF-02', 'APC Smart-UPS SRT 1000VA (SRT1000RMXLI)', '1.000 W', '312 W (31 %)', '≈ 41 min', 'No cal']
+        ], 'Taula 15. Models de SAI triats i autonomia amb la càrrega real.', { mono: [2, 3, 4] }) +
+        D.p('<b>Conclusió:</b> cap SAI queda sobrecarregat (el més carregat és el de l’IDF-P2, al 84 %), però <b>quatre no arribaven als 15 min</b> que ens havíem marcat: els tres IDF de Barcelona i el CPD de Saragossa. En lloc de canviar-los per un model més gran, <b>els afegim un mòdul de bateries extern</b> de la mateixa sèrie. Va a sota del SAI (2U; als IDF i al CPD de Saragossa sobra espai) i en multiplica l’autonomia. Els SAI del CPD de Barcelona i de l’IDF-02 ja arriben al mínim tal com estan.') +
+        D.p('<b>Autonomies.</b> Són aproximades, a partir de la corba d’autonomia que publica APC per a la sèrie SRT; la real depèn de l’estat i la temperatura de les bateries.') +
+        D.p('<b>Cost.</b> Els quatre mòduls sumen ≈ 3.000 € + IVA i ja són al pressupost.')],
       ['2.B1.5', 'Per què SAI online de doble conversió i no de línia interactiva',
         D.p('El SAI de línia interactiva (el típic de casa o d’una oficina petita) és més barat, però commuta a bateria quan detecta el tall i triga <b>de 2 a 6 ms</b> a fer-ho. Per a un PC d’usuari és invisible, però un servidor o un switch de core amb aquest temps de transferència es pot reiniciar si la tensió d’entrada ja arribava degradada abans del tall.',
           'El SAI online de doble conversió regenera el senyal tot el temps: el corrent sempre passa pel rectificador i l’inversor, les bateries són en línia i <b>no hi ha temps de transferència</b>. És el que es demana per a electrònica crítica i és el que posem a tots els racks del projecte. Talla la llum als dos i compara’ls:') +
@@ -276,7 +356,7 @@
           ['PC, telèfons i impressores', '10 PC, 2 telèfons IP, 2 impressores', '10 PC, 1 telèfon IP, 1 impressora d’etiquetes, 2 càmeres', 'PC-INTERNET', 'PC-PT, 7960, Printer-PT'],
           ['Wi-Fi', '4 AP, 2 mòbils', '3 AP, 2 mòbils, 1 tauleta', '—', 'AccessPoint-PT'],
           ['Cablejat', '4 panells de connexions, rosetes', '3 panells de connexions, rosetes', '—', 'Copper Patch Panel / Wall Mount']
-        ], 'Taula 12. Dispositius del Packet Tracer simplificat.') +
+        ], 'Taula 16. Dispositius del Packet Tracer simplificat.') +
         D.p('La nomenclatura segueix sempre el mateix patró: <code>SEU-PLANTA-FUNCIÓ-NÚMERO</code>. Per exemple, <code>P1-ADM-03</code> és el lloc 3 d’administració de la planta 1 i <code>BCN-P1-ACC1</code> és el switch d’accés d’aquella planta.')],
       ['2.C.2', 'Topologia lògica',
         D.p('Cada seu segueix el mateix esquema de tres nivells: <b>accés → core → tallafoc → routers → Internet</b>. Cada switch d’accés té dos enllaços troncals, un a cada core; els dos cores estan units per un EtherChannel de dos cables; el tallafoc ASA té una pota cap a cada core i una altra cap a cada router; i cada router surt a Internet per un ISP diferent. Així cap part de la xarxa depèn d’un sol cable ni d’un sol equip.') +

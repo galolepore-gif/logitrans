@@ -14,7 +14,7 @@
           ['Lloc amb telèfon IP (PC connectat al telèfon)', '3 (sticky)', 'Shutdown', 'Hi ha dos equips: el telèfon i el PC que en penja. El telèfon IP ocupa dues entrades a port-security (vegeu més avall), així que el màxim real és 3. Un tercer equip ja supera el límit.'],
           ['Punt d’accés Wi-Fi', '32 (corporatiu) / 64 (convidats)', 'Restrict', 'Al port de l’AP apareixen les MAC de tots els clients sense fil. Amb Restrict, si se supera el límit només es descarten els equips sobrants i no es talla tot el Wi-Fi.'],
           ['Port lliure', '—', 'Apagat (VLAN 998)', 'Un port que no es fa servir no ha d’estar mai actiu.']
-        ], 'Taula 25. Criteri de Port Security.') +
+        ], 'Taula 29. Criteri de Port Security.') +
         D.p('Les MAC es desen amb <b>sticky</b>: el switch aprèn la MAC del primer equip que es connecta i la desa a la configuració, així que després d’un reinici continua sabent quin és l’equip autoritzat sense escriure cada MAC a mà.') +
         D.note('Al principi vam configurar els ports amb telèfon amb un màxim de 2 (telèfon + PC), però el port es desactivava sol amb els equips legítims. El missatge del switch indicava que la MAC que provocava la violació era la del mateix telèfon (0060.7035.5001): el telèfon IP, a més del trànsit de dades, envia trànsit propi de veu, i el switch el compta com una entrada més. Per això el màxim és 3, que continua sent «un PC i un telèfon» i continua apagant el port si s’hi connecta qualsevol altre equip.', 'fix', 'El que vam aprendre') +
         D.p('Els ports amb telèfon són <code>BCN-P1-ACC1 Fa0/2</code>, <code>BCN-P3-ACC1 Fa0/10</code> i <code>ZGZ-ACC1 Fa0/6</code>. Prova-ho al switch:') +

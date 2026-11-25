@@ -22,7 +22,7 @@
         (sec.sc ? '<p class="ss-sc"><span class="lbl">En el Tracer</span>' + sec.sc[1] + '</p>' : '') + '</div><div class="ss-r"><div class="vis">' + s.panes.map(function (p, k) { return p == null ? '' : '<div class="vp" data-vp="' + k + '"></div>'; }).join('') + '</div></div></div>';
     } else if (s.kind === 'budget') {
       var T = LT.BUDGET_TOTAL;
-      h += '<span class="kick">Presupuesto</span><h2>1.034.758 € con IVA</h2><div class="bd">' + LT.BUDGET.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (r) { return '<div class="bd-r"><span>' + r[0] + '</span><i style="--w:' + (r[1] / LT.BUDGET[0][1] * 100).toFixed(1) + '%"></i><b>' + LT.fmt(r[1]) + ' €</b></div>'; }).join('') + '</div><p class="sl-lead">Base ' + LT.fmt(T.net) + ' € · IVA ' + LT.fmt(T.iva, 2) + ' €</p>';
+      h += '<span class="kick">Presupuesto</span><h2>914.686 € con IVA</h2><div class="bd">' + LT.BUDGET.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (r) { return '<div class="bd-r"><span>' + r[0] + '</span><i style="--w:' + (r[1] / LT.BUDGET[0][1] * 100).toFixed(1) + '%"></i><b>' + LT.fmt(r[1]) + ' €</b></div>'; }).join('') + '</div><p class="sl-lead">Base ' + LT.fmt(T.net) + ' € · IVA ' + LT.fmt(T.iva, 2) + ' €</p>';
     } else if (s.kind === 'team') {
       h += '<span class="kick">Equipo ASIX2C 0379</span><h2>Quién hizo qué</h2><div class="tm">' + LT.TEAM.map(function (t) { return '<div><span class="av" style="--c:var(' + t.color + ')">' + t.initial + '</span><b>' + t.name + '</b><small>' + t.role + '</small><p>' + t.does + '</p></div>'; }).join('') + '</div>';
     } else if (s.kind === 'end') {

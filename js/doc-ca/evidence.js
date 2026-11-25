@@ -2,6 +2,8 @@
 (function () {
   var LT = window.LT;
   var RAW = `
+1006|Plànol|Detall de la planta 1: safates, derivacions a cada caixa de terra i presa, i muntant del patinet
+1007|Plànol|Detall del magatzem: safata dels molls amb la derivació a cada moll, i safata del passadís principal
 6|Alçat|Racks de Barcelona: CPD R1 i els IDF de les plantes 1, 2 i 3
 7|Alçat|Rack R1 de la sala de comunicacions de Saragossa i armari mural IDF-02
 8|Alçat|Llegenda de colors de l’alçat

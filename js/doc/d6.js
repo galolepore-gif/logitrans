@@ -18,7 +18,7 @@
           ['445/tcp', 'SMB de Windows', 'No para la web', 'Igual que el 135.'],
           ['1042/tcp', 'Desconocido (afrog?)', 'No', 'Identificamos el proceso y lo bloqueamos (6.1.2).'],
           ['7778/tcp', 'Desconocido (interwise?)', 'No', 'Igual que el 1042.']
-        ], 'Tabla 33. Puertos abiertos y decisión.', { mono: [0] })],
+        ], 'Tabla 37. Puertos abiertos y decisión.', { mono: [0] })],
       ['6.1.2', 'Identificación y bloqueo de los puertos desconocidos',
         D.chk('Equipo de auditoría (PowerShell)', 'Get-NetTCPConnection -LocalPort 1042,7778 -State Listen · Get-Process -Id <PID>', 'El puerto 7778 es de ArmouryCrateControlInterface y el 1042 de asus_framework: dos programas del fabricante de la placa base (ASUS), que no tienen nada que ver con la web.', 158, 'HOST|Get-NetTCPConnection -LocalPort 1042,7778 -State Listen') +
         D.chk('Equipo de auditoría (PowerShell como administrador)', 'New-NetFirewallRule -DisplayName "LogiTrans-bloqueo-ASUS" -Direction Inbound -Protocol TCP -LocalPort 1042,7778 -Action Block', 'La regla LogiTrans-bloqueo-ASUS creada: Enabled True, Direction Inbound y Action Block.', 159, 'HOST|New-NetFirewallRule -DisplayName "LogiTrans-bloqueo-ASUS" -Direction Inbound -Protocol TCP -LocalPort 1042,7778 -Action Block')],
@@ -61,18 +61,18 @@
           ['WPScan: sin vulnerabilidades ni usuarios enumerables', '—', 'Mantener WordPress y las imágenes actualizados', '<span class="chip ok">Correcto</span>'],
           ['Invitados con salida a todo Internet (versión anterior de la ACL)', 'Medio', 'ACL-INVITADOS-IN reducida a DHCP, DNS, HTTP y HTTPS (4.B1)', '<span class="chip ok">Aplicado</span>'],
           ['Operarios con acceso a toda la VLAN de servidores (versión anterior de la ACL)', 'Medio', 'ACL-OPERARIOS-IN reducida a DHCP, DNS, base de datos y web (4.B3)', '<span class="chip ok">Aplicado</span>']
-        ], 'Tabla 34. Hallazgos de la auditoría y mitigación.')],
+        ], 'Tabla 38. Hallazgos de la auditoría y mitigación.')],
       ['6.3.2', 'Protección frente al OWASP Top 10',
         D.p('El OWASP Top 10 (versión 2021) es la lista de los diez riesgos más importantes de las aplicaciones web. Así protegemos el WordPress y el área de clientes. Girá cada carta:') +
         D.w('owasp') +
-        D.tbl(['Riesgo', 'Cómo lo protegemos', 'Punto'], LT.OWASP.map(function (o) { return ['<b>' + o[0] + '</b> · ' + o[1], o[2], o[3]]; }), 'Tabla 35. Protección del WordPress y del área de clientes frente al OWASP Top 10.')],
+        D.tbl(['Riesgo', 'Cómo lo protegemos', 'Punto'], LT.OWASP.map(function (o) { return ['<b>' + o[0] + '</b> · ' + o[1], o[2], o[3]]; }), 'Tabla 39. Protección del WordPress y del área de clientes frente al OWASP Top 10.')],
       ['6.3.3', 'Protección frente a los ataques de capa 2',
         D.p('Elegí un ataque y lanzalo contra el switch de acceso. Cada uno muestra cómo lo frena la red y en qué punto está configurado.') +
         D.w('attacks', { layer: 2 }) +
-        D.tbl(['Ataque', 'En qué consiste', 'Cómo lo frenamos', 'Punto'], LT.ATTACKS.filter(function (a) { return a.layer === 2; }).map(function (a) { return ['<b>' + a.name + '</b>', a.how, a.defHow, a.ref]; }), 'Tabla 36. Protección frente a los ataques de capa 2.')],
+        D.tbl(['Ataque', 'En qué consiste', 'Cómo lo frenamos', 'Punto'], LT.ATTACKS.filter(function (a) { return a.layer === 2; }).map(function (a) { return ['<b>' + a.name + '</b>', a.how, a.defHow, a.ref]; }), 'Tabla 40. Protección frente a los ataques de capa 2.')],
       ['6.3.4', 'Protección frente a los ataques de capa 3',
         D.w('attacks', { layer: 3 }) +
-        D.tbl(['Ataque', 'En qué consiste', 'Cómo lo frenamos', 'Punto'], LT.ATTACKS.filter(function (a) { return a.layer === 3; }).map(function (a) { return ['<b>' + a.name + '</b>', a.how, a.defHow, a.ref]; }), 'Tabla 37. Protección frente a los ataques de capa 3.')],
+        D.tbl(['Ataque', 'En qué consiste', 'Cómo lo frenamos', 'Punto'], LT.ATTACKS.filter(function (a) { return a.layer === 3; }).map(function (a) { return ['<b>' + a.name + '</b>', a.how, a.defHow, a.ref]; }), 'Tabla 41. Protección frente a los ataques de capa 3.')],
       ['6.3.5', 'Verificación de las medidas de red',
         D.p('Para cerrar la auditoría volvimos a probar en el Packet Tracer las medidas de capa 2 en un switch distinto del de las pruebas del bloque 4 (BCN-P0-ACC1), y el cifrado de la VPN entre sedes.') +
         D.chk('BCN-P0-ACC1', 'show port-security · show port-security interface fa0/6', 'Arriba, Fa0/1 (punto de acceso) con máximo 64 y Restrict, y Fa0/5, Fa0/6 y Fa0/7 con máximo 1 y Shutdown. Abajo, Fa0/6 en Secure-up con la MAC sticky 0030.BB2E.0743.', 166, 'BCN-P0-ACC1|show port-security') +

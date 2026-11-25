@@ -49,7 +49,8 @@
     h += '<section class="home-sec"><div class="sec-head"><span class="kick">Material</span><h2>Descargas</h2></div><div class="dl-grid">' +
       dl('downloads/LogiTrans_Memoria.pdf', 'Memoria completa', 'PDF') + dl('downloads/LogiTrans_Memoria.docx', 'Memoria editable', 'DOCX') +
       dl('downloads/LogiTrans_PacketTracer_PT9.0.1.pkt', 'Packet Tracer 9.0.1', 'PKT') + dl('downloads/LogiTrans_PacketTracer_PT9.0.0.pkt', 'Packet Tracer 9.0.0', 'PKT') +
-      dl('downloads/LogiTrans_Planos_drawio.zip', 'Planos editables (draw.io)', 'ZIP') + '<a class="dl" href="#/presupuesto"><span>EUR</span><b>Presupuesto detallado</b><small>855.172 € + IVA</small></a></div></section>';
+      dl('downloads/LogiTrans_Planos_drawio.zip', 'Planos editables (draw.io)', 'ZIP') + dl('downloads/LogiTrans_Planos_PNG.zip', 'Planos en imagen (PNG)', 'ZIP') +
+      '<a class="dl" href="#/presupuesto"><span>EUR</span><b>Presupuesto detallado</b><small>755.939 € + IVA</small></a>' + dl('downloads/LogiTrans_Presupuesto.xlsx', 'Presupuesto (Excel)', 'XLSX') + '</div></section>';
     h += '<footer class="foot-home"><span>LogiTrans · Institut F. Vidal i Barraquer · ASIX2C 0379 · 2026</span><span>Galo Lepore · Joan Infantes · Robert Purcharea · Oliver Molina</span></footer></div>';
     view.innerHTML = h;
     window.scrollTo(0, 0);
@@ -130,11 +131,11 @@
     clearInterval(demoTimer);
     var view = LT.$('#view'), max = LT.BUDGET[0][1], T = LT.BUDGET_TOTAL;
     var rows = LT.BUDGET.slice().sort(function (a, b) { return b[1] - a[1]; });
-    view.innerHTML = '<div class="budget"><header class="doc-head"><div class="crumbs"><a href="#/">Inicio</a><span>/</span><span>Presupuesto</span></div><span class="num">€</span><h1>Presupuesto del proyecto</h1><p class="lead">Lo que cuesta montar las dos sedes: equipos, electrónica de red, cableado, servidores, software e instalación.</p></header>' +
+    view.innerHTML = '<div class="budget"><header class="doc-head"><div class="crumbs"><a href="#/">Inicio</a><span>/</span><span>Presupuesto</span></div><span class="num">€</span><h1>Presupuesto del proyecto</h1><p class="lead">Lo que cuesta montar las dos sedes: equipos, electrónica de red, cableado, servidores, software e instalación.</p><a class="btn ghost b-xlsx" href="downloads/LogiTrans_Presupuesto.xlsx" download>Descargar Excel</a></header>' +
       '<div class="b-total"><div><span class="lbl">Base imponible</span><b data-n="' + T.net + '">0</b><small>euros</small></div><div><span class="lbl">IVA 21 %</span><b data-n="' + T.iva + '" data-d="2">0</b><small>euros</small></div><div class="big"><span class="lbl">Total</span><b data-n="' + T.total + '" data-d="2">0</b><small>euros</small></div></div>' +
       '<figure class="b-chart"><ol>' + rows.map(function (r) { var pc = r[1] / T.net * 100; return '<li class="rv"><div class="b-l"><b>' + r[0] + '</b><small>' + r[2] + '</small></div><div class="b-bar"><i style="--w:' + (r[1] / max * 100).toFixed(1) + '%"></i></div><div class="b-v"><b>' + LT.fmt(r[1]) + ' €</b><small>' + pc.toFixed(1).replace('.', ',') + ' %</small></div></li>'; }).join('') + '</ol>' +
       '<figcaption class="figcap"><span>FIG. P · Reparto por categoría, sin IVA</span><span>Fuente: presupuesto de la memoria</span></figcaption></figure>' +
-      '<p class="b-note">Más de la mitad del dinero se va en los equipos de usuario (460 PC con monitor, terminales RF y cámaras). La red en sí, sumando acceso, core, frontera, Wi-Fi, cableado y armarios, ronda los 218.000 €.</p></div>';
+      '<p class="b-note">El bloque más grande son los puestos de trabajo (36 %): 330 PC con monitor, teléfonos IP, impresoras y terminales de muelle. La red en sí, sumando electrónica, Wi-Fi, cableado, canalizaciones y armarios con SAI, ronda los 287.000 €.</p></div>';
     LT.$$('.b-total b', view).forEach(function (b) { LT.countUp(b, +b.dataset.n, { dec: +(b.dataset.d || 0) }); });
     LT.reveal(view);
     window.scrollTo(0, 0);

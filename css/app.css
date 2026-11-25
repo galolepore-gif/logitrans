@@ -335,13 +335,13 @@ table.t td:first-child, table.t th:first-child { padding-left: 2px; }
 
 /* ---------- Visor de capturas ---------- */
 #lightbox { position: fixed; inset: 0; z-index: 300; display: none; background: rgba(20, 33, 46, .92); color: var(--paper); }
-#lightbox.open { display: grid; grid-template-rows: auto 1fr auto auto; }
+#lightbox.open { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; }
 #lightbox .lb-top { display: flex; align-items: center; gap: 16px; padding: 14px 20px; font: 500 11.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 #lightbox .lb-top b { color: var(--sun); }
 #lightbox .lb-top .sp { flex: 1; }
 #lightbox .lb-top button { background: none; border: 1px solid rgba(242, 238, 228, .3); color: var(--paper); padding: 8px 12px; font: 600 11px/1 var(--mono); letter-spacing: .1em; }
 #lightbox .lb-top button:hover { border-color: var(--sun); color: var(--sun); }
-#lightbox .stage { display: grid; place-items: center; padding: 0 70px; min-height: 0; position: relative; }
+#lightbox .stage { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; padding: 0 70px; min-height: 0; position: relative; }
 #lightbox .stage img { max-height: 100%; max-width: 100%; object-fit: contain; background: #fff; box-shadow: 0 20px 60px rgba(0, 0, 0, .4); }
 #lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(242, 238, 228, .35); background: rgba(20, 33, 46, .6); color: var(--paper); font-size: 20px; }
 #lightbox .nav:hover { background: var(--sun); color: var(--ink); border-color: var(--sun); }
@@ -635,3 +635,6 @@ span.dot { width: auto; }
 .gs-links { max-width: 520px; }
 .gs-links a { white-space: nowrap; }
 @media (max-width: 1100px) { .guide-strip { grid-template-columns: 1fr; } }
+
+/* Presupuesto: descarga del Excel */
+.budget .b-xlsx { display: inline-flex; margin-top: 14px; }

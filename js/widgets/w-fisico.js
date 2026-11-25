@@ -97,22 +97,22 @@
 
   /* Canalizaciones */
   W.ducts = function (el) {
-    var D = [['Bandeja 300 × 60', 'Oficina BCN, pasillos P0 a P3', 320, 'h'], ['Bandeja 400 × 100', 'Nave del almacén, a 6 m', 360, 'h'], ['Bandeja 200 × 60', 'Cuarto de com. → IDF-02 (ZGZ)', 150, 'h'], ['Bandeja 300 × 60', 'Oficinas del almacén', 40, 'h'], ['Bandeja 200 × 60', 'CPD y taller IT', 30, 'h'], ['Tubo acero Ø 125', 'Montante P0 ↔ P3', 16, 'v'], ['Tubo ignífugo Ø 50', 'Entradas RITI', 20, 'v'], ['Corrugado PVC Ø 32', 'Bajadas a cajas de suelo', 600, 'b']];
-    var max = 600;
-    el.innerHTML = '<div class="w-ducts">' + D.map(function (d) { return '<div class="du"><span class="du-l"><b>' + d[0] + '</b><small>' + d[1] + '</small></span><div class="du-b"><i class="' + d[3] + '" style="--w:' + (d[2] / max * 100) + '%"></i></div><b class="du-v">' + LT.fmt(d[2]) + ' m</b></div>'; }).join('') + '<p class="ds-n">≈ 900 m de bandeja metálica en tres secciones, 16 m de montante, 20 m de tubo ignífugo y ≈ 600 m de corrugado.</p></div>';
+    var D = [['Bandeja 300 × 60', 'Oficina BCN, pasillos P0 a P3', 371, 'h'], ['Bandeja 400 × 100', 'Nave del almacén, a 6 m', 445, 'h'], ['Bandeja 200 × 60', 'Cuarto de com. → IDF-02 (ZGZ)', 150, 'h'], ['Bandeja 300 × 60', 'Oficinas del almacén y bajada al IDF-02', 57, 'h'], ['Bandeja 200 × 60', 'CPD y taller IT', 30, 'h'], ['Tubo acero Ø 125', 'Montante P0 ↔ P3', 16, 'v'], ['Tubo ignífugo Ø 50', 'Entradas RITI', 20, 'v'], ['Corrugado PVC Ø 40', 'Derivaciones a cajas de suelo', 556, 'b'], ['Corrugado PVC Ø 32', 'Derivaciones a tomas de pared', 319, 'b'], ['Tubo acero Ø 32', 'Bajadas de la nave (14)', 150, 'v']];
+    var max = 556;
+    el.innerHTML = '<div class="w-ducts">' + D.map(function (d) { return '<div class="du"><span class="du-l"><b>' + d[0] + '</b><small>' + d[1] + '</small></span><div class="du-b"><i class="' + d[3] + '" style="--w:' + (d[2] / max * 100) + '%"></i></div><b class="du-v">' + LT.fmt(d[2]) + ' m</b></div>'; }).join('') + '<p class="ds-n">≈ 1.053 m de bandeja metálica medidos en los planos, 16 m de montante, 20 m de tubo ignífugo, ≈ 556 m de corrugado Ø 40, ≈ 319 m de Ø 32 y 150 m de tubo de acero en la nave. A la compra se suma un 10 %.</p></div>';
   };
 
   /* Bobinas de cable */
   W.reels = function (el) {
-    var Z = [['P0', 96, 50], ['P1', 154, 40], ['P2', 144, 40], ['P3', 144, 40], ['Almacén', 152, 70]];
+    var Z = [['P0', 100, 50], ['P1', 154, 40], ['P2', 144, 40], ['P3', 144, 40], ['Almacén', 152, 70]];
     var tot = Z.reduce(function (s, z) { return s + z[1] * z[2]; }, 0);
-    el.innerHTML = '<div class="w-reels"><div class="rl-z">' + Z.map(function (z) { return '<div><span class="lbl">' + z[0] + '</span><b>' + LT.fmt(z[1] * z[2]) + ' m</b><small>' + z[1] + ' tomas × ' + z[2] + ' m</small></div>'; }).join('') + '</div><div class="rl-sum"><div><span class="lbl">Bruto</span><b>' + LT.fmt(tot) + ' m</b></div><div><span class="lbl">+10 %</span><b>≈ 36.500 m</b></div><div class="rl-n"><span class="lbl">Bobinas de 1.000 m</span><b class="cnt">37</b></div></div><div class="rl-vis">' + Array.apply(null, Array(37)).map(function (x, i) { return '<i style="--d:' + (i * 30) + 'ms"></i>'; }).join('') + '</div></div>';
+    el.innerHTML = '<div class="w-reels"><div class="rl-z">' + Z.map(function (z) { return '<div><span class="lbl">' + z[0] + '</span><b>' + LT.fmt(z[1] * z[2]) + ' m</b><small>' + z[1] + ' tomas × ' + z[2] + ' m</small></div>'; }).join('') + '</div><div class="rl-sum"><div><span class="lbl">Bruto</span><b>' + LT.fmt(tot) + ' m</b></div><div><span class="lbl">+10 %</span><b>≈ 36.700 m</b></div><div class="rl-n"><span class="lbl">Bobinas de 1.000 m</span><b class="cnt">37</b></div></div><div class="rl-vis">' + Array.apply(null, Array(37)).map(function (x, i) { return '<i style="--d:' + (i * 30) + 'ms"></i>'; }).join('') + '</div></div>';
   };
 
   /* Carga de cada SAI */
   W.upsload = function (el) {
-    var U = [['BCN · CPD R1', 2400, 6000, 15, 'SRT 6000VA'], ['BCN · IDF-P1', 1200, 1980, 18, 'SRT 2200VA'], ['BCN · IDF-P2', 900, 1500, 15, 'SRT 1500VA'], ['BCN · IDF-P3', 900, 1500, 15, 'SRT 1500VA'], ['ZGZ · CPD R1', 1600, 2700, 18, 'SRT 3000VA'], ['ZGZ · IDF-02', 350, 1000, 15, 'SRT 1000VA']];
-    el.innerHTML = '<div class="w-ups-l">' + U.map(function (u) { var pc = Math.round(u[1] / u[2] * 100); return '<div class="ul"><span class="ul-l"><b>' + u[0] + '</b><small>APC Smart-UPS ' + u[4] + '</small></span><div class="ul-b"><i style="--w:' + pc + '%"></i><em>' + LT.fmt(u[1]) + ' W de ' + LT.fmt(u[2]) + ' W</em></div><b class="ul-m">' + u[3] + ' min</b></div>'; }).join('') + '<p class="ds-n">Carga con factor de uso ≈ 0,7 y autonomía a esa carga. Objetivo: 15 a 20 minutos.</p></div>';
+    var U = [['BCN · CPD R1', 2282, 6000, 17, 'SRT 6000VA'], ['BCN · IDF-P1', 1531, 1980, 24, 'SRT 2200VA + SRT72RMBP'], ['BCN · IDF-P2', 1261, 1500, 35, 'SRT 1500VA + SRT48RMBP'], ['BCN · IDF-P3', 1054, 1500, 43, 'SRT 1500VA + SRT48RMBP'], ['ZGZ · CPD R1', 1581, 2700, 35, 'SRT 3000VA + SRT96RMBP'], ['ZGZ · IDF-02', 312, 1000, 41, 'SRT 1000VA']];
+    el.innerHTML = '<div class="w-ups-l">' + U.map(function (u) { var pc = Math.round(u[1] / u[2] * 100); return '<div class="ul"><span class="ul-l"><b>' + u[0] + '</b><small>APC Smart-UPS ' + u[4] + '</small></span><div class="ul-b"><i style="--w:' + pc + '%"></i><em>' + LT.fmt(u[1]) + ' W de ' + LT.fmt(u[2]) + ' W</em></div><b class="ul-m">' + u[3] + ' min</b></div>'; }).join('') + '<p class="ds-n">Carga real: consumo de cada equipo + PoE entregado ÷ 0,9. Autonomía con el módulo de baterías donde hace falta. Objetivo: al menos 15 minutos.</p></div>';
   };
 
   /* SAI online frente a línea interactiva */
@@ -149,9 +149,9 @@
   /* Hardware elegido */
   W.hw = function (el) {
     var H = [['Core Barcelona', 'Cisco Catalyst 9500-24Y4C', '2', '24 puertos SFP28 y 4 QSFP28. Enruta las VLAN, HSRP y raíz de STP.', 'core'], ['Core Zaragoza', 'Cisco Catalyst 9300-48P', '2', 'Capa 3 para un almacén de 150 puestos, PoE+.', 'core'],
-      ['Acceso', 'Cisco Catalyst 9300L-48P-4X', '14', '48 puertos PoE+ para teléfonos, AP y cámaras, 4 × 10 Gb de subida por fibra.', 'acc'], ['Routers', 'Cisco ISR 4331', '4', 'Uno principal y uno de respaldo por sede, cada uno a un operador distinto. VPN IPsec por hardware.', 'rt'],
+      ['Acceso', 'Cisco Catalyst 9300L-48P-4X', '16', '48 puertos PoE+ para teléfonos, AP y cámaras, 4 × 10 Gb de subida por fibra.', 'acc'], ['Routers', 'Cisco ISR 4331', '4', 'Uno principal y uno de respaldo por sede, cada uno a un operador distinto. VPN IPsec por hardware.', 'rt'],
       ['Firewall', 'Cisco ASA 5506-X', '2', 'Perímetro de cada sede: outside, wanbak, inside y corebak.', 'fw'], ['Servidores', 'Dell PowerEdge R450', '4', 'Hipervisores con RAID por hardware: AD, DHCP, DNS, RADIUS, web y servicios.', 'srv'],
-      ['Wi-Fi', 'AP Wi-Fi 6 + 2 controladoras', '71', 'Cobertura de oficinas y nave; SSID por VLAN.', 'ap'], ['SAI', 'APC Smart-UPS SRT (online)', '6', 'De 1.000 a 6.000 VA, con tarjeta de red y SNMP v3.', 'ups']];
+      ['Wi-Fi', 'AP Wi-Fi 6 + controladora 9800-L', '71', 'Cobertura de oficinas y nave; SSID por VLAN.', 'ap'], ['SAI', 'APC Smart-UPS SRT (online)', '6', 'De 1.000 a 6.000 VA, online, con tarjeta de red y SNMP v3. 4 módulos de baterías extra.', 'ups']];
     el.innerHTML = '<div class="w-hw">' + H.map(function (x) { return '<article class="hwc rv t-' + x[4] + '"><span class="lbl">' + x[0] + '</span><b>' + x[1] + '</b><span class="qty">× ' + x[2] + '</span><p>' + x[3] + '</p></article>'; }).join('') + '</div>';
   };
 })();

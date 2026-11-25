@@ -61,14 +61,14 @@
       var first = evs.length && LT.EVIDENCE[evs[0]];
       var data = ' data-dev="' + esc(dev) + '" data-cmd="' + esc(cmd) + '"' + (run ? ' data-run="' + esc(run) + '"' : '') + ' data-ev="' + evs.join(',') + '"';
       return '<div class="chk"' + data + '><div class="c-body"><div class="c-top"><span class="c-dev">' + esc(dev) + '</span><span class="c-cmd">' + esc(cmd) + '</span></div><p>' + txt + '</p><div class="c-act"></div></div>' +
-        (first ? '<div class="c-img" style="background-image:url(' + first.src + ')"><span>' + (LT.lang === 'ca' ? 'IMATGE ' : 'IMAGEN ') + evs.join(' · ') + '</span></div>' : '') + '</div>';
+        (first ? '<div class="c-img" style="background-image:url(' + first.src + ')"><span>' + (LT.lang === 'ca' ? 'IMATGE ' : 'IMAGEN ') + evs.map(function (n) { return LT.EVIDENCE[n] ? LT.EVIDENCE[n].num : n; }).join(' · ') + '</span></div>' : '') + '</div>';
     },
     fig: function (n, cap) {
       var e = LT.EVIDENCE[n]; if (!e) return '';
-      return '<figure class="fig"><div class="fig-frame" data-evn="' + n + '"><img src="' + e.src + '" alt="' + esc(e.txt) + '" loading="lazy"></div><figcaption class="figcap"><span>FIG. ' + n + ' · ' + esc(cap || e.txt) + '</span><span>Imagen ' + n + ' de la memoria</span></figcaption></figure>';
+      return '<figure class="fig"><div class="fig-frame" data-evn="' + n + '"><img src="' + e.src + '" alt="' + esc(e.txt) + '" loading="lazy"></div><figcaption class="figcap"><span>FIG. ' + e.num + ' · ' + esc(cap || e.txt) + '</span><span>' + (LT.lang === 'ca' ? 'Imatge ' + e.num + ' de la memòria' : 'Imagen ' + e.num + ' de la memoria') + '</span></figcaption></figure>';
     },
     evs: function (list) {
-      return '<div class="ev-grid">' + list.map(function (n) { var e = LT.EVIDENCE[n]; return e ? '<button data-evn="' + n + '" data-evl="' + list.join(',') + '"><img src="' + e.src + '" alt="" loading="lazy"><span>' + n + ' · ' + esc(e.txt) + '</span></button>' : ''; }).join('') + '</div>';
+      return '<div class="ev-grid">' + list.map(function (n) { var e = LT.EVIDENCE[n]; return e ? '<button data-evn="' + n + '" data-evl="' + list.join(',') + '"><img src="' + e.src + '" alt="" loading="lazy"><span>' + e.num + ' · ' + esc(e.txt) + '</span></button>' : ''; }).join('') + '</div>';
     },
     vl: function (id) { return '<span class="vl" style="background:var(--v' + id + ')">' + id + '</span>'; },
     sc: function (id, label) { return '<button class="link" data-sc="' + id + '">' + (label || 'Reproducir en el Tracer') + '</button>'; }
@@ -195,7 +195,7 @@
       });
     });
     (LT.SCENARIOS || []).forEach(function (sc) { idx.push({ k: 'PT', t: sc.t, h: '#/tracer/' + sc.id, kind: 'Escenario', txt: (sc.t + ' ' + sc.d).toLowerCase() }); });
-    Object.keys(LT.EVIDENCE || {}).forEach(function (n) { var e = LT.EVIDENCE[n]; idx.push({ k: 'IMG ' + n, t: e.dev + ' · ' + e.txt, ev: +n, kind: 'Captura', txt: (e.dev + ' ' + e.txt).toLowerCase() }); });
+    Object.keys(LT.EVIDENCE || {}).forEach(function (n) { var e = LT.EVIDENCE[n]; idx.push({ k: 'IMG ' + e.num, t: e.dev + ' · ' + e.txt, ev: +n, kind: 'Captura', txt: (e.dev + ' ' + e.txt).toLowerCase() }); });
   }
   var sel = 0, res = [];
   function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, ''); }
